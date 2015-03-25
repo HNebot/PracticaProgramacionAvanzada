@@ -1,15 +1,15 @@
-package principal;
+package salida;
 
 import java.util.ArrayList;
 
 import gestores.GestorCliente;
 
-public class princpial 
+public class Princpial 
 {
 	public static GestorCliente gestor = new GestorCliente();
 	public static void main(String[] args)
 	{
-		ArrayList<String> datos = new ArrayList();
+		/*ArrayList<String> datos = new ArrayList();
 		datos.add("P");
 		datos.add("123S");
 		datos.add("Hector");
@@ -25,8 +25,10 @@ public class princpial
 		datos.add("Nebot");
 		
 		System.out.println(gestor.altaCliente(datos));
-		System.out.println(gestor.datosCliente(datos.get(1)));
+		System.out.println(gestor.datosCliente(datos.get(1)));*/
 		
+		Controlador controlador = new Controlador();
+		controlador.start();
 		
 	}
 	
