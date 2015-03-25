@@ -1,16 +1,19 @@
 package menus;
 
+import interfaces.Menu;
+
 import java.util.Scanner;
 
-public class MenuLlamadas 
+public class MenuLlamadas implements Menu
 {
 	private Scanner scanner;
 	
-	public MenuLlamadas() {
-		this.scanner = new Scanner(System.in);
+	public MenuLlamadas(Scanner scanner) {
+		this.scanner = scanner;
 	}
 	
-	public byte menuInicialLlamadas()
+	@Override
+	public byte menuInicial()
 	{
 		System.out.println("Elija una opcion:");
 		System.out.println("1- Nueva llamada.");

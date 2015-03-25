@@ -1,5 +1,6 @@
 package salida;
 
+import interfaces.IOInterface;
 import menus.MenuClientes;
 import menus.MenuFacturas;
 import menus.MenuLlamadas;
@@ -12,8 +13,15 @@ public class Controlador
 	private MenuFacturas menFacturas;
 	private MenuLlamadas menLlamadas;
 	
+	private IOInterface IoInterface;
+	
 	public Controlador() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+	
+	public void SetInterface (IOInterface IoInterface)
+	{
+		this.IoInterface = IoInterface;
 	}
 	
 	public void start()
@@ -24,7 +32,7 @@ public class Controlador
 		byte opcion = 0;
 		
 		do{
-            opcion = this.menPrincipal.menuInicial();
+            opcion = this.IoInterface.getMenuPrincipal().menuInicial();
             ejecutarOpcion(opcion);
         }while (opcion!=0);
 		
@@ -36,10 +44,7 @@ public class Controlador
 	}
 	public void inicializaMenus()
 	{
-		this.menPrincipal = new MenuPincipal();
-		this.menClientes = new MenuClientes();
-		this.menFacturas = new MenuFacturas();
-		this.menLlamadas = new MenuLlamadas();
+		
 	}
 	
 	/**
@@ -51,18 +56,18 @@ public class Controlador
         switch (opcion){
             case 1: 
             	//Ejecuta el menu sobre los clientes
-            	opcion = (byte) ((opcion*10) + this.menClientes.menuInicialClientes());
+            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuClientes().menuInicial());
             	ejecutarOpcion(opcion);
                 break;
             case 2: 
             	//Ejecuta el menu sobre las facturas
-            	opcion = (byte) ((opcion*10) + this.menFacturas.menuInicialFacturas());
+            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuFacturas().menuInicial());
             	ejecutarOpcion(opcion);
             	break;
             	
             case 3: 
             	//Ejecuta el menu sobre las llamadas
-            	opcion = (byte) ((opcion*10) + this.menLlamadas.menuInicialLlamadas());
+            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuLlamadas().menuInicial());
             	ejecutarOpcion(opcion);
             	break;
             	

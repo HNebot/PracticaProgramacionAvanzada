@@ -1,16 +1,19 @@
 package menus;
 
+import interfaces.Menu;
+
 import java.util.Scanner;
 
-public class MenuFacturas 
+public class MenuFacturas implements Menu 
 {
 	private Scanner scanner;
 	
-	public MenuFacturas() {
-		this.scanner = new Scanner(System.in);
+	public MenuFacturas(Scanner scanner) {
+		this.scanner = scanner;
 	}
 	
-	public byte menuInicialFacturas()
+	@Override
+	public byte menuInicial()
 	{
 		System.out.println("Elija una opcion:");
 		System.out.println("1- Nueva factura.");

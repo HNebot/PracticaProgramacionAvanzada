@@ -1,17 +1,18 @@
 package menus;
 
+import interfaces.Menu;
+
 import java.util.Scanner;
 
-public class MenuPincipal {
+public class MenuPincipal implements Menu{
 	
 	private Scanner scanner;
 	
-	public MenuPincipal()
-	{
-		super();
-		scanner = new Scanner(System.in);
+	public MenuPincipal(Scanner scanner) {
+		this.scanner = scanner;
 	}
 	
+	@Override
 	public byte menuInicial()
 	{
 		System.out.println("Elija una opcion del menu:");

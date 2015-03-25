@@ -1,5 +1,7 @@
 package salida;
 
+import interfaces.IOInterface;
+
 import java.util.ArrayList;
 
 import gestores.GestorCliente;
@@ -28,6 +30,8 @@ public class Princpial
 		System.out.println(gestor.datosCliente(datos.get(1)));*/
 		
 		Controlador controlador = new Controlador();
+		IOInterface IoInterface = new IOInterfazSalidaConsola();
+		controlador.SetInterface(IoInterface);
 		controlador.start();
 		
 	}

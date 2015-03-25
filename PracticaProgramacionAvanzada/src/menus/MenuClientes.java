@@ -1,19 +1,21 @@
 package menus;
 
 import gestores.GestorCliente;
+import interfaces.Menu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuClientes 
+public class MenuClientes implements Menu
 {
 	private Scanner scanner;
 	
-	public MenuClientes() {
-		this.scanner = new Scanner(System.in);
+	public MenuClientes(Scanner scanner) {
+		this.scanner = scanner;
 	}
 	
-	public byte menuInicialClientes()
+	@Override
+	public byte menuInicial()
 	{
 		System.out.println("Elija una opcion:");
 		System.out.println("1- Nuevo cliente.");
@@ -25,7 +27,7 @@ public class MenuClientes
 		return this.scanner.nextByte();
 	}
 	
-	public ArrayList<String> nuevoCliente(GestorCliente gestor)
+	public ArrayList<String> menuNuevoCliente()
 	{
 		ArrayList<String> datosEntrada = new ArrayList<String>();
 		String tipo;
@@ -64,9 +66,17 @@ public class MenuClientes
 		datosEntrada.add(9,this.scanner.nextLine());
 		System.out.print("Tarifa: ");
 		datosEntrada.add(10,this.scanner.nextLine());
+		System.out.println("");
 		
 		
 		return datosEntrada;
+	}
+	
+	public String menuVerCliente()
+	{
+			System.out.println("Introduzca el NIF del cliente que desea buscar: ");
+			System.out.print("--> ");
+			return this.scanner.nextLine();
 	}
 
 }
