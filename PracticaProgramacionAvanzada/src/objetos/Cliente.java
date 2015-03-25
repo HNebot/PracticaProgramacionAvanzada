@@ -1,0 +1,121 @@
+package objetos;
+
+import java.util.Calendar;
+import java.util.Date;
+
+public class Cliente 
+{
+	
+	private String NIF;
+	private String nombre;
+	private String email;
+	
+	private Direccion direccion;
+	
+	private Calendar fechaAlta;
+	
+	private Tarifa tarifa;
+	
+	
+	public Cliente(){
+		
+	}
+	
+
+	public Cliente(String nIF, String nombre, String email,
+			Direccion direccion, Calendar fechaAlta, Tarifa tarifa) {
+		super();
+		NIF = nIF;
+		this.nombre = nombre;
+		this.email = email;
+		this.direccion = direccion;
+		this.fechaAlta = fechaAlta;
+		this.tarifa = tarifa;
+	}
+
+
+
+	public String getNIF() {
+		return NIF;
+	}
+
+
+
+	public void setNIF(String nIF) {
+		NIF = nIF;
+	}
+
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+
+
+	public Calendar getFechaAlta() {
+		return fechaAlta;
+	}
+
+
+
+	public void setFechaAlta(Calendar fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
+
+
+	public Tarifa getTarifa() {
+		return tarifa;
+	}
+
+
+
+	public void setTarifa(Tarifa tarifa) {
+		this.tarifa = tarifa;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Cliente [NIF=" + NIF + ", nombre=" + nombre + ", email="
+				+ email + ", direccion=" + direccion + ", fechaAlta="
+				+ fechaAlta.toString() + ", tarifa=" + tarifa + "]";
+	}
+	
+	
+	
+	
+
+}
