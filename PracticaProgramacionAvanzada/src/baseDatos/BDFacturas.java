@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import objetos.Factura;
 
-public class Facturas {
+public class BDFacturas {
 
 	private HashMap<String,ArrayList<Factura>> factuas;
 }

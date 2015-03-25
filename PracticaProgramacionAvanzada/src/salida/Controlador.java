@@ -1,17 +1,15 @@
 package salida;
 
+import gestores.GestorCliente;
+import gestores.GestorFactura;
+import gestores.GestorLlamada;
 import interfaces.IOInterface;
-import menus.MenuClientes;
-import menus.MenuFacturas;
-import menus.MenuLlamadas;
-import menus.MenuPincipal;
 
 public class Controlador 
 {
-	private MenuPincipal menPrincipal;
-	private MenuClientes menClientes;
-	private MenuFacturas menFacturas;
-	private MenuLlamadas menLlamadas;
+	private GestorCliente gestorCliente;
+	private GestorFactura gestorFactura;
+	private GestorLlamada gestorLlamada;
 	
 	private IOInterface IoInterface;
 	
@@ -27,7 +25,6 @@ public class Controlador
 	public void start()
 	{
 		inicializaGestores();
-		inicializaMenus();
 		
 		byte opcion = 0;
 		
@@ -40,11 +37,9 @@ public class Controlador
 	}
 	public void inicializaGestores()
 	{
-		
-	}
-	public void inicializaMenus()
-	{
-		
+		this.gestorCliente = new GestorCliente();
+		this.gestorFactura = new GestorFactura();
+		this.gestorLlamada = new GestorLlamada();
 	}
 	
 	/**
