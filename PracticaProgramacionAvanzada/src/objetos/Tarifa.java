@@ -17,5 +17,9 @@ public class Tarifa
 		this.tarifa = tarifa;
 	}
 	
+	@Override
+	public String toString() {
+		return "" + getTarifa();
+	}
 	
 }

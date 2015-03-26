@@ -2,6 +2,7 @@ package salida;
 
 import java.util.ArrayList;
 
+import objetos.Cliente;
 import gestores.GestorCliente;
 import gestores.GestorFactura;
 import gestores.GestorLlamada;
@@ -69,7 +70,28 @@ public class Controlador
             	break;
             	
             case 11:
-            	this.IoInterface.getMenuClientes().menuNuevoCliente();
+            	//ArrayList<String> datos = this.IoInterface.getMenuClientes().menuNuevoCliente();
+            	ArrayList<String> datos = new ArrayList();
+        		datos.add("P");
+        		datos.add("Hector");
+        		datos.add("123S");
+        		datos.add("n@gmail.com");
+        		datos.add("Avd Pio XII");
+        		datos.add("17");
+        		datos.add("2D");
+        		datos.add("Vila-real");
+        		datos.add("Castellon");
+        		datos.add("12540");
+        		datos.add("0.03");
+        		datos.add("Nebot");
+            	String mensaje = this.gestorCliente.altaCliente(datos);
+            	
+            	break;
+            	
+            case 12:
+            	
+            	Cliente cli = this.gestorCliente.datosCliente(this.IoInterface.getMenuClientes().menuVerCliente());
+            	this.IoInterface.getMenuClientes().formatoInfoCliente(cli);
             	break;
              
             default:

@@ -37,6 +37,8 @@ public class Princpial
 		controlador.SetInterface(IoInterface);
 		controlador.start();
 		
+	
+		
 	}
 	
 

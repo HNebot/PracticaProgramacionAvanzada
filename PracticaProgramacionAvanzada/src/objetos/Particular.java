@@ -1,5 +1,6 @@
 package objetos;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,6 +32,13 @@ public class Particular extends Cliente
 	@Override
 	public String toString() {
 		return super.toString() + "Particular [apellido=" + apellido + "]";
+	}
+	
+	@Override
+	public ArrayList<String> toArray() {
+		ArrayList<String> datos = super.toArray();
+		datos.add(getApellido());
+		return datos;
 	}
 
 	

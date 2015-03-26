@@ -77,6 +77,12 @@ public class Direccion
 				+ provincia + ", codigoPostal=" + codigoPostal + "]";
 	}
 	
+	public String newToString()
+	{
+		return getCalle() + " Nº" + getPortal() + " " + getPuerta() + "\n" + 
+				getPoblacion() + " ("+ getProvincia() +") " + getCodigoPostal();
+	}
+	
 	
 	
 	

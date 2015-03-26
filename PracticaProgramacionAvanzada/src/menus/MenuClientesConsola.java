@@ -5,6 +5,9 @@ import interfaces.MenuClientes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import objetos.Cliente;
+import objetos.Particular;
+
 public class MenuClientesConsola implements MenuClientes
 {
 	private Scanner scanner;
@@ -28,23 +31,25 @@ public class MenuClientesConsola implements MenuClientes
 	
 	public ArrayList<String> menuNuevoCliente()
 	{
-		ArrayList<String> datosEntrada = new ArrayList<String>();
+		ArrayList<String> datosEntrada = new ArrayList<String>(13);
 		String tipo;
+		this.scanner.nextLine();
 		do{
-			System.out.println("Cliente particulas(P) o empresa(M)?");
+			System.out.println("Cliente particulas(P) o empresa(E)?");
 			tipo = this.scanner.nextLine();
-			tipo.toUpperCase();
+			tipo = tipo.toUpperCase();
 		}
-		while(!tipo.equals("M") || !tipo.equals("P"));
+		while(tipo.equals("E") == false && tipo.equals("P") == false);
 		datosEntrada.add(0, tipo);
 		
 		System.out.print("Nombre: ");
 		datosEntrada.add(1,this.scanner.nextLine());
+		String apellido ="";
 		
 		if(tipo.equals("P"))
 		{
 			System.out.print("Apellido: ");
-			datosEntrada.add(11,this.scanner.nextLine());			
+			apellido = this.scanner.nextLine();
 		}
 		
 		System.out.print("NIF: ");
@@ -65,6 +70,10 @@ public class MenuClientesConsola implements MenuClientes
 		datosEntrada.add(9,this.scanner.nextLine());
 		System.out.print("Tarifa: ");
 		datosEntrada.add(10,this.scanner.nextLine());
+		if(tipo.equals("P"))
+		{
+			datosEntrada.add(11,apellido);			
+		}
 		System.out.println("");
 		
 		
@@ -73,9 +82,37 @@ public class MenuClientesConsola implements MenuClientes
 	
 	public String menuVerCliente()
 	{
+			this.scanner.nextLine();
 			System.out.println("Introduzca el NIF del cliente que desea buscar: ");
 			System.out.print("--> ");
 			return this.scanner.nextLine();
+	}
+
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+		
+	}
+
+	@Override
+	public void formatoInfoCliente(Cliente cliente) {
+		ArrayList<String> informacion = cliente.toArray();
+		String info = "";
+		info = info + "Nombre: " + informacion.get(0);
+		if(cliente.getClass().getSimpleName().toString().equals("Particular"))
+		{
+			info = info + " " + informacion.get(5);
+		}
+		info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
+		info = info + "Email: " + informacion.get(2) + "\n";
+		info = info + "Dirección: " + informacion.get(3) + "\n";
+		info = info + "Tarifa: " + informacion.get(4) +  "\n";
+		
+		System.out.println("=====================");
+		System.out.print(info);
+		System.out.println("=====================");
+		
+		
 	}
 
 }

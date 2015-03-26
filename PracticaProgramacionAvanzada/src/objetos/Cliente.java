@@ -1,5 +1,6 @@
 package objetos;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class Cliente
 	}
 	
 
-	public Cliente(String nIF, String nombre, String email,
+	public Cliente(String nombre, String nIF, String email,
 			Direccion direccion, Calendar fechaAlta, Tarifa tarifa) {
 		super();
 		NIF = nIF;
@@ -112,6 +113,18 @@ public class Cliente
 		return "Cliente [NIF=" + NIF + ", nombre=" + nombre + ", email="
 				+ email + ", direccion=" + direccion + ", fechaAlta="
 				+ fechaAlta.toString() + ", tarifa=" + tarifa + "]";
+	}
+	
+	public ArrayList<String> toArray()
+	{
+		ArrayList<String> datos = new ArrayList<String>();
+		datos.add(getNombre());
+		datos.add(getNIF());
+		datos.add(getEmail());
+		datos.add(getDireccion().newToString());
+		datos.add(getTarifa().toString());
+		return datos;
+		
 	}
 	
 	
