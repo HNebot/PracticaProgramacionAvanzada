@@ -1,5 +1,5 @@
 package interfaces;
 
-public interface Menu {
+public interface IntMenu {
 	public byte menuInicial();
 }

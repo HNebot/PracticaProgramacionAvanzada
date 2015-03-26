@@ -6,7 +6,7 @@ import objetos.Cliente;
 import gestores.GestorCliente;
 import gestores.GestorFactura;
 import gestores.GestorLlamada;
-import interfaces.IOInterface;
+import interfaces.IntIOInterface;
 
 public class Controlador 
 {
@@ -14,13 +14,13 @@ public class Controlador
 	private GestorFactura gestorFactura;
 	private GestorLlamada gestorLlamada;
 	
-	private IOInterface IoInterface;
+	private IntIOInterface IoInterface;
 	
 	public Controlador() {
 		super();
 	}
 	
-	public void SetInterface (IOInterface IoInterface)
+	public void SetInterface (IntIOInterface IoInterface)
 	{
 		this.IoInterface = IoInterface;
 	}

@@ -1,13 +1,13 @@
 package salida;
 
-import interfaces.IOInterface;
+import interfaces.IntIOInterface;
 
 import java.util.ArrayList;
 
 import objetos.Particular;
 import gestores.GestorCliente;
 
-public class Princpial 
+public class Principal 
 {
 	public static GestorCliente gestor = new GestorCliente();
 	public static void main(String[] args)
@@ -33,7 +33,7 @@ public class Princpial
 		System.out.println(gestor.datosCliente(datos.get(1)).getClass().getSimpleName());*/
 		
 		Controlador controlador = new Controlador();
-		IOInterface IoInterface = new IOInterfazSalidaConsola();
+		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
 		controlador.start();
 		

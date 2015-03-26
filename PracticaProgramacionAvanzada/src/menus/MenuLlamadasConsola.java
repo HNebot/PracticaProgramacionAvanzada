@@ -1,10 +1,10 @@
 package menus;
 
-import interfaces.MenuLlamadas;
+import interfaces.IntMenuLlamadas;
 
 import java.util.Scanner;
 
-public class MenuLlamadasConsola implements MenuLlamadas
+public class MenuLlamadasConsola implements IntMenuLlamadas
 {
 	private Scanner scanner;
 	

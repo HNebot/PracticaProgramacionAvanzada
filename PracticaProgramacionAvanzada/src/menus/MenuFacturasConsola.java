@@ -1,10 +1,10 @@
 package menus;
 
-import interfaces.MenuFacturas;
+import interfaces.IntMenuFacturas;
 
 import java.util.Scanner;
 
-public class MenuFacturasConsola implements MenuFacturas 
+public class MenuFacturasConsola implements IntMenuFacturas 
 {
 	private Scanner scanner;
 	

@@ -1,10 +1,10 @@
 package salida;
 
-import interfaces.IOInterface;
+import interfaces.IntIOInterface;
 import java.util.Scanner;
 import menus.*;
 
-public class IOInterfazSalidaConsola implements IOInterface 
+public class IOInterfazSalidaConsola implements IntIOInterface 
 {
 	private MenuPrincipalConsola menPrincipal;
 	private MenuClientesConsola menClientes;

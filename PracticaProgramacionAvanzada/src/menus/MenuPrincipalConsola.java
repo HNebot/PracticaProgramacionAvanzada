@@ -1,10 +1,10 @@
 package menus;
 
-import interfaces.MenuPrincipal;
+import interfaces.IntMenuPrincipal;
 
 import java.util.Scanner;
 
-public class MenuPrincipalConsola implements MenuPrincipal{
+public class MenuPrincipalConsola implements IntMenuPrincipal{
 	
 	private Scanner scanner;
 	

@@ -1,6 +1,6 @@
 package menus;
 
-import interfaces.MenuClientes;
+import interfaces.IntMenuClientes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ import java.util.Scanner;
 import objetos.Cliente;
 import objetos.Particular;
 
-public class MenuClientesConsola implements MenuClientes
+public class MenuClientesConsola implements IntMenuClientes
 {
 	private Scanner scanner;
 	
