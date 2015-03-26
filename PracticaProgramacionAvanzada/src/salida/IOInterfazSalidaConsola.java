@@ -1,50 +1,44 @@
 package salida;
 
 import interfaces.IOInterface;
-import interfaces.Menu;
-
 import java.util.Scanner;
-
-import menus.MenuClientes;
-import menus.MenuFacturas;
-import menus.MenuLlamadas;
-import menus.MenuPincipal;
+import menus.*;
 
 public class IOInterfazSalidaConsola implements IOInterface 
 {
-	private MenuPincipal menPrincipal;
-	private MenuClientes menClientes;
-	private MenuFacturas menFacturas;
-	private MenuLlamadas menLlamadas;
+	private MenuPrincipalConsola menPrincipal;
+	private MenuClientesConsola menClientes;
+	private MenuFacturasConsola menFacturas;
+	private MenuLlamadasConsola menLlamadas;
 	
 	private Scanner scanner;
 	
 	public IOInterfazSalidaConsola() {
 		this.scanner = new Scanner(System.in);
 		
-		this.menPrincipal = new MenuPincipal(this.scanner);
-		this.menClientes = new MenuClientes(this.scanner);
-		this.menFacturas = new MenuFacturas(this.scanner);
-		this.menLlamadas = new MenuLlamadas(this.scanner);
+		this.menPrincipal = new MenuPrincipalConsola(this.scanner);
+		this.menClientes = new MenuClientesConsola(this.scanner);
+		this.menFacturas = new MenuFacturasConsola(this.scanner);
+		this.menLlamadas = new MenuLlamadasConsola(this.scanner);
 	}
 
 	@Override
-	public Menu getMenuPrincipal() {
+	public MenuPrincipalConsola getMenuPrincipal() {
 		return this.menPrincipal;
 	}
 
 	@Override
-	public Menu getMenuClientes() {
+	public MenuClientesConsola getMenuClientes() {
 		return this.menClientes;
 	}
 
 	@Override
-	public Menu getMenuFacturas() {
+	public MenuFacturasConsola getMenuFacturas() {
 		return this.menFacturas;
 	}
 
 	@Override
-	public Menu getMenuLlamadas() {
+	public MenuLlamadasConsola getMenuLlamadas() {
 		return this.menLlamadas;
 	}
 

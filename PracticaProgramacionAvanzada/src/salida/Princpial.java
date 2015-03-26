@@ -4,6 +4,7 @@ import interfaces.IOInterface;
 
 import java.util.ArrayList;
 
+import objetos.Particular;
 import gestores.GestorCliente;
 
 public class Princpial 
@@ -27,7 +28,9 @@ public class Princpial
 		datos.add("Nebot");
 		
 		System.out.println(gestor.altaCliente(datos));
-		System.out.println(gestor.datosCliente(datos.get(1)));*/
+		Particular particular = (Particular) gestor.datosCliente(datos.get(1));
+		System.out.println(particular);
+		System.out.println(gestor.datosCliente(datos.get(1)).getClass().getSimpleName());*/
 		
 		Controlador controlador = new Controlador();
 		IOInterface IoInterface = new IOInterfazSalidaConsola();

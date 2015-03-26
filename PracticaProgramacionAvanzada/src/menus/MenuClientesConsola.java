@@ -1,16 +1,15 @@
 package menus;
 
-import gestores.GestorCliente;
-import interfaces.Menu;
+import interfaces.MenuClientes;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MenuClientes implements Menu
+public class MenuClientesConsola implements MenuClientes
 {
 	private Scanner scanner;
 	
-	public MenuClientes(Scanner scanner) {
+	public MenuClientesConsola(Scanner scanner) {
 		this.scanner = scanner;
 	}
 	

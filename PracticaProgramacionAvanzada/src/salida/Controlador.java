@@ -1,5 +1,7 @@
 package salida;
 
+import java.util.ArrayList;
+
 import gestores.GestorCliente;
 import gestores.GestorFactura;
 import gestores.GestorLlamada;
@@ -67,7 +69,7 @@ public class Controlador
             	break;
             	
             case 11:
-            	System.out.println("nuevocliente");
+            	this.IoInterface.getMenuClientes().menuNuevoCliente();
             	break;
              
             default:

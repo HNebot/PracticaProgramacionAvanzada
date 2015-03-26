@@ -46,9 +46,9 @@ public class GestorCliente
 		return mensage;
 	}
 	
-	public String datosCliente(String nif)
+	public Cliente datosCliente(String nif)
 	{
-		return this.dbCliente.buscarCliente(nif).toString();
+		return this.dbCliente.buscarCliente(nif);
 	}
 
 }

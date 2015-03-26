@@ -1,14 +1,14 @@
 package menus;
 
-import interfaces.Menu;
+import interfaces.MenuLlamadas;
 
 import java.util.Scanner;
 
-public class MenuFacturas implements Menu 
+public class MenuLlamadasConsola implements MenuLlamadas
 {
 	private Scanner scanner;
 	
-	public MenuFacturas(Scanner scanner) {
+	public MenuLlamadasConsola(Scanner scanner) {
 		this.scanner = scanner;
 	}
 	
@@ -16,9 +16,9 @@ public class MenuFacturas implements Menu
 	public byte menuInicial()
 	{
 		System.out.println("Elija una opcion:");
-		System.out.println("1- Nueva factura.");
-		System.out.println("2- Ver factura de un cliente.");
-		System.out.println("3- Listar facturas de un cliente.");
+		System.out.println("1- Nueva llamada.");
+		System.out.println("2- Ver llamadas de un cliente.");
+		System.out.println("3- Ver llamadas de una factura.");
 		System.out.println("0- Salir.");
 		System.out.print("->");
 		
