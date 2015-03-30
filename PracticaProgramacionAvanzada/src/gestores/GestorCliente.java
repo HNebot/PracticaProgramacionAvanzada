@@ -67,5 +67,30 @@ public class GestorCliente
 			return new ArrayList<Cliente>();
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	public String actualizarTarifa(String nif, String nuevaTarifa)
+	{	
+		String mensaje = "";
+		try
+		{
+			Cliente cliente = this.datosCliente(nif);
+			cliente.getTarifa().setTarifa(Float.parseFloat(nuevaTarifa));
+			mensaje = "Tarifa actualizada";
+		}
+		catch(NumberFormatException e)
+		{
+			mensaje = "Error. La tarifa no es correcta";
+		}
+		catch(Exception e)
+		{
+			mensaje = e.getMessage();
+		}
+		finally
+		{
+			return mensaje;
+		}
+		
+	}
 
 }

@@ -57,6 +57,7 @@ public class Controlador
 	 * @param opcion
 	 */
 	private void ejecutarOpcion(byte opcion) {
+		String mensaje;
         switch (opcion){
             case 1: 
             	//Ejecuta el menu sobre los clientes
@@ -90,7 +91,7 @@ public class Controlador
         		datos.add("12540");
         		datos.add("0.03");
         		datos.add("Nebot");
-            	String mensaje = this.gestorCliente.altaCliente(datos);
+            	mensaje = this.gestorCliente.altaCliente(datos);
             	this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
             	
             	break;
@@ -104,6 +105,12 @@ public class Controlador
             case 13:
             	this.IoInterface.getMenuClientes().mostrarClientes(this.gestorCliente.getClientes());
             	break;
+            
+            case 14:
+            	String nif = this.IoInterface.getMenuClientes().menuVerCliente();
+            	String tarifa = this.IoInterface.getMenuClientes().actualizarTarifa();
+            	mensaje = this.gestorCliente.actualizarTarifa(nif, tarifa);
+            	this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
              
             default:
             	break;

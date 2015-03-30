@@ -11,4 +11,5 @@ public interface IntMenuClientes extends IntMenu
 	public void mostrarMensaje(String mensaje);
 	public void formatoInfoCliente(Cliente cliente);
 	public void mostrarClientes(ArrayList<Cliente> clientes);
+	public String actualizarTarifa();
 }

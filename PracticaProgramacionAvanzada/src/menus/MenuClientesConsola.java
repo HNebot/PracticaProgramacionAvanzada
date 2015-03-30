@@ -38,6 +38,7 @@ public class MenuClientesConsola implements IntMenuClientes
 		System.out.println("1- Nuevo cliente.");
 		System.out.println("2- Ver cliente.");
 		System.out.println("3- Listar clientes.");
+		System.out.println("4- Actualizar tarifa.");
 		System.out.println("0- Salir.");
 		System.out.print("->");
 		
@@ -109,7 +110,7 @@ public class MenuClientesConsola implements IntMenuClientes
 	public String menuVerCliente()
 	{
 			this.scanner.nextLine();
-			System.out.println("Introduzca el NIF del cliente que desea buscar: ");
+			System.out.println("Introduzca el NIF del cliente: ");
 			System.out.print("--> ");
 			return this.scanner.nextLine();
 	}
@@ -167,6 +168,15 @@ public class MenuClientesConsola implements IntMenuClientes
 				this.formatoInfoCliente(clientes.get(i));
 			}
 		}
+	}
+
+	@Override
+	public String actualizarTarifa()
+	{
+		System.out.println("Introduzca la nuva tarifa del cliente: ");
+		System.out.print("--> ");
+		return this.scanner.nextLine();
+		
 	}
 
 }
