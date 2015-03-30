@@ -10,4 +10,5 @@ public interface IntMenuClientes extends IntMenu
 	public String menuVerCliente();
 	public void mostrarMensaje(String mensaje);
 	public void formatoInfoCliente(Cliente cliente);
+	public void mostrarClientes(ArrayList<Cliente> clientes);
 }

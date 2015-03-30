@@ -6,16 +6,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import objetos.Cliente;
-import objetos.Particular;
 
+/**
+ * @author Hector
+ * Esta clase es la que gestiona las salidas por pantalla, en este por consola de la informacion de los clientes
+ * 
+ * Implementa una interfaz IntMenuClientes que a su vez extiende una de tipo Menu
+ */
 public class MenuClientesConsola implements IntMenuClientes
 {
 	private Scanner scanner;
 	
+	/**
+	 * Contructor principal de la clase
+	 * Le pasamos un Scanner con el que recojeremos la informacion introducida
+	 * @param scanner
+	 */
 	public MenuClientesConsola(Scanner scanner) {
 		this.scanner = scanner;
 	}
 	
+	/**
+	 * Muestra el menu principal de acciones sobre los clientsç
+	 * 
+	 * retorna un Byte que es el valor que introduce el usuario
+	 */
 	@Override
 	public byte menuInicial()
 	{
@@ -29,6 +44,12 @@ public class MenuClientesConsola implements IntMenuClientes
 		return this.scanner.nextByte();
 	}
 	
+	/**
+	 * Muestra y recoje los datos necesarios para introducir un nuevo cliente
+	 * 
+	 * Retorna un ArrayList de String
+	 */
+	@Override
 	public ArrayList<String> menuNuevoCliente()
 	{
 		ArrayList<String> datosEntrada = new ArrayList<String>(13);
@@ -80,6 +101,11 @@ public class MenuClientesConsola implements IntMenuClientes
 		return datosEntrada;
 	}
 	
+	/**
+	 * Pide la informacion para buscar un cliente
+	 * retorna un String
+	 */
+	@Override
 	public String menuVerCliente()
 	{
 			this.scanner.nextLine();
@@ -88,12 +114,19 @@ public class MenuClientesConsola implements IntMenuClientes
 			return this.scanner.nextLine();
 	}
 
+	/**
+	 * Muestra los mensajes de confirmación o errores
+	 */
 	@Override
 	public void mostrarMensaje(String mensaje) {
 		System.out.println(mensaje);
 		
 	}
 
+	/**
+	 * Muestra por patalla los datos del cliente que se le pasa comprovando si es un Particular o una Empresa
+	 * @param cliente
+	 */
 	@Override
 	public void formatoInfoCliente(Cliente cliente) {
 		ArrayList<String> informacion = cliente.toArray();
@@ -111,8 +144,29 @@ public class MenuClientesConsola implements IntMenuClientes
 		System.out.println("=====================");
 		System.out.print(info);
 		System.out.println("=====================");
+	}
+	
+	/**
+	 * Recorre la lista con todos los clientes para mostrarlos por pantalla
+	 * Llama a   para mostrar la informacion
+	 * @param clientes
+	 */
+	@Override
+	public void mostrarClientes(ArrayList<Cliente> clientes)
+	{
+		String info = "No hay clientes";
 		
-		
+		if(clientes == null || clientes.isEmpty())
+		{
+			System.out.println(info);
+		}
+		else
+		{
+			for(int i = 0; i<clientes.size(); i++)
+			{
+				this.formatoInfoCliente(clientes.get(i));
+			}
+		}
 	}
 
 }

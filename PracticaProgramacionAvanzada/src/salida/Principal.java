@@ -31,7 +31,10 @@ public class Principal
 		Particular particular = (Particular) gestor.datosCliente(datos.get(1));
 		System.out.println(particular);
 		System.out.println(gestor.datosCliente(datos.get(1)).getClass().getSimpleName());*/
-		
+		/**
+		 * Usamos un cotrolador para gestionar la interaccion entre el modelo y las vistas
+		 * Le pasamos un interfaz que sera la que gestione las vistas
+		 */
 		Controlador controlador = new Controlador();
 		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
