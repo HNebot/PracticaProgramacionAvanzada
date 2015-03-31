@@ -1,7 +1,10 @@
 package salida;
 
 import interfaces.IntIOInterface;
+import interfaces.IntMenuPrincipal;
+
 import java.util.Scanner;
+
 import menus.*;
 
 public class IOInterfazSalidaConsola implements IntIOInterface 
@@ -11,15 +14,17 @@ public class IOInterfazSalidaConsola implements IntIOInterface
 	private MenuFacturasConsola menFacturas;
 	private MenuLlamadasConsola menLlamadas;
 	
+	private MenuEnumeracion menu;
+	
 	private Scanner scanner;
 	
 	public IOInterfazSalidaConsola() {
 		this.scanner = new Scanner(System.in);
 		
-		this.menPrincipal = new MenuPrincipalConsola(this.scanner);
-		this.menClientes = new MenuClientesConsola(this.scanner);
-		this.menFacturas = new MenuFacturasConsola(this.scanner);
-		this.menLlamadas = new MenuLlamadasConsola(this.scanner);
+		//this.menPrincipal = new MenuPrincipalConsola(this.scanner);
+		//this.menClientes = new MenuClientesConsola(this.scanner);
+		//this.menFacturas = new MenuFacturasConsola(this.scanner);
+		//this.menLlamadas = new MenuLlamadasConsola(this.scanner);
 	}
 
 	@Override
@@ -40,6 +45,12 @@ public class IOInterfazSalidaConsola implements IntIOInterface
 	@Override
 	public MenuLlamadasConsola getMenuLlamadas() {
 		return this.menLlamadas;
+	}
+	
+	@Override
+	public IntMenuPrincipal menu()
+	{
+		return menu;
 	}
 
 }

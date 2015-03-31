@@ -32,7 +32,7 @@ public class MenuClientesConsola implements IntMenuClientes
 	 * retorna un Byte que es el valor que introduce el usuario
 	 */
 	@Override
-	public byte menuInicial()
+	public String getMenu()
 	{
 		System.out.println("Elija una opcion:");
 		System.out.println("1- Nuevo cliente.");
@@ -42,7 +42,7 @@ public class MenuClientesConsola implements IntMenuClientes
 		System.out.println("0- Salir.");
 		System.out.print("->");
 		
-		return this.scanner.nextByte();
+		return "";
 	}
 	
 	/**

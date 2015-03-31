@@ -1,5 +1,6 @@
 package menus;
 
+import interfaces.IntLectura;
 import interfaces.IntMenuPrincipal;
 
 import java.util.Scanner;
@@ -7,13 +8,18 @@ import java.util.Scanner;
 public class MenuPrincipalConsola implements IntMenuPrincipal{
 	
 	private Scanner scanner;
+	private IntLectura lecturaTeclado;
+	private final String MENUPRINCIPAL =""; 
 	
 	public MenuPrincipalConsola(Scanner scanner) {
 		this.scanner = scanner;
 	}
+	public MenuPrincipalConsola(IntLectura lecturaTeclado) {
+		this.lecturaTeclado = lecturaTeclado;
+	}
 	
 	@Override
-	public byte menuInicial()
+	public String getMenu()
 	{
 		System.out.println("Elija una opcion del menu:");
 		System.out.println("1- Operaciones sobre clientes.");
@@ -22,29 +28,7 @@ public class MenuPrincipalConsola implements IntMenuPrincipal{
 		System.out.println("0- Salir.");
 		System.out.print("-->");
 		
-		return scanner.nextByte();
+		return "";
 	}
-	
-	/*public void menuClientes()
-	{
-		System.out.println("Elija una opcion:");
-		System.out.println("1- Nuevo cliente.");
-		System.out.println("2- Ver cliente.");
-		System.out.println("0- Salir.");
-	}
-	
-	public boolean opcionesMenuInicial(String opt)
-	{
-		boolean salir = false;
-		switch (opt){
-			case "1":
-				this.menuClientes();
-				break;
-			case "0":
-				salir = true;
-				break;				
-		}
-		return salir;
-	}*/
 
 }

@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface IntMenu {
-	public byte menuInicial();
+	public String getMenu();
 }

@@ -132,6 +132,7 @@ public class Cliente
 		datos.add(getNombre());
 		datos.add(getNIF());
 		datos.add(getEmail());
+		datos.add(getNumeroTelefono() +"");
 		datos.add(getDireccion().newToString());
 		datos.add(getTarifa().toString());
 		return datos;

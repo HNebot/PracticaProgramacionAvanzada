@@ -13,7 +13,7 @@ public class MenuLlamadasConsola implements IntMenuLlamadas
 	}
 	
 	@Override
-	public byte menuInicial()
+	public String getMenu()
 	{
 		System.out.println("Elija una opcion:");
 		System.out.println("1- Nueva llamada.");
@@ -22,7 +22,8 @@ public class MenuLlamadasConsola implements IntMenuLlamadas
 		System.out.println("0- Salir.");
 		System.out.print("->");
 		
-		return this.scanner.nextByte();
+		return "";
+		//return this.scanner.nextByte();
 	}
 
 }

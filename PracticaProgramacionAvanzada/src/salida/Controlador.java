@@ -35,8 +35,9 @@ public class Controlador
 		byte opcion = 0;
 		
 		do{
-            opcion = this.IoInterface.getMenuPrincipal().menuInicial();
-            ejecutarOpcion(opcion);
+			System.out.println(this.IoInterface.menu());
+            //opcion = this.IoInterface.menu();
+            //ejecutarOpcion(opcion);
         }while (opcion!=0);
 		
 		
@@ -56,24 +57,25 @@ public class Controlador
 	 * Se usa de forma recursiva
 	 * @param opcion
 	 */
-	private void ejecutarOpcion(byte opcion) {
+	private void ejecutarOpcion(String opcion) {
 		String mensaje;
-        switch (opcion){
+		byte opt = Byte.parseByte(opcion);
+        switch (opt){
             case 1: 
             	//Ejecuta el menu sobre los clientes
-            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuClientes().menuInicial());
-            	ejecutarOpcion(opcion);
+            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuClientes().menuInicial());
+            	//ejecutarOpcion(opcion);
                 break;
             case 2: 
             	//Ejecuta el menu sobre las facturas
-            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuFacturas().menuInicial());
-            	ejecutarOpcion(opcion);
+            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuFacturas().menuInicial());
+            	//ejecutarOpcion(opcion);
             	break;
             	
             case 3: 
             	//Ejecuta el menu sobre las llamadas
-            	opcion = (byte) ((opcion*10) + this.IoInterface.getMenuLlamadas().menuInicial());
-            	ejecutarOpcion(opcion);
+            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuLlamadas().menuInicial());
+            	//ejecutarOpcion(opcion);
             	break;
             	
             case 11:
@@ -99,19 +101,20 @@ public class Controlador
             	
             case 12:
             	
-            	Cliente cli = this.gestorCliente.datosCliente(this.IoInterface.getMenuClientes().menuVerCliente());
-            	this.IoInterface.getMenuClientes().formatoInfoCliente(cli);
+            	//Cliente cli = this.gestorCliente.datosCliente(this.IoInterface.getMenuClientes().menuVerCliente());
+            	//this.IoInterface.getMenuClientes().formatoInfoCliente(cli);
             	break;
             
             case 13:
-            	this.IoInterface.getMenuClientes().mostrarClientes(this.gestorCliente.getClientes());
+            	//this.IoInterface.getMenuClientes().mostrarClientes(this.gestorCliente.getClientes());
             	break;
             
             case 14:
-            	String nif = this.IoInterface.getMenuClientes().menuVerCliente();
-            	String tarifa = this.IoInterface.getMenuClientes().actualizarTarifa();
-            	mensaje = this.gestorCliente.actualizarTarifa(nif, tarifa);
-            	this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
+            	//String nif = this.IoInterface.getMenuClientes().menuVerCliente();
+            	//String tarifa = this.IoInterface.getMenuClientes().actualizarTarifa();
+            	//mensaje = this.gestorCliente.actualizarTarifa(nif, tarifa);
+            	//this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
+            	break;
              
             default:
             	break;
