@@ -25,18 +25,18 @@ public class GestorCliente
 		try{
 			String mensage = "Cliente registrado";
 			
-			Direccion direccion = new Direccion(datos.get(4), datos.get(5), datos.get(6), 
-					datos.get(7), datos.get(8), Integer.parseInt(datos.get(9)));
+			Direccion direccion = new Direccion(datos.get(5), datos.get(6), datos.get(7), 
+					datos.get(8), datos.get(9), Integer.parseInt(datos.get(10)));
 			Calendar fechaAlta = Calendar.getInstance();
-			Tarifa tarifa = new Tarifa(Float.parseFloat(datos.get(10)));
+			Tarifa tarifa = new Tarifa(Float.parseFloat(datos.get(11)));
 			
 			if(datos.get(0) == "E")
 			{
-				this.cliente = new Empresa(datos.get(1), datos.get(2), datos.get(3), direccion, fechaAlta, tarifa);
+				this.cliente = new Empresa(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa);
 			}
 			else
 			{
-				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), direccion, fechaAlta, tarifa, datos.get(11));
+				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa, datos.get(11));
 			}
 			
 			if(!dbCliente.nuevoCliente(cliente))

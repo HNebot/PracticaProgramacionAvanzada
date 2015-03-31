@@ -13,9 +13,9 @@ public class Particular extends Cliente
 		super();
 	}
 	
-	public Particular(String nIF, String nombre, String email,
+	public Particular(String nIF, String nombre, String email, int numeroTelefono,
 			Direccion direccion, Calendar fechaAlta, Tarifa tarifa, String apellido) {
-		super(nIF, nombre, email, direccion, fechaAlta, tarifa);
+		super(nIF, nombre, email, numeroTelefono, direccion, fechaAlta, tarifa);
 		
 		this.apellido = apellido;
 	}

@@ -27,7 +27,7 @@ public class MenuClientesConsola implements IntMenuClientes
 	}
 	
 	/**
-	 * Muestra el menu principal de acciones sobre los clientsç
+	 * Muestra el menu principal de acciones sobre los clientsï¿½
 	 * 
 	 * retorna un Byte que es el valor que introduce el usuario
 	 */
@@ -53,7 +53,7 @@ public class MenuClientesConsola implements IntMenuClientes
 	@Override
 	public ArrayList<String> menuNuevoCliente()
 	{
-		ArrayList<String> datosEntrada = new ArrayList<String>(13);
+		ArrayList<String> datosEntrada = new ArrayList<String>(14);
 		String tipo;
 		this.scanner.nextLine();
 		do{
@@ -78,23 +78,25 @@ public class MenuClientesConsola implements IntMenuClientes
 		datosEntrada.add(2,this.scanner.nextLine());
 		System.out.print("email: ");
 		datosEntrada.add(3,this.scanner.nextLine());
-		System.out.print("Calle: ");
+		System.out.print("telefono: ");
 		datosEntrada.add(4,this.scanner.nextLine());
-		System.out.print("Portal: ");
+		System.out.print("Calle: ");
 		datosEntrada.add(5,this.scanner.nextLine());
-		System.out.print("Piso y portal: ");
+		System.out.print("Portal: ");
 		datosEntrada.add(6,this.scanner.nextLine());
-		System.out.print("Poblacion: ");
+		System.out.print("Piso y portal: ");
 		datosEntrada.add(7,this.scanner.nextLine());
-		System.out.print("Porvincia: ");
+		System.out.print("Poblacion: ");
 		datosEntrada.add(8,this.scanner.nextLine());
-		System.out.print("Código postal: ");
+		System.out.print("Porvincia: ");
 		datosEntrada.add(9,this.scanner.nextLine());
-		System.out.print("Tarifa: ");
+		System.out.print("Cï¿½digo postal: ");
 		datosEntrada.add(10,this.scanner.nextLine());
+		System.out.print("Tarifa: ");
+		datosEntrada.add(11,this.scanner.nextLine());
 		if(tipo.equals("P"))
 		{
-			datosEntrada.add(11,apellido);			
+			datosEntrada.add(12,apellido);			
 		}
 		System.out.println("");
 		
@@ -116,7 +118,7 @@ public class MenuClientesConsola implements IntMenuClientes
 	}
 
 	/**
-	 * Muestra los mensajes de confirmación o errores
+	 * Muestra los mensajes de confirmaciï¿½n o errores
 	 */
 	@Override
 	public void mostrarMensaje(String mensaje) {
@@ -139,7 +141,7 @@ public class MenuClientesConsola implements IntMenuClientes
 		}
 		info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
 		info = info + "Email: " + informacion.get(2) + "\n";
-		info = info + "Dirección: " + informacion.get(3) + "\n";
+		info = info + "Direcciï¿½n: " + informacion.get(3) + "\n";
 		info = info + "Tarifa: " + informacion.get(4) +  "\n";
 		
 		System.out.println("=====================");

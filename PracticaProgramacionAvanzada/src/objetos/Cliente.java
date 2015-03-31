@@ -9,6 +9,7 @@ public class Cliente
 	
 	private String NIF;
 	private String nombre;
+	private int numeroTelefono;
 	private String email;
 	
 	private Direccion direccion;
@@ -23,12 +24,13 @@ public class Cliente
 	}
 	
 
-	public Cliente(String nombre, String nIF, String email,
+	public Cliente(String nombre, String nIF, String email, int numeroTelefono,
 			Direccion direccion, Calendar fechaAlta, Tarifa tarifa) {
 		super();
 		NIF = nIF;
 		this.nombre = nombre;
 		this.email = email;
+		this.numeroTelefono = numeroTelefono;
 		this.direccion = direccion;
 		this.fechaAlta = fechaAlta;
 		this.tarifa = tarifa;
@@ -70,6 +72,15 @@ public class Cliente
 		this.email = email;
 	}
 
+
+	public int getNumeroTelefono() {
+		return numeroTelefono;
+	}
+
+
+	public void setNumeroTelefono(int numeroTelefono) {
+		this.numeroTelefono = numeroTelefono;
+	}
 
 
 	public Direccion getDireccion() {
