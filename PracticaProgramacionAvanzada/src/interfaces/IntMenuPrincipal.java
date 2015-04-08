@@ -1,5 +1,6 @@
 package interfaces;
 
-public interface IntMenuPrincipal  extends IntMenu{
+public interface IntMenuPrincipal
+{
 
 }

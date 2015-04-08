@@ -1,12 +1,12 @@
 package interfaces;
 
-import menus.MenuEnumeracion;
-
 public interface IntIOInterface {
-	public IntMenuPrincipal getMenuPrincipal();
-	public IntMenuClientes getMenuClientes();
-	public IntMenuFacturas getMenuFacturas();
-	public IntMenuLlamadas getMenuLlamadas();
-	public IntMenuPrincipal menu();
+	public IntMenuClientes getOperacionesClientes();
+	public IntMenuFacturas getOperacionesFacturas();
+	public IntMenuLlamadas getOperacionesLlamadas();
+	//public IntMenu menuPrincipal();
+	//public IntMenu menuClientes();
+	//public IntMenu menuLLamadas();
+	//public IntMenu menuFacturas();
 
 }

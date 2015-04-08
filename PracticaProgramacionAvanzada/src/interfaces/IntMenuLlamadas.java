@@ -1,5 +1,5 @@
 package interfaces;
 
-public interface IntMenuLlamadas extends IntMenu{
+public interface IntMenuLlamadas{
 
 }

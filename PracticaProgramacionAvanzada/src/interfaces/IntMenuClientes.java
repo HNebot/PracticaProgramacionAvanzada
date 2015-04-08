@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import objetos.Cliente;
 
-public interface IntMenuClientes extends IntMenu
+public interface IntMenuClientes
 {
 	public ArrayList<String> menuNuevoCliente();
 	public String menuVerCliente();

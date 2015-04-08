@@ -1,5 +1,9 @@
 package interfaces;
 
-public interface IntMenu {
-	public String getMenu();
+public interface IntMenu 
+{
+	public default String getMenu() {
+		return null;
+	}
+
 }

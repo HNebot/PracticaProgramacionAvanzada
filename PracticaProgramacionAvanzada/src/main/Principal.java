@@ -1,15 +1,18 @@
-package salida;
+package main;
 
 import interfaces.IntIOInterface;
+import interfaces.IntLectura;
+import interfaces.IntSalidaInfo;
 
 import java.util.ArrayList;
 
+import lectura.LecturaDatosConsola;
 import objetos.Particular;
-import gestores.GestorCliente;
+import salida.SalidaInfoConsola;
 
 public class Principal 
 {
-	public static GestorCliente gestor = new GestorCliente();
+	//public static GestorCliente gestor = new GestorCliente();
 	public static void main(String[] args)
 	{
 		/*ArrayList<String> datos = new ArrayList();
@@ -38,6 +41,10 @@ public class Principal
 		Controlador controlador = new Controlador();
 		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
+		IntLectura lecturaDatos = new LecturaDatosConsola();
+		controlador.setLectura(lecturaDatos);
+		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
+		controlador.setSalida(salidaInfo);
 		controlador.start();
 		
 	
