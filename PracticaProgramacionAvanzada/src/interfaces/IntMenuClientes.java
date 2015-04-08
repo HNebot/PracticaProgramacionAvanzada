@@ -6,6 +6,7 @@ import objetos.Cliente;
 
 public interface IntMenuClientes
 {
+	
 	public ArrayList<String> menuNuevoCliente();
 	public String menuVerCliente();
 	public void mostrarMensaje(String mensaje);
