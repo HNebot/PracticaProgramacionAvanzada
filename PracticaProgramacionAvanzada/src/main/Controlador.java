@@ -6,16 +6,18 @@ import java.util.Scanner;
 import menus.MenuClientesConsola;
 import menus.MenuPrincipalConsola;
 import objetos.Cliente;
+import gestores.GestorClientes;
+import gestores.GestorFacturas;
+import gestores.GestorLlamadas;
 import interfaces.IntIOInterface;
 import interfaces.IntLectura;
-import interfaces.IntMenu;
 import interfaces.IntSalidaInfo;
 
 public class Controlador 
 {
-	//private GestorCliente gestorCliente;
-	//private GestorFactura gestorFactura;
-	//private GestorLlamada gestorLlamada;
+	private GestorClientes gestorClientes;
+	private GestorFacturas gestorFacturas;
+	private GestorLlamadas gestorLlamadas;
 	
 	private IntIOInterface IoInterface;
 	private IntLectura lecturaDatos;
@@ -43,14 +45,13 @@ public class Controlador
 	 */
 	public void start()
 	{
+		inicializaGestores();
 		MenuPrincipalConsola op;
-		Scanner scanner = new Scanner(System.in);
 		do {
 			this.salidaInfo.salidaInfo(MenuPrincipalConsola.getMenu());
 			op = MenuPrincipalConsola.getOpcion(this.lecturaDatos.lecturaEnteros());
 			ejecutaOpcionMenuPrincipal(op);
 		} while (op != MenuPrincipalConsola.SALIR);
-		scanner.close();
 	}
 
 	/**
@@ -58,11 +59,15 @@ public class Controlador
 	 */
 	public void inicializaGestores()
 	{
-		//this.gestorCliente = new GestorCliente();
-		//this.gestorFactura = new GestorFactura();
-		//this.gestorLlamada = new GestorLlamada();
+		this.gestorClientes = new GestorClientes();
+		this.gestorFacturas = new GestorFacturas();
+		this.gestorLlamadas = new GestorLlamadas();
 	}
 	
+	/**
+	 * Ejecuta las opciones principales elegidas por le usuario y ejecuta sus operaciones
+	 * @param opcion
+	 */
 	private void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) {
 		switch (opcion) {
 		case CLIENTES:
@@ -79,6 +84,10 @@ public class Controlador
 		
 	}
 	
+	/**
+	 * Ejecuta las opciones sobre los clientes elegidas por le usuario y ejecuta sus operaciones
+	 * @param opcion
+	 */
 	private void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
 		String mensaje;
 		switch (opcion) {
@@ -98,20 +107,28 @@ public class Controlador
     		datos.add("12540");
     		datos.add("0.03");
     		datos.add("Nebot");
-        	//mensaje = this..altaCliente(datos);
-        	//this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
+        	mensaje = this.gestorClientes.altaCliente(datos);
+        	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
 			break;
 			
 		case BUSCAR_CLIENTE_DNI:
-			//Cliente cli = this.gestorCliente.datosCliente(this.IoInterface.getMenuClientes().menuVerCliente());
-        	//this.IoInterface.getMenuClientes().formatoInfoCliente(cli);
+			Cliente cli = this.gestorClientes.datosCliente(this.IoInterface.getOperacionesClientes().menuVerCliente());
+        	this.IoInterface.getOperacionesClientes().formatoInfoCliente(cli);
 			break;
 			
 		case BUSCAR_CLIENTE_ALTA:
 			break;
 			
 		case VER_CLIENTES:
-			break;
+			this.IoInterface.getOperacionesClientes().mostrarClientes(this.gestorClientes.getClientes());
+        	break;
+        	
+		case MODIFICAR_TARIFA:
+			String nif = this.IoInterface.getOperacionesClientes().menuVerCliente();
+        	String tarifa = this.IoInterface.getOperacionesClientes().actualizarTarifa();
+        	mensaje = this.gestorClientes.actualizarTarifa(nif, tarifa);
+        	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
+        	break;
 			
 		case ATRAS:
 			break;
@@ -127,68 +144,5 @@ public class Controlador
 	 * Se usa de forma recursiva
 	 * @param opcion
 	 */
-	/*private void ejecutarOpcion(String opcion) {
-		String mensaje;
-		byte opt = Byte.parseByte(opcion);
-        switch (opt){
-            case 1: 
-            	//Ejecuta el menu sobre los clientes
-            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuClientes().menuInicial());
-            	//ejecutarOpcion(opcion);
-                break;
-            case 2: 
-            	//Ejecuta el menu sobre las facturas
-            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuFacturas().menuInicial());
-            	//ejecutarOpcion(opcion);
-            	break;
-            	
-            case 3: 
-            	//Ejecuta el menu sobre las llamadas
-            	//opcion = (byte) ((opcion*10) + this.IoInterface.getMenuLlamadas().menuInicial());
-            	//ejecutarOpcion(opcion);
-            	break;
-            	
-            case 11:
-            	//ArrayList<String> datos = this.IoInterface.getMenuClientes().menuNuevoCliente();
-            	ArrayList<String> datos = new ArrayList();
-        		datos.add("P");
-        		datos.add("Hector");
-        		datos.add("123S");
-        		datos.add("n@gmail.com");
-        		datos.add("111222333");
-        		datos.add("Avd Pio XII");
-        		datos.add("17");
-        		datos.add("2D");
-        		datos.add("Vila-real");
-        		datos.add("Castellon");
-        		datos.add("12540");
-        		datos.add("0.03");
-        		datos.add("Nebot");
-            	mensaje = this.gestorCliente.altaCliente(datos);
-            	//this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
-            	
-            	break;
-            	
-            case 12:
-            	
-            	//Cliente cli = this.gestorCliente.datosCliente(this.IoInterface.getMenuClientes().menuVerCliente());
-            	//this.IoInterface.getMenuClientes().formatoInfoCliente(cli);
-            	break;
-            
-            case 13:
-            	//this.IoInterface.getMenuClientes().mostrarClientes(this.gestorCliente.getClientes());
-            	break;
-            
-            case 14:
-            	//String nif = this.IoInterface.getMenuClientes().menuVerCliente();
-            	//String tarifa = this.IoInterface.getMenuClientes().actualizarTarifa();
-            	//mensaje = this.gestorCliente.actualizarTarifa(nif, tarifa);
-            	//this.IoInterface.getMenuClientes().mostrarMensaje(mensaje);
-            	break;
-             
-            default:
-            	break;
-        }
-	}*/
-
+	
 }

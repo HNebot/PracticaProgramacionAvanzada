@@ -1,11 +1,17 @@
 package objetos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Cliente 
+public class Cliente implements Serializable
 {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3883647530742079062L;
 	
 	private String NIF;
 	private String nombre;

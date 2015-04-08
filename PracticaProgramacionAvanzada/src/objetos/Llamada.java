@@ -1,10 +1,16 @@
 package objetos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Llamada 
+public class Llamada implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2659701448875084153L;
+	
 	private int telefonoReceptor;
 	private Date fecha;
 	private int duracion;

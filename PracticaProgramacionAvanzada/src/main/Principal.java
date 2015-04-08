@@ -4,7 +4,9 @@ import interfaces.IntIOInterface;
 import interfaces.IntLectura;
 import interfaces.IntSalidaInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import lectura.LecturaDatosConsola;
 import objetos.Particular;
@@ -38,6 +40,11 @@ public class Principal
 		 * Usamos un cotrolador para gestionar la interaccion entre el modelo y las vistas
 		 * Le pasamos un interfaz que sera la que gestione las vistas
 		 */
+		
+		/*Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		System.out.println(sdf.format(cal.getTime()));*/
+		
 		Controlador controlador = new Controlador();
 		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
@@ -46,9 +53,6 @@ public class Principal
 		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
 		controlador.setSalida(salidaInfo);
 		controlador.start();
-		
-	
-		
 	}
 	
 

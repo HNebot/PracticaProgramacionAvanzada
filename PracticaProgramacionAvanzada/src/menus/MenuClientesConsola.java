@@ -5,7 +5,8 @@ public enum MenuClientesConsola{
 	NUEVO_CLIENTE("Nuevo cliente"),
 	BUSCAR_CLIENTE_DNI("Buscar cliente por dni"),
 	BUSCAR_CLIENTE_ALTA("Buscar cliente por fecha alta"),
-	VER_CLIENTES("Ver todos los clientes");
+	VER_CLIENTES("Ver todos los clientes"),
+	MODIFICAR_TARIFA("Modificar la tarifa de un cliente");
 	
 	private String descripcion;
 	

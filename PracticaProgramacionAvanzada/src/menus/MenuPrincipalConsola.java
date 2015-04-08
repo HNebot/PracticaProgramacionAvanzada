@@ -1,7 +1,5 @@
 package menus;
 
-import interfaces.IntMenu;
-
 public enum MenuPrincipalConsola {
 	SALIR("Salir del programa"),
 	CLIENTES("Menu clientes"),

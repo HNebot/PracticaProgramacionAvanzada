@@ -1,16 +1,22 @@
 package baseDatos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import objetos.Cliente;
 
-public class BDClientes 
+public class BDClientes implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8666169454847355680L;
 	private HashMap<String, Cliente> clientes;
 	
 	public BDClientes() {
+		super();
 		this.clientes = new HashMap<String, Cliente>();
 	}
 	

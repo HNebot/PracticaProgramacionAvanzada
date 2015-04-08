@@ -1,7 +1,14 @@
 package objetos;
 
-public class Tarifa 
+import java.io.Serializable;
+
+public class Tarifa implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8255629566405519458L;
+	
 	private float tarifa;
 
 	public Tarifa(float tarifa) {

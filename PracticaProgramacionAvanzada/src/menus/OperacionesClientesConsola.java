@@ -5,7 +5,9 @@ import interfaces.IntMenuClientes;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import lectura.LecturaDatosConsola;
 import objetos.Cliente;
+import salida.SalidaInfoConsola;
 
 /**
  * @author Hector
@@ -16,6 +18,7 @@ import objetos.Cliente;
 public class OperacionesClientesConsola implements IntMenuClientes
 {
 	private Scanner scanner;
+	private LecturaDatosConsola lectura;
 	
 	/**
 	 * Contructor principal de la clase
@@ -26,7 +29,7 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		this.scanner = scanner;
 	}
 	public OperacionesClientesConsola() {
-		
+		this.lectura = new LecturaDatosConsola();
 	}
 	
 	
@@ -40,10 +43,10 @@ public class OperacionesClientesConsola implements IntMenuClientes
 	{
 		ArrayList<String> datosEntrada = new ArrayList<String>(14);
 		String tipo;
-		this.scanner.nextLine();
 		do{
 			System.out.println("Cliente particulas(P) o empresa(E)?");
 			tipo = this.scanner.nextLine();
+			tipo = this.lectura.lecturaDatos();
 			tipo = tipo.toUpperCase();
 		}
 		while(tipo.equals("E") == false && tipo.equals("P") == false);
@@ -85,7 +88,7 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		}
 		System.out.println("");
 		
-		
+		scanner.close();
 		return datosEntrada;
 	}
 	
@@ -96,10 +99,9 @@ public class OperacionesClientesConsola implements IntMenuClientes
 	@Override
 	public String menuVerCliente()
 	{
-			this.scanner.nextLine();
 			System.out.println("Introduzca el NIF del cliente: ");
 			System.out.print("--> ");
-			return this.scanner.nextLine();
+			return this.lectura.lecturaDatos();
 	}
 
 	/**
@@ -122,12 +124,13 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		info = info + "Nombre: " + informacion.get(0);
 		if(cliente.getClass().getSimpleName().toString().equals("Particular"))
 		{
-			info = info + " " + informacion.get(5);
+			info = info + " " + informacion.get(6);
 		}
 		info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
 		info = info + "Email: " + informacion.get(2) + "\n";
-		info = info + "Direcci�n: " + informacion.get(3) + "\n";
-		info = info + "Tarifa: " + informacion.get(4) +  "\n";
+		info = info + "Telefono: " + informacion.get(3) + "\n";
+		info = info + "Direcci�n: " + informacion.get(4) + "\n";
+		info = info + "Tarifa: " + informacion.get(5) +  "\n";
 		
 		System.out.println("=====================");
 		System.out.print(info);
@@ -162,7 +165,7 @@ public class OperacionesClientesConsola implements IntMenuClientes
 	{
 		System.out.println("Introduzca la nuva tarifa del cliente: ");
 		System.out.print("--> ");
-		return this.scanner.nextLine();
+		return this.lectura.lecturaDatos();
 		
 	}
 

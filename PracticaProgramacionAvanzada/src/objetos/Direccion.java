@@ -1,7 +1,14 @@
 package objetos;
 
-public class Direccion 
+import java.io.Serializable;
+
+public class Direccion implements Serializable
 {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7841767109713569607L;
 	
 	private String calle;
 	private String portal;

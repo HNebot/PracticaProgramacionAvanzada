@@ -1,12 +1,16 @@
 package objetos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-public class Particular extends Cliente
+public class Particular extends Cliente implements Serializable
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3657030936586245205L;
 	private String apellido;
 	
 	public Particular(){
