@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import menus.MenuClientesConsola;
+import menus.MenuFacturasConsola;
+import menus.MenuLlamadasConsola;
 import menus.MenuPrincipalConsola;
 import objetos.Cliente;
 import gestores.GestorClientes;
@@ -75,8 +77,12 @@ public class Controlador
 			ejecutaOpcionMenuCliente(MenuClientesConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
 			break;
 		case FACTURAS:
+			this.salidaInfo.salidaInfo(MenuFacturasConsola.getMenu());
+			ejecutaOpcionMenuFacturas(MenuFacturasConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
 			break;
 		case LLAMADAS:
+			this.salidaInfo.salidaInfo(MenuLlamadasConsola.getMenu());
+			ejecutaOpcionMenuLlamadas(MenuLlamadasConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
 			break;
 		case SALIR:
 			break;
@@ -133,10 +139,43 @@ public class Controlador
 		case ATRAS:
 			break;
 		}
-		
 	}
-
 	
+	/**
+	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
+	 * @param opcion
+	 */
+	private void ejecutaOpcionMenuFacturas(MenuFacturasConsola opcion) {
+		switch (opcion) {
+		case EMITIR_FACTURA:
+			break;
+		case BUSCAR_FACTURA_CODIGO:
+			break;
+		case BUSCAR_FACTURAS_FECHA:
+			break;
+		case FACTURAS_CLIENTE:
+			break;
+		case ATRAS:
+			break;
+		}
+	}
+	
+	/**
+	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
+	 * @param opcion
+	 */
+	private void ejecutaOpcionMenuLlamadas(MenuLlamadasConsola opcion) {
+		switch (opcion) {
+		case ALTA_LLAMADA:
+			break;
+		case LLAMADAS_CLIENTE:
+			break;
+		case LLAMADAS_CLIENTE_FECHA:
+			break;
+		case ATRAS:
+			break;
+		}
+	}
 	
 	
 	/**

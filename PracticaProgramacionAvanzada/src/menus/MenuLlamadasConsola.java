@@ -1,14 +1,15 @@
 package menus;
 
-public enum MenuPrincipalConsola {
-	SALIR("Salir del programa"),
-	CLIENTES("Menu clientes"),
-	FACTURAS("Menu facturas"),
-	LLAMADAS("Menu llamadas");
-
+public enum MenuLlamadasConsola 
+{
+	ATRAS("Volver atras"),
+	ALTA_LLAMADA("Emitir una factura de un cliente."),
+	LLAMADAS_CLIENTE("Ver una llamadasde un cliente."),
+	LLAMADAS_CLIENTE_FECHA("Ver las llamadas de un cliente comprendidas entre dos fechas.");
+	
 	private String descripcion;
-
-	private MenuPrincipalConsola(String descripcion) {
+	
+	private MenuLlamadasConsola(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	
@@ -18,7 +19,7 @@ public enum MenuPrincipalConsola {
 	
 	public static String getMenu() {
 		StringBuilder sb = new StringBuilder();
-		for (MenuPrincipalConsola opcion : MenuPrincipalConsola.values()) {
+		for (MenuLlamadasConsola opcion : MenuLlamadasConsola.values()) {
 			sb.append(opcion.ordinal());
 			sb.append(".- ");
 			sb.append(opcion.getDescripcion());
@@ -27,7 +28,7 @@ public enum MenuPrincipalConsola {
 		return sb.toString();
 	}
 	
-	public static MenuPrincipalConsola getOpcion(int posicion) {
+	public static MenuLlamadasConsola getOpcion(int posicion)  {
 		try
 		{
 			return values()[posicion];
@@ -36,6 +37,5 @@ public enum MenuPrincipalConsola {
 			return values()[0];
 		}
 	}
-		
-}
 
+}
