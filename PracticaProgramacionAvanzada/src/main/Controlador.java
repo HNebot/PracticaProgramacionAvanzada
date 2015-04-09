@@ -64,6 +64,8 @@ public class Controlador
 		this.gestorClientes = new GestorClientes();
 		this.gestorFacturas = new GestorFacturas();
 		this.gestorLlamadas = new GestorLlamadas();
+		
+		this.gestorLlamadas.setGestorCliente(this.gestorClientes);
 	}
 	
 	/**
@@ -165,10 +167,16 @@ public class Controlador
 	 * @param opcion
 	 */
 	private void ejecutaOpcionMenuLlamadas(MenuLlamadasConsola opcion) {
+		String mensaje;
 		switch (opcion) {
 		case ALTA_LLAMADA:
+			mensaje = this.gestorLlamadas.altaLlamada(this.IoInterface.getOperacionesLlamadas().realizarLLamada());
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case LLAMADAS_CLIENTE:
+			mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
+					this.gestorLlamadas.verLlamadasCliente(this.IoInterface.getOperacionesLlamadas().llamadasCliente()));
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case LLAMADAS_CLIENTE_FECHA:
 			break;

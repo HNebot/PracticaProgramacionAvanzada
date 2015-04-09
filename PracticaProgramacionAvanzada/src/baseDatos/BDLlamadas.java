@@ -16,5 +16,32 @@ public class BDLlamadas implements Serializable
 	private HashMap<String, ArrayList<Llamada>> llamadas;
 	
 	
+	public boolean altaLlamada(String nif, Llamada llamada)
+	{
+		if(!this.llamadas.containsKey(nif))
+		{
+			return this.llamadas.get(nif).add(llamada);
+		}
+		else
+		{
+			ArrayList<Llamada> lista = new ArrayList<Llamada>();
+			lista.add(llamada);
+			this.llamadas.put(nif, lista);
+			return true;
+		}
+	}
+	
+	public ArrayList<Llamada> llamadasCliente(String nif)
+	{
+		if(!this.llamadas.containsKey(nif))
+		{
+			return null;
+		}
+		
+		return this.llamadas.get(nif);
+	}
+	
+	
+	
 
 }
