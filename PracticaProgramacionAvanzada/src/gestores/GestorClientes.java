@@ -23,12 +23,18 @@ public class GestorClientes
 	private Cliente cliente;
 	private BDClientes dbCliente = new BDClientes();
 	private final String FICHERO_CLIENTES ="BDClientes.bin";
+	private GestorFacturas gestorFacturas;
 	//private GestorAlmacenamientoFichero<BDClientes> datosClientes = 
 	//		new GestorAlmacenamientoFichero<BDClientes>(dbCliente, FICHERO_CLIENTES);
 	
 	public GestorClientes(){
 		super();
 		recuperarDatos();
+	}
+	
+	public void setGestorFacturas(GestorFacturas gestorFacturas)
+	{
+		this.gestorFacturas = gestorFacturas;
 	}
 	
 	public String altaCliente (ArrayList<String> datos)
@@ -50,7 +56,7 @@ public class GestorClientes
 				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa, datos.get(11));
 			}
 			
-			if(!dbCliente.nuevoCliente(cliente))
+			if(!dbCliente.addNuevoCliente(cliente))
 			{
 				mensage = "No se pudo dar de alta el cliente. \n Ya existe.";
 				return mensage;
@@ -106,7 +112,7 @@ public class GestorClientes
 	}
 	
 	
-	public void almacenarDatos() {
+	private void almacenarDatos() {
 		ObjectOutputStream oos=null;
 		try {
 			try {
@@ -128,7 +134,7 @@ public class GestorClientes
 		
 	}
 	
-	public void recuperarDatos() {
+	private void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{
 			try {

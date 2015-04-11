@@ -12,13 +12,19 @@ public class GestorFacturas
 {
 	private BDFacturas dbFacturas = new BDFacturas();
 	private final String FICHERO_FACTURAS ="BDFacturas.bin";
+	private GestorClientes gestorClientes;
 	
 	public GestorFacturas() {
 		super();
 		recuperarDatos();
 	}
 	
-	public void almacenarDatos() {
+	public void setGestorClientes(GestorClientes gestorClientes)
+	{
+		this.gestorClientes = gestorClientes;
+	}
+	
+	private void almacenarDatos() {
 		ObjectOutputStream oos=null;
 		try {
 			try {
@@ -40,7 +46,7 @@ public class GestorFacturas
 		
 	}
 	
-	public void recuperarDatos() {
+	private void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{
 			try {

@@ -65,7 +65,10 @@ public class Controlador
 		this.gestorFacturas = new GestorFacturas();
 		this.gestorLlamadas = new GestorLlamadas();
 		
-		this.gestorLlamadas.setGestorCliente(this.gestorClientes);
+		this.gestorClientes.setGestorFacturas(this.gestorFacturas);
+		this.gestorFacturas.setGestorClientes(this.gestorClientes);
+		this.gestorLlamadas.setGestorClientes(this.gestorClientes);
+		this.gestorLlamadas.setGestorFacturas(this.gestorFacturas);
 	}
 	
 	/**

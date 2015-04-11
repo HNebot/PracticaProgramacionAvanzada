@@ -20,7 +20,7 @@ public class BDClientes implements Serializable
 		this.clientes = new HashMap<String, Cliente>();
 	}
 	
-	public boolean nuevoCliente (Cliente cliente)
+	public boolean addNuevoCliente (Cliente cliente)
 	{
 		if(clientes.containsKey(cliente.getNIF()))
 		{

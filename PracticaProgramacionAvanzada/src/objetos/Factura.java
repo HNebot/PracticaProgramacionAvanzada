@@ -1,6 +1,7 @@
 package objetos;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -19,12 +20,23 @@ public class Factura implements Serializable
 	private Calendar fechaFin;
 	private ArrayList<Llamada> llamadasFactura;
 	
+	/**
+	 * Genera el codigo de la factura mendiante un contador que cuenta las facturas creadas 
+	 * y el codigo individual de cada cliente
+	 * @param codCliente
+	 * @return codFactura
+	 */
 	private static String generarCodFactura(String codCliente)
 	{
 		contFacturaID++;
 		return codCliente + contFacturaID;
 	}
 	
+	/**
+	 * Genera la fecha de fin de factura sumandole un mes a la fecha de inicio de esta
+	 * @param fechaInicio
+	 * @return fechaFin
+	 */
 	private static Calendar generarFechaFin(Calendar fechaInicio)
 	{
 		Calendar cal = fechaInicio;
@@ -95,13 +107,40 @@ public class Factura implements Serializable
 	public void setLlamadasFactura(ArrayList<Llamada> llamadasFactura) {
 		this.llamadasFactura = llamadasFactura;
 	}
+
+	@Override
+	public String toString() {
+		return "Factura [codFactura=" + codFactura + ", tarifa=" + tarifa
+				+ ", fechaEmision=" + fechaEmision + ", fechaInicio="
+				+ fechaInicio + ", fechaFin=" + fechaFin + ", llamadasFactura="
+				+ llamadasFactura + "]";
+	}
 	
+	/**
+	 * Da formato a la fecha para convertir el objeto Calendar en un string con formato dd/M/yyyy
+	 * @param fecha
+	 * @return fechaString
+	 */
+	private String formatoFecha(Calendar fecha)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		return sdf.format(fecha.getTime());
+	}
 	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Deveuelve un ArrayList<String> con los datos de la factura
+	 * por0: codFactura, pos1: fechaInicio, pos2: fechaFin, pos3: tarifa
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> toArray()
+	{
+		ArrayList<String> datos = new ArrayList<String>();
+		
+		datos.add(getCodFactura());
+		datos.add(formatoFecha(fechaInicio));
+		datos.add(formatoFecha(fechaFin));
+		datos.add("" + getTarifa().getTarifa());
+		return datos;
+	}
 
 }

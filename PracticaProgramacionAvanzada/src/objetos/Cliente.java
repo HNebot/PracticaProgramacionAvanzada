@@ -3,7 +3,6 @@ package objetos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Cliente implements Serializable
 {

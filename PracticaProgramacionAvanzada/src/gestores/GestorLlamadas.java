@@ -20,16 +20,21 @@ public class GestorLlamadas
 	
 	private Llamada llamada;
 	private GestorClientes gestorCliente;
+	private GestorFacturas gestorFacturas;
 	
 	public GestorLlamadas() {
 		super();
 		recuperarDatos();
 	}
 	
-	public void setGestorCliente(GestorClientes gestorCliente)
+	public void setGestorClientes(GestorClientes gestorCliente)
 	{
 		this.gestorCliente = gestorCliente;
 	}
+	public void setGestorFacturas(GestorFacturas gestorFacturas) 
+	{
+		this.gestorFacturas = gestorFacturas;
+	}	
 	
 	public String altaLlamada(ArrayList<String> datos)
 	{
@@ -108,5 +113,7 @@ public class GestorLlamadas
 		
 			
 	}
+
+	
 
 }

@@ -15,6 +15,10 @@ public class BDLlamadas implements Serializable
 	private static final long serialVersionUID = -5525941430214701042L;
 	private HashMap<String, ArrayList<Llamada>> llamadas;
 	
+	public BDLlamadas() {
+		super();
+		this.llamadas = new HashMap<String, ArrayList<Llamada>>();
+	}
 	
 	public boolean altaLlamada(String nif, Llamada llamada)
 	{
