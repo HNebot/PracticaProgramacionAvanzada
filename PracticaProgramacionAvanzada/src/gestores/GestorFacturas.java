@@ -78,7 +78,39 @@ public class GestorFacturas
 		}
 	}
 	
-	public Factura emitirFactura(){
+	/**
+	 * Busca la ultima factura sin emitir y la devuelve asignando la fecha actual como fecha de emision.
+	 * Si la fecha de emision es anterior a la de fin de factura esta ultima se actualiza a la de emision.
+	 * Se crea una nueva factura si la que se emite es la ultima.
+	 * @param El  codigo del cliente al que se le emite la factura.
+	 * @return Un objeto factura si se emite. Si hay algun fallo retorna null.
+	 */
+	public Factura emitirFactura(String codCliente){
+		ArrayList<Factura> listaFacturas = this.devolverFacturasCliente(codCliente);
+		Factura factura;
+		try{
+			for(int i = 0;  i > listaFacturas.size(); i++)
+			{
+				factura = listaFacturas.get(i);
+				if(factura.getFechaEmision() == null)
+				{
+					Calendar fechaEmision = Calendar.getInstance();
+					factura.setFechaEmision(fechaEmision);
+					if(fechaEmision.before(factura.getFechaFin()))
+					{
+						factura.setFechaFin(fechaEmision);
+						Cliente cliente = this.gestorClientes.datosCliente(codCliente);
+						this.crearFactura(codCliente, cliente.getTarifa());
+					}
+					almacenarDatos();
+					return factura;
+				}
+			}
+		}
+		catch(Exception e){
+			almacenarDatos();
+			return null;
+		}
 		return null;
 	}
 	
@@ -88,7 +120,7 @@ public class GestorFacturas
 	}
 	
 	public Factura buscarFactura(String codFactura){
-		return null;
+		return this.dbFacturas.buscarFactura(codFactura);
 	}
 	
 	public ArrayList<Factura> devolverFacturasCliente(String CodCliente)
