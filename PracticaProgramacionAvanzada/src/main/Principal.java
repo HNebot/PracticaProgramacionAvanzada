@@ -15,6 +15,13 @@ import salida.SalidaInfoConsola;
 public class Principal 
 {
 	//public static GestorCliente gestor = new GestorCliente();
+	
+	static Calendar generar(Calendar fechaInicio)
+	{
+		Calendar cal = (Calendar) fechaInicio.clone();
+		cal.add(Calendar.MONTH, 1);
+		return cal;
+	}
 	public static void main(String[] args)
 	{
 		/*ArrayList<String> datos = new ArrayList();
@@ -41,18 +48,25 @@ public class Principal
 		 * Le pasamos un interfaz que sera la que gestione las vistas
 		 */
 		
-		/*Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-		System.out.println(sdf.format(cal.getTime()));*/
+		System.out.println(sdf.format(cal.getTime()));
+		Calendar cal2 = generar(cal);
+		System.out.println(sdf.format(cal.getTime()));
+		//cal.add(Calendar.MONTH, 1);
+		//System.out.println(sdf.format(cal.getTime()));
+		//cal.add(Calendar.MONTH, 8);
+		//System.out.println(sdf.format(cal.getTime()));
+		System.out.println(sdf.format(cal2.getTime()));
 		
-		Controlador controlador = new Controlador();
+		/*Controlador controlador = new Controlador();
 		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
 		IntLectura lecturaDatos = new LecturaDatosConsola();
 		controlador.setLectura(lecturaDatos);
 		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
 		controlador.setSalida(salidaInfo);
-		controlador.start();
+		controlador.start();*/
 	}
 	
 

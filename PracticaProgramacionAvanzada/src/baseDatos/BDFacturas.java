@@ -3,7 +3,9 @@ package baseDatos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import objetos.Cliente;
 import objetos.Factura;
 
 public class BDFacturas implements Serializable{
@@ -58,6 +60,20 @@ public class BDFacturas implements Serializable{
 			return this.factuasCliente.get(codCliente);
 		}
 		return null;
+	}
+	
+	/**
+	 * Devuelve todas las facturas que existen en la base de datos
+	 * @return ArrayList<Factura>
+	 */
+	public ArrayList<Factura> devolverFacturas()
+	{
+		ArrayList<Factura> listaFacturas = new ArrayList<Factura>();
+		for (Map.Entry<String, Factura> entry : facturas.entrySet()) { 
+			listaFacturas.add(entry.getValue());
+		}
+		
+		return listaFacturas;
 	}
 	
 	

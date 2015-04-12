@@ -39,7 +39,7 @@ public class Factura implements Serializable
 	 */
 	private static Calendar generarFechaFin(Calendar fechaInicio)
 	{
-		Calendar cal = fechaInicio;
+		Calendar cal = (Calendar) fechaInicio.clone();
 		cal.add(Calendar.MONTH, 1);
 		return cal;
 	}
@@ -90,6 +90,7 @@ public class Factura implements Serializable
 
 	public void setFechaInicio(Calendar fechaInicio) {
 		this.fechaInicio = fechaInicio;
+		generarFechaFin(fechaInicio);
 	}
 
 	public Calendar getFechaFin() {
@@ -106,6 +107,12 @@ public class Factura implements Serializable
 
 	public void setLlamadasFactura(ArrayList<Llamada> llamadasFactura) {
 		this.llamadasFactura = llamadasFactura;
+	}
+	
+	public void modificarFechaInicioYFIn(Calendar fecha)
+	{
+		this.setFechaInicio(fecha);
+		this.setFechaFin(generarFechaFin(fecha));
 	}
 
 	@Override
