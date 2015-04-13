@@ -59,7 +59,7 @@ public class Controlador
 	/**
 	 * Inicializamos todos los gestores para interactuar con el modelo
 	 */
-	public void inicializaGestores()
+	private void inicializaGestores()
 	{
 		this.gestorClientes = new GestorClientes();
 		this.gestorFacturas = new GestorFacturas();
@@ -103,21 +103,7 @@ public class Controlador
 		String mensaje;
 		switch (opcion) {
 		case NUEVO_CLIENTE:
-			//ArrayList<String> datos = this.IoInterface.getMenuClientes().menuNuevoCliente();
-        	ArrayList<String> datos = new ArrayList<String>();
-    		datos.add("P");
-    		datos.add("Hector");
-    		datos.add("123S");
-    		datos.add("n@gmail.com");
-    		datos.add("111222333");
-    		datos.add("Avd Pio XII");
-    		datos.add("17");
-    		datos.add("2D");
-    		datos.add("Vila-real");
-    		datos.add("Castellon");
-    		datos.add("12540");
-    		datos.add("0.03");
-    		datos.add("Nebot");
+			ArrayList<String> datos = this.IoInterface.getOperacionesClientes().menuNuevoCliente();
         	mensaje = this.gestorClientes.altaCliente(datos);
         	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
 			break;
