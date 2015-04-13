@@ -2,8 +2,12 @@ package menus;
 
 import interfaces.IntMenuFacturas;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import lectura.LecturaDatosConsola;
@@ -85,6 +89,35 @@ public class OperacionesFacturasConsola implements IntMenuFacturas
 			return info;
 		}else{
 			return "No existen facturas";
+		}
+	}
+
+	@Override
+	public ArrayList<Calendar> buscarFacturasClientePorFechaEmision() {
+		try{
+			ArrayList<Calendar> filtro = new ArrayList<Calendar>();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); 
+			
+			System.out.println("Introduzca la fecha de inicio (ejemplo: 12/4/2015): ");
+			System.out.print("--> ");
+			Date fecha1 = sdf.parse(lectura.lecturaDatos() , new ParsePosition(0));
+			Calendar cal1 = new GregorianCalendar();
+			cal1.setTime(fecha1);
+			filtro.add(cal1);
+			
+			System.out.println("Introduzca la fecha de fin (ejemplo: 12/4/2015): ");
+			System.out.print("--> ");
+			Date fecha2 = sdf.parse(lectura.lecturaDatos() , new ParsePosition(0));
+			Calendar cal2 = new GregorianCalendar();
+			cal1.setTime(fecha2);
+			filtro.add(cal2);
+			
+			return filtro;
+		}catch(NullPointerException e)
+		{
+			System.out.println("java.lang.NullPointerException");
+			System.out.println("Error en el formato de la fecha");
+			return null;
 		}
 	}
 	

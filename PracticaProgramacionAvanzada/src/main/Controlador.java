@@ -128,6 +128,9 @@ public class Controlador
 			break;
 			
 		case BUSCAR_CLIENTE_ALTA:
+			this.IoInterface.getOperacionesClientes().mostrarClientes(
+					this.gestorClientes.buscarClientePorFechaAlta(
+							this.IoInterface.getOperacionesClientes().buscarClientesPorFechaAlta()));
 			break;
 			
 		case VER_CLIENTES:
@@ -160,8 +163,17 @@ public class Controlador
 			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case BUSCAR_FACTURA_CODIGO:
+			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
+					this.gestorFacturas.buscarFactura(
+							this.IoInterface.getOperacionesFacturas().buscarFacturaPorCodigo()));
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case BUSCAR_FACTURAS_FECHA:
+			String codCliente = this.IoInterface.getOperacionesFacturas().buscarFacturasCliente();
+			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
+					this.gestorFacturas.devolverFacturasClienteEntreDosFechas(codCliente, 
+							this.IoInterface.getOperacionesFacturas().buscarFacturasClientePorFechaEmision()));
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case FACTURAS_CLIENTE:
 			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
@@ -191,17 +203,15 @@ public class Controlador
 			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case LLAMADAS_CLIENTE_FECHA:
+			String codCliente = this.IoInterface.getOperacionesLlamadas().llamadasCliente();
+			mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
+					this.gestorLlamadas.devolverLlamadasClienteEntreDosFechas(codCliente, 
+							this.IoInterface.getOperacionesLlamadas().buscarLlamadasClientePorFecha()));
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case ATRAS:
 			break;
 		}
 	}
-	
-	
-	/**
-	 * Ejecuta las opciones elegidas por le usuario y ejecuta sus operaciones
-	 * Se usa de forma recursiva
-	 * @param opcion
-	 */
 	
 }

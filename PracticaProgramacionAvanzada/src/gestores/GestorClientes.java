@@ -11,6 +11,9 @@ import java.util.Calendar;
 
 
 
+
+import comparadores.ComparadorFecha;
+
 import baseDatos.BDClientes;
 import objetos.Cliente;
 import objetos.Direccion;
@@ -111,6 +114,16 @@ public class GestorClientes
 			return mensaje;
 		}
 		
+	}
+	
+	public ArrayList<Cliente> buscarClientePorFechaAlta(ArrayList<Calendar> fechasDeFiltrado)
+	{
+		try{
+			return ComparadorFecha.buscarEntreDosFechas(getClientes(), fechasDeFiltrado.get(0), fechasDeFiltrado.get(1));
+		}catch(NullPointerException e)
+		{
+			return null;
+		}
 	}
 	
 	

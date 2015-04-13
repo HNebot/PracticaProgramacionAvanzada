@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import objetos.Cliente;
 
@@ -13,4 +14,5 @@ public interface IntMenuClientes
 	public void formatoInfoCliente(Cliente cliente);
 	public void mostrarClientes(ArrayList<Cliente> clientes);
 	public String actualizarTarifa();
+	public ArrayList<Calendar> buscarClientesPorFechaAlta();
 }

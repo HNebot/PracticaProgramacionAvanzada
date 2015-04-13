@@ -9,6 +9,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import comparadores.ComparadorFecha;
+
+import objetos.Factura;
 import objetos.Llamada;
 import baseDatos.BDLlamadas;
 
@@ -65,6 +68,12 @@ public class GestorLlamadas
 	public ArrayList<Llamada> verLlamadasCliente(String nif)
 	{
 		return this.dbLlamadas.llamadasCliente(nif);
+	}
+	
+	public ArrayList<Llamada> devolverLlamadasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
+	{
+		return ComparadorFecha.buscarEntreDosFechas(this.verLlamadasCliente(codCliente), 
+				filtradoFechas.get(0), filtradoFechas.get(1));
 	}
 	
 	

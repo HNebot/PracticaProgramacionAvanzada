@@ -1,6 +1,8 @@
 package interfaces;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import objetos.Llamada;
 
 public interface IntMenuLlamadas
@@ -9,5 +11,6 @@ public interface IntMenuLlamadas
 	public String llamadasCliente();
 	public String mostrarLlamadas(ArrayList<Llamada> llamadas);
 	public String formatoLlamadaPantalla(Llamada llamada);
+	public ArrayList<Calendar> buscarLlamadasClientePorFecha();
 
 }

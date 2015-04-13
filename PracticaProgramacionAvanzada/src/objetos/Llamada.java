@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class Llamada implements Serializable
+public class Llamada extends Fecha implements Serializable
 {
 	/**
 	 * 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+import comparadores.ComparadorFecha;
 
 import objetos.Cliente;
 import objetos.Factura;
@@ -131,6 +132,12 @@ public class GestorFacturas
 	public ArrayList<Factura> devolverFacturasCliente(String codCliente)
 	{
 		return this.dbFacturas.buscarFacturasCliente(codCliente);
+	}
+	
+	public ArrayList<Factura> devolverFacturasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
+	{
+		return ComparadorFecha.buscarEntreDosFechas(this.dbFacturas.buscarFacturasCliente(codCliente), 
+				filtradoFechas.get(0), filtradoFechas.get(1));
 	}
 	
 	private void almacenarDatos() {

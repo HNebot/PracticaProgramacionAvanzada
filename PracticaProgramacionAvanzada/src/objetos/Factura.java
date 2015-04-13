@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Factura implements Serializable
+public class Factura extends Fecha implements Serializable
 {
 	/**
 	 * 

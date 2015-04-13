@@ -2,7 +2,12 @@ package menus;
 
 import interfaces.IntMenuClientes;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import lectura.LecturaDatosConsola;
@@ -17,18 +22,12 @@ import salida.SalidaInfoConsola;
  */
 public class OperacionesClientesConsola implements IntMenuClientes
 {
-	private Scanner scanner;
 	private LecturaDatosConsola lectura;
 	
 	/**
 	 * Contructor principal de la clase
-	 * Le pasamos un Scanner con el que recojeremos la informacion introducida
-	 * @param scanner
-	 */
-	public OperacionesClientesConsola(Scanner scanner) {
-		this.scanner = scanner;
-	}
-	public OperacionesClientesConsola() {
+	 * Instanciamos un objeto de tipo lectura para leer datos por consola
+	 */	public OperacionesClientesConsola() {
 		this.lectura = new LecturaDatosConsola();
 	}
 	
@@ -45,7 +44,6 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		String tipo;
 		do{
 			System.out.println("Cliente particulas(P) o empresa(E)?");
-			tipo = this.scanner.nextLine();
 			tipo = this.lectura.lecturaDatos();
 			tipo = tipo.toUpperCase();
 		}
@@ -53,42 +51,41 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		datosEntrada.add(0, tipo);
 		
 		System.out.print("Nombre: ");
-		datosEntrada.add(1,this.scanner.nextLine());
+		datosEntrada.add(1,this.lectura.lecturaDatos());
 		String apellido ="";
 		
 		if(tipo.equals("P"))
 		{
 			System.out.print("Apellido: ");
-			apellido = this.scanner.nextLine();
+			apellido = this.lectura.lecturaDatos();
 		}
 		
 		System.out.print("NIF: ");
-		datosEntrada.add(2,this.scanner.nextLine());
+		datosEntrada.add(2,this.lectura.lecturaDatos());
 		System.out.print("email: ");
-		datosEntrada.add(3,this.scanner.nextLine());
+		datosEntrada.add(3,this.lectura.lecturaDatos());
 		System.out.print("telefono: ");
-		datosEntrada.add(4,this.scanner.nextLine());
+		datosEntrada.add(4,this.lectura.lecturaDatos());
 		System.out.print("Calle: ");
-		datosEntrada.add(5,this.scanner.nextLine());
+		datosEntrada.add(5,this.lectura.lecturaDatos());
 		System.out.print("Portal: ");
-		datosEntrada.add(6,this.scanner.nextLine());
+		datosEntrada.add(6,this.lectura.lecturaDatos());
 		System.out.print("Piso y portal: ");
-		datosEntrada.add(7,this.scanner.nextLine());
+		datosEntrada.add(7,this.lectura.lecturaDatos());
 		System.out.print("Poblacion: ");
-		datosEntrada.add(8,this.scanner.nextLine());
+		datosEntrada.add(8,this.lectura.lecturaDatos());
 		System.out.print("Porvincia: ");
-		datosEntrada.add(9,this.scanner.nextLine());
+		datosEntrada.add(9,this.lectura.lecturaDatos());
 		System.out.print("C�digo postal: ");
-		datosEntrada.add(10,this.scanner.nextLine());
+		datosEntrada.add(10,this.lectura.lecturaDatos());
 		System.out.print("Tarifa: ");
-		datosEntrada.add(11,this.scanner.nextLine());
+		datosEntrada.add(11,this.lectura.lecturaDatos());
 		if(tipo.equals("P"))
 		{
 			datosEntrada.add(12,apellido);			
 		}
 		System.out.println("");
 		
-		scanner.close();
 		return datosEntrada;
 	}
 	
@@ -167,6 +164,34 @@ public class OperacionesClientesConsola implements IntMenuClientes
 		System.out.print("--> ");
 		return this.lectura.lecturaDatos();
 		
+	}
+	@Override
+	public ArrayList<Calendar> buscarClientesPorFechaAlta() {
+		try{
+			ArrayList<Calendar> filtro = new ArrayList<Calendar>();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy"); 
+			
+			System.out.println("Introduzca la fecha de inicio (ejemplo: 12/4/2015): ");
+			System.out.print("--> ");
+			Date fecha1 = sdf.parse(lectura.lecturaDatos() , new ParsePosition(0));
+			Calendar cal1 = new GregorianCalendar();
+			cal1.setTime(fecha1);
+			filtro.add(cal1);
+			
+			System.out.println("Introduzca la fecha de fin (ejemplo: 12/4/2015): ");
+			System.out.print("--> ");
+			Date fecha2 = sdf.parse(lectura.lecturaDatos() , new ParsePosition(0));
+			Calendar cal2 = new GregorianCalendar();
+			cal1.setTime(fecha2);
+			filtro.add(cal2);
+			
+			return filtro;
+		}catch(NullPointerException e)
+		{
+			System.out.println("java.lang.NullPointerException");
+			System.out.println("Error en el formato de la fecha");
+			return null;
+		}
 	}
 
 }
