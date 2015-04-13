@@ -104,7 +104,7 @@ public class Controlador
 		switch (opcion) {
 		case NUEVO_CLIENTE:
 			//ArrayList<String> datos = this.IoInterface.getMenuClientes().menuNuevoCliente();
-        	ArrayList<String> datos = new ArrayList();
+        	ArrayList<String> datos = new ArrayList<String>();
     		datos.add("P");
     		datos.add("Hector");
     		datos.add("123S");
@@ -151,14 +151,23 @@ public class Controlador
 	 * @param opcion
 	 */
 	private void ejecutaOpcionMenuFacturas(MenuFacturasConsola opcion) {
+		String mensaje;
 		switch (opcion) {
 		case EMITIR_FACTURA:
+			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
+					this.gestorFacturas.emitirFactura(
+							this.IoInterface.getOperacionesFacturas().emitirFactura()));
+			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case BUSCAR_FACTURA_CODIGO:
 			break;
 		case BUSCAR_FACTURAS_FECHA:
 			break;
 		case FACTURAS_CLIENTE:
+			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
+					this.gestorFacturas.devolverFacturasCliente(
+							this.IoInterface.getOperacionesFacturas().buscarFacturasCliente()));
+			salidaInfo.salidaInfo(mensaje);
 			break;
 		case ATRAS:
 			break;

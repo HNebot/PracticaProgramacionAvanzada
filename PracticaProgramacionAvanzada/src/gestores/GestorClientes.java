@@ -53,7 +53,7 @@ public class GestorClientes
 			}
 			else
 			{
-				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa, datos.get(11));
+				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa, datos.get(12));
 			}
 			
 			if(!dbCliente.addNuevoCliente(cliente))
@@ -63,6 +63,7 @@ public class GestorClientes
 			}
 
 			almacenarDatos();
+			this.gestorFacturas.crearFactura(cliente.getNIF(), cliente.getTarifa());
 			return mensage;
 		}
 		catch(NumberFormatException ex)
@@ -106,6 +107,7 @@ public class GestorClientes
 		}
 		finally
 		{
+			almacenarDatos();
 			return mensaje;
 		}
 		

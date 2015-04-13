@@ -3,8 +3,8 @@ package menus;
 public enum MenuLlamadasConsola 
 {
 	ATRAS("Volver atras"),
-	ALTA_LLAMADA("Emitir una factura de un cliente."),
-	LLAMADAS_CLIENTE("Ver una llamadasde un cliente."),
+	ALTA_LLAMADA("Dar de alta una llamada."),
+	LLAMADAS_CLIENTE("Ver una llamadas de un cliente."),
 	LLAMADAS_CLIENTE_FECHA("Ver las llamadas de un cliente comprendidas entre dos fechas.");
 	
 	private String descripcion;

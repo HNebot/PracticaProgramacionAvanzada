@@ -51,10 +51,17 @@ public class Llamada implements Serializable
 	
 	@Override
 	public String toString() {
-		return "Llamada [telefonoReceptor=" + telefonoReceptor + ", fecha="
-				+ fecha + ", duracion=" + duracion + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		return "telefonoReceptor: " + telefonoReceptor + ", fecha:"
+				+ sdf.format(fecha.getTime()) + ", duracion: " + duracion + "min";
 	}
 	
+	/**
+	 * Devuelve un arrayList con los datos de la llamada.
+	 * orden de los datos: pos0: telefono receptor, pos1: dia de la llamada, pos3: duracion.
+	 * 
+	 * @return arrayList de String con todos los datos de la llamada.
+	 */
 	public ArrayList<String> toArray()
 	{
 		ArrayList<String> datosLlamada = new ArrayList<String>();

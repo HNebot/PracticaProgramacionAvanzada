@@ -22,7 +22,7 @@ public class BDLlamadas implements Serializable
 	
 	public boolean altaLlamada(String nif, Llamada llamada)
 	{
-		if(!this.llamadas.containsKey(nif))
+		if(this.llamadas.containsKey(nif))
 		{
 			return this.llamadas.get(nif).add(llamada);
 		}

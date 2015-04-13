@@ -41,13 +41,13 @@ public class OperacionesLlamadasConsola implements IntMenuLlamadas
 
 	@Override
 	public String mostrarLlamadas(ArrayList<Llamada> llamadas) {
-		String informacion = "====================";
+		String informacion = "====================\n";
 		if(llamadas == null) return "El cliente no existe o no tiene llamadas";
 		
 		for(Llamada llamada: llamadas)
 		{
 			informacion = informacion + this.formatoLlamadaPantalla(llamada);
-			informacion = informacion + "====================";
+			informacion = informacion + "====================\n";
 		}
 		return informacion;
 	}

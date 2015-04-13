@@ -49,6 +49,7 @@ public class Factura implements Serializable
 		this.codFactura = generarCodFactura(codCliente);
 		this.fechaInicio = Calendar.getInstance();
 		this.fechaFin = generarFechaFin(fechaInicio);
+		this.tarifa = tarifa;
 		this.llamadasFactura = new ArrayList<Llamada>();
 	}
 
@@ -76,11 +77,19 @@ public class Factura implements Serializable
 		this.tarifa = tarifa;
 	}
 
-	public Calendar getFechaEmision() {
+	/**
+	 * Hace referencia a la fecha de emision de la factura.
+	 * @return La fecha de emision.
+	 */
+	public Calendar getFecha() {
 		return fechaEmision;
 	}
 
-	public void setFechaEmision(Calendar fechaEmision) {
+	/**
+	 * Inserta una fecha de emison.
+	 * @param fechaEmision
+	 */
+	public void setFecha(Calendar fechaEmision) {
 		this.fechaEmision = fechaEmision;
 	}
 
@@ -113,6 +122,21 @@ public class Factura implements Serializable
 	{
 		this.setFechaInicio(fecha);
 		this.setFechaFin(generarFechaFin(fecha));
+	}
+	
+	public float facturacionTotal()
+	{
+		float facturacion = 0;
+		try{
+			for(Llamada llamada: this.llamadasFactura)
+			{
+				facturacion = facturacion + llamada.getDuracion() * this.tarifa.getTarifa();
+			}
+			return facturacion;
+		}catch(Exception e){
+			return facturacion;
+		}
+		
 	}
 
 	@Override

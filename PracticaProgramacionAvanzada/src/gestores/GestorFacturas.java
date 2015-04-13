@@ -46,13 +46,18 @@ public class GestorFacturas
 		}
 	}
 	
+	/**
+	 * Añade una llamada a la ultima factura del cliente, 
+	 * si la llamda es posterior a la fecha de finalizacion de la ultima factura se crea una nueva, ya que las facturas son mensuales.
+	 * @param codCliente: el codigo del cliente que realiza la llamda i al que pertenece la factura.
+	 * @param llamada: la llamada qeu se añadira a la factura actual.
+	 * @return devuelfe true si se ha añadido correctamente, false si ha ahbiado algun error.
+	 */
 	public boolean anyadirLlamada(String codCliente, Llamada llamada)
 	{
 		try {
 			ArrayList<Factura> facturas = this.dbFacturas.buscarFacturasCliente(codCliente);
 			Factura factura = facturas .get(facturas.size() - 1);
-			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
 			
 			if(llamada.getFecha().before(factura.getFechaFin()))
 			{
@@ -89,13 +94,13 @@ public class GestorFacturas
 		ArrayList<Factura> listaFacturas = this.devolverFacturasCliente(codCliente);
 		Factura factura;
 		try{
-			for(int i = 0;  i > listaFacturas.size(); i++)
+			for(int i = 0;  i < listaFacturas.size(); i++)
 			{
 				factura = listaFacturas.get(i);
-				if(factura.getFechaEmision() == null)
+				if(factura.getFecha() == null)
 				{
 					Calendar fechaEmision = Calendar.getInstance();
-					factura.setFechaEmision(fechaEmision);
+					factura.setFecha(fechaEmision);
 					if(fechaEmision.before(factura.getFechaFin()))
 					{
 						factura.setFechaFin(fechaEmision);
@@ -123,9 +128,9 @@ public class GestorFacturas
 		return this.dbFacturas.buscarFactura(codFactura);
 	}
 	
-	public ArrayList<Factura> devolverFacturasCliente(String CodCliente)
+	public ArrayList<Factura> devolverFacturasCliente(String codCliente)
 	{
-		return null;
+		return this.dbFacturas.buscarFacturasCliente(codCliente);
 	}
 	
 	private void almacenarDatos() {

@@ -100,13 +100,13 @@ public class Cliente implements Serializable
 
 
 
-	public Calendar getFechaAlta() {
+	public Calendar getFecha() {
 		return fechaAlta;
 	}
 
 
 
-	public void setFechaAlta(Calendar fechaAlta) {
+	public void setFecha(Calendar fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 

@@ -48,6 +48,7 @@ public class GestorLlamadas
 			
 			if(this.dbLlamadas.altaLlamada(datos.get(0), llamada)){
 				almacenarDatos();
+				this.gestorFacturas.anyadirLlamada(datos.get(0), llamada);
 				return "La llamada ha sido dadda de alta correctamente";
 			}
 			else{

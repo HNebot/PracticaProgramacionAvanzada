@@ -42,6 +42,7 @@ public class Particular extends Cliente implements Serializable
 	public ArrayList<String> toArray() {
 		ArrayList<String> datos = super.toArray();
 		datos.add(getApellido());
+		datos.add(getApellido());
 		return datos;
 	}
 
