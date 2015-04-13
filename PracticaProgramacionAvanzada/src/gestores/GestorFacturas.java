@@ -35,6 +35,13 @@ public class GestorFacturas
 		this.gestorClientes = gestorClientes;
 	}
 	
+	/**
+	 * Crea una factura de forma automatica con los datos del niff del cliente y el tipo de tarifa que tiene.
+	 * Todas las facturas se crean de manera automatica. El usuario no crea ninguna.
+	 * @param cliente, el codigo del cliente al que se le genera la factura.
+	 * @param tarifa, la tarifa que se le aplicara a la fatura en concreto
+	 * @return true si la operacion tubo exito, false si hubo algun error
+	 */
 	public boolean crearFactura(String cliente, Tarifa tarifa)
 	{
 		try{
@@ -120,26 +127,53 @@ public class GestorFacturas
 		return null;
 	}
 	
+	/**
+	 * METODO NO IMPLEMENTADO UN
+	 * Emite una factura determinada referente a la que se le pasa por parametro
+	 * @param codfactura, codigo de la factura a emitir
+	 * @return la factura emitida
+	 */
 	public Factura emitirFacturaPorCodigo(String codfactura)
 	{
 		return null;
 	}
 	
+	/**
+	 * Busca la factura con el codigo que se le pasa por parametro
+	 * @param codFactura, codigod e la factura que se desea buscar
+	 * @return una factura
+	 */
 	public Factura buscarFactura(String codFactura){
 		return this.dbFacturas.buscarFactura(codFactura);
 	}
 	
+	/**
+	 * Busca y devuelve todas las facturas de un cliente que se le pasa por parametro
+	 * @param codCliente
+	 * @return listado con las facturas del cliente
+	 */
 	public ArrayList<Factura> devolverFacturasCliente(String codCliente)
 	{
 		return this.dbFacturas.buscarFacturasCliente(codCliente);
 	}
 	
+	/**
+	 * Devuelve un lista con las facturas de un cliente que se han emitido 
+	 * en las dos fechas que estan dentro de la lista que se pasa por parametro.
+	 * Llama al metodo estatico de la calse CoparadorFechas para realizar la operacion de filtrado
+	 * @param codCliente
+	 * @param filtradoFechas
+	 * @return listado con los objetos encontrados y filtrados
+	 */
 	public ArrayList<Factura> devolverFacturasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
 	{
 		return ComparadorFecha.buscarEntreDosFechas(this.dbFacturas.buscarFacturasCliente(codCliente), 
 				filtradoFechas.get(0), filtradoFechas.get(1));
 	}
 	
+	/**
+	 * Almacena los datos en un fichero binario determinado para no perder los datos
+	 */
 	private void almacenarDatos() {
 		ObjectOutputStream oos=null;
 		try {
@@ -162,6 +196,9 @@ public class GestorFacturas
 		
 	}
 	
+	/**
+	 * Recupera los datos almacenados en el fichero binario.
+	 */
 	private void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{

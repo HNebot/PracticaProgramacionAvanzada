@@ -30,16 +30,31 @@ public class GestorClientes
 	//private GestorAlmacenamientoFichero<BDClientes> datosClientes = 
 	//		new GestorAlmacenamientoFichero<BDClientes>(dbCliente, FICHERO_CLIENTES);
 	
+	/**
+	 * Contructor principal del gestor de clientes. Cuando el objeto se instancia carga los datos guardados en el dico
+	 */
 	public GestorClientes(){
 		super();
 		recuperarDatos();
 	}
 	
+	/**
+	 * Asigna un objeto para gestionar las facturas
+	 * @param gestorFacturas
+	 */
 	public void setGestorFacturas(GestorFacturas gestorFacturas)
 	{
 		this.gestorFacturas = gestorFacturas;
 	}
 	
+	/**
+	 * Crea un cliente con los datos que se han proporcinado en la lista. La fecha de alta se genera automaticamente.
+	 * Luego llama  a la funcion addNuevoCliente() para guardarla en al base de datos.
+	 * Si el cliente se crea correctaemnte se le genera una factura de forma automatica
+	 * Llama al metodo almacenarDatos() para guarda los datos en un fichero en el disco
+	 * @param datos, una lista con todos los datos del cliente que se va a crear
+	 * @return Un mensaje indicando si la operacion ha tenido exito
+	 */
 	public String altaCliente (ArrayList<String> datos)
 	{
 		try{
@@ -75,11 +90,20 @@ public class GestorClientes
 		}
 	}
 	
+	/**
+	 * Devuelve un cliente que coresponda al condigo que se le pasa por parametro
+	 * @param nuff del cliente a guscar
+	 * @return un objeto cliente
+	 */
 	public Cliente datosCliente(String nif)
 	{
 		return this.dbCliente.buscarCliente(nif);
 	}
 	
+	/**
+	 * LLama al metodo buscarCliente del bojeto dBclientes para obtener todos los clientes
+	 * @return Un listado con todos los clientes de la base de datos
+	 */
 	public ArrayList<Cliente> getClientes()
 	{
 		try{
@@ -90,6 +114,12 @@ public class GestorClientes
 		}
 	}
 	
+	/**
+	 * Busca un cliente y actualiza la tarifa con la nueva que se pasa por parametro
+	 * @param El nif del cliente al que se le modificara al tarifa
+	 * @param El valor de la nueva tarifa
+	 * @return Un mensaje indicando si la operacio ha tenido exito.
+	 */
 	@SuppressWarnings("finally")
 	public String actualizarTarifa(String nif, String nuevaTarifa)
 	{	
@@ -116,6 +146,13 @@ public class GestorClientes
 		
 	}
 	
+	/**
+	 * Devuelve un lista con los clientes que se han dado de alta 
+	 * en las dos fechas que estan dentro de la lista que se pasa por parametro.
+	 * Llama al metodo estatico de la calse CoparadorFechas para realizar la operacion de filtrado
+	 * @param fechasDeFiltrado, listado con las dos fechas para filtrar los datos
+	 * @return Un listado con los objetos que cumplen la condicion. Retorna null si hay algun error o no existen clientes
+	 */
 	public ArrayList<Cliente> buscarClientePorFechaAlta(ArrayList<Calendar> fechasDeFiltrado)
 	{
 		try{
@@ -126,6 +163,9 @@ public class GestorClientes
 		}
 	}
 	
+	/**
+	 * Almacena los datos en un fichero binario determinado para no perder los datos
+	 */
 	
 	private void almacenarDatos() {
 		ObjectOutputStream oos=null;
@@ -149,6 +189,9 @@ public class GestorClientes
 		
 	}
 	
+	/**
+	 * Recupera los datos almacenados en el fichero binario.
+	 */
 	private void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{

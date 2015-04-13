@@ -73,7 +73,8 @@ public class Controlador
 	
 	/**
 	 * Ejecuta las opciones principales elegidas por le usuario y ejecuta sus operaciones
-	 * @param opcion
+	 * segun la opcion que se elija carga el menu correspondiente
+	 * @param opcion elegida por el usuario
 	 */
 	private void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) {
 		switch (opcion) {
@@ -97,7 +98,7 @@ public class Controlador
 	
 	/**
 	 * Ejecuta las opciones sobre los clientes elegidas por le usuario y ejecuta sus operaciones
-	 * @param opcion
+	 * @param opcion elegida por el usuario
 	 */
 	private void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
 		String mensaje;
@@ -137,7 +138,7 @@ public class Controlador
 	
 	/**
 	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
-	 * @param opcion
+	 * @param opcion elegida por el usuario
 	 */
 	private void ejecutaOpcionMenuFacturas(MenuFacturasConsola opcion) {
 		String mensaje;
@@ -174,7 +175,7 @@ public class Controlador
 	
 	/**
 	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
-	 * @param opcion
+	 * @param opcion elegida por el usuario
 	 */
 	private void ejecutaOpcionMenuLlamadas(MenuLlamadasConsola opcion) {
 		String mensaje;

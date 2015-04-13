@@ -30,15 +30,29 @@ public class GestorLlamadas
 		recuperarDatos();
 	}
 	
+	/**
+	 * Añade un gestor de clientes para crear inteccion entre los gestores.
+	 * @param gestorCliente
+	 */
 	public void setGestorClientes(GestorClientes gestorCliente)
 	{
 		this.gestorCliente = gestorCliente;
 	}
+	/**
+	 * Añade un gestor de facturas para crear inteccion entre los gestores.
+	 * @param gestorFacturas
+	 */
 	public void setGestorFacturas(GestorFacturas gestorFacturas) 
 	{
 		this.gestorFacturas = gestorFacturas;
 	}	
 	
+	/**
+	 * Da de alta una llamada con los datos que se le pasan mediante una lista de String
+	 * Crea la llamada y llama la gestor de facturas para asignarla a una factura determinada.
+	 * @param datos
+	 * @return
+	 */
 	public String altaLlamada(ArrayList<String> datos)
 	{
 		try{
@@ -65,18 +79,33 @@ public class GestorLlamadas
 		}
 	}
 	
+	/**
+	 * Devuelve todas las llamadas de un cliente.
+	 * @param nif
+	 * @return listado de llamadas.
+	 */
 	public ArrayList<Llamada> verLlamadasCliente(String nif)
 	{
 		return this.dbLlamadas.llamadasCliente(nif);
 	}
 	
+	/**
+	 * Devuelve un lista con las llamadas de un cliente que se han realizado 
+	 * en las dos fechas que estan dentro de la lista que se pasa por parametro.
+	 * Llama al metodo estatico de la calse CoparadorFechas para realizar la operacion de filtrado
+	 * @param codCliente
+	 * @param filtradoFechas
+	 * @return listado con las llamadas filtradas del cliente.
+	 */
 	public ArrayList<Llamada> devolverLlamadasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
 	{
 		return ComparadorFecha.buscarEntreDosFechas(this.verLlamadasCliente(codCliente), 
 				filtradoFechas.get(0), filtradoFechas.get(1));
 	}
 	
-	
+	/**
+	 * Almacena los datos en un fichero binario determinado para no perder los datos
+	 */
 	private void almacenarDatos() {
 		ObjectOutputStream oos=null;
 		try {
@@ -99,6 +128,9 @@ public class GestorLlamadas
 		
 	}
 	
+	/**
+	 * Recupera los datos almacenados en el fichero binario.
+	 */
 	private void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{

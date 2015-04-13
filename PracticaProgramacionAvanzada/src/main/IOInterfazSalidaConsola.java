@@ -7,8 +7,15 @@ import interfaces.IntMenuLlamadas;
 
 import java.util.Scanner;
 
+import com.sun.org.glassfish.gmbal.Description;
+
 import menus.*;
 
+/**
+ * Clase para gestionar la salida de los datos por pantalla, en esta clase se gestiona la salida por consola.
+ * Implemtena la interfaz IntIOInterface
+ * @author Hector
+ */
 public class IOInterfazSalidaConsola implements IntIOInterface 
 {
 	private OperacionesClientesConsola opClintes;
@@ -16,10 +23,10 @@ public class IOInterfazSalidaConsola implements IntIOInterface
 	private OperacionesLlamadasConsola opLlamadas;
 	
 	
-	
-	public IOInterfazSalidaConsola() {
-		//this.scanner = new Scanner(System.in);
-		
+	/**
+	 * Contructor de la clase donde se intancian los menus de operaciones
+	 */
+	public IOInterfazSalidaConsola() {		
 		this.opClintes = new OperacionesClientesConsola();
 		this.opFacturas = new OperacionesFacturasConsola();
 		this.opLlamadas = new OperacionesLlamadasConsola();

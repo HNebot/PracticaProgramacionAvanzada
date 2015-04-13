@@ -8,6 +8,14 @@ import objetos.Fecha;
 
 public class ComparadorFecha 
 {
+	/**
+	 * Metodo generico que recive una lista de objetos que extiende a fecha y dos fechas.
+	 * Recorre los objetos de la lista para buscar aquellos que tengan un fecha entre la dos pasadas por parametro.
+	 * @param lista de objetos que extieden de fecha
+	 * @param Un objeto calendar con la fecha de inicio para crear el filtro.
+	 * @param Un objeto calendar con la fecha final para crear el filtro.
+	 * @return devuelve un lista de ojetos que cumplen con las condiciones del filtro, Devuelve null is hay algun error
+	 */
 	public static <T> ArrayList<T> buscarEntreDosFechas(ArrayList<? extends Fecha> lista, Calendar fechaInicio, Calendar fechaFin)
 	{
 		ArrayList<T> listaFiltrada = new ArrayList<T>();
