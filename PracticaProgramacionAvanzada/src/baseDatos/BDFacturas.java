@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionClienteNoEncontrado;
 import objetos.Cliente;
 import objetos.Factura;
 
@@ -44,22 +46,22 @@ public class BDFacturas implements Serializable{
 		}
 	}
 	
-	public Factura buscarFactura(String codFactura)
+	public Factura buscarFactura(String codFactura) throws ExcepcionFacturaNoEncontrada
 	{
-		if(this.facturas.containsKey(codFactura))
+		if(!this.facturas.containsKey(codFactura))
 		{
-			return this.facturas.get(codFactura);
+			throw new ExcepcionFacturaNoEncontrada();
 		}
-		return null;
+		return this.facturas.get(codFactura);
 	}
 	
-	public ArrayList<Factura> buscarFacturasCliente(String codCliente)
+	public ArrayList<Factura> buscarFacturasCliente(String codCliente) throws ExcepcionClienteNoEncontrado
 	{
-		if(this.factuasCliente.containsKey(codCliente))
+		if(!this.factuasCliente.containsKey(codCliente))
 		{
-			return this.factuasCliente.get(codCliente);
+			throw new ExcepcionClienteNoEncontrado();
 		}
-		return null;
+		return this.factuasCliente.get(codCliente);
 	}
 	
 	/**

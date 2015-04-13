@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import excepciones.ExcepcionClienteNoEncontrado;
 import objetos.Llamada;
 
 
@@ -35,11 +36,11 @@ public class BDLlamadas implements Serializable
 		}
 	}
 	
-	public ArrayList<Llamada> llamadasCliente(String nif)
+	public ArrayList<Llamada> llamadasCliente(String nif) throws ExcepcionClienteNoEncontrado
 	{
 		if(!this.llamadas.containsKey(nif))
 		{
-			return null;
+			throw new ExcepcionClienteNoEncontrado();
 		}
 		
 		return this.llamadas.get(nif);

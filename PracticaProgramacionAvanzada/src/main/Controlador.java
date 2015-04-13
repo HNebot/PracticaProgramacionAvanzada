@@ -3,6 +3,9 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionClienteNoEncontrado;
+import excepciones.ExcepcionLlamadaNoEncontrada;
 import menus.MenuClientesConsola;
 import menus.MenuFacturasConsola;
 import menus.MenuLlamadasConsola;
@@ -44,8 +47,9 @@ public class Controlador
 	
 	/**
 	 * Inicia el controlador y mantiene el programa en ejecucion
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public void start()
+	public void start() throws ExcepcionClienteNoEncontrado
 	{
 		inicializaGestores();
 		MenuPrincipalConsola op;
@@ -75,8 +79,9 @@ public class Controlador
 	 * Ejecuta las opciones principales elegidas por le usuario y ejecuta sus operaciones
 	 * segun la opcion que se elija carga el menu correspondiente
 	 * @param opcion elegida por el usuario
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	private void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) {
+	private void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) throws ExcepcionClienteNoEncontrado {
 		switch (opcion) {
 		case CLIENTES:
 			this.salidaInfo.salidaInfo(MenuClientesConsola.getMenu());
@@ -99,6 +104,7 @@ public class Controlador
 	/**
 	 * Ejecuta las opciones sobre los clientes elegidas por le usuario y ejecuta sus operaciones
 	 * @param opcion elegida por el usuario
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
 	private void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
 		String mensaje;
@@ -110,18 +116,34 @@ public class Controlador
 			break;
 			
 		case BUSCAR_CLIENTE_DNI:
-			Cliente cli = this.gestorClientes.datosCliente(this.IoInterface.getOperacionesClientes().menuVerCliente());
-        	this.IoInterface.getOperacionesClientes().formatoInfoCliente(cli);
+			Cliente cli;
+			try {
+				cli = this.gestorClientes.datosCliente(this.IoInterface.getOperacionesClientes().menuVerCliente());
+				this.IoInterface.getOperacionesClientes().formatoInfoCliente(cli);
+			} catch (ExcepcionClienteNoEncontrado e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
+        	
 			break;
 			
 		case BUSCAR_CLIENTE_ALTA:
-			this.IoInterface.getOperacionesClientes().mostrarClientes(
-					this.gestorClientes.buscarClientePorFechaAlta(
-							this.IoInterface.getOperacionesClientes().buscarClientesPorFechaAlta()));
+			try {
+				this.IoInterface.getOperacionesClientes().mostrarClientes(
+						this.gestorClientes.buscarClientePorFechaAlta(
+								this.IoInterface.getOperacionesClientes().buscarClientesPorFechaAlta()));
+			} catch (ExcepcionClienteNoEncontrado e) {
+				// TODO Auto-generated catch block
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 			
 		case VER_CLIENTES:
-			this.IoInterface.getOperacionesClientes().mostrarClientes(this.gestorClientes.getClientes());
+			try {
+				this.IoInterface.getOperacionesClientes().mostrarClientes(this.gestorClientes.getClientes());
+			} catch (ExcepcionClienteNoEncontrado e) {
+				// TODO Auto-generated catch block
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
         	break;
         	
 		case MODIFICAR_TARIFA:
@@ -144,29 +166,48 @@ public class Controlador
 		String mensaje;
 		switch (opcion) {
 		case EMITIR_FACTURA:
-			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
-					this.gestorFacturas.emitirFactura(
-							this.IoInterface.getOperacionesFacturas().emitirFactura()));
-			this.salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
+						this.gestorFacturas.emitirFactura(
+								this.IoInterface.getOperacionesFacturas().emitirFactura()));
+				this.salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionClienteNoEncontrado e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
+
 			break;
 		case BUSCAR_FACTURA_CODIGO:
-			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
-					this.gestorFacturas.buscarFactura(
-							this.IoInterface.getOperacionesFacturas().buscarFacturaPorCodigo()));
-			this.salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFactura(
+						this.gestorFacturas.buscarFactura(
+								this.IoInterface.getOperacionesFacturas().buscarFacturaPorCodigo()));
+				this.salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionFacturaNoEncontrada e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		case BUSCAR_FACTURAS_FECHA:
 			String codCliente = this.IoInterface.getOperacionesFacturas().buscarFacturasCliente();
-			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
-					this.gestorFacturas.devolverFacturasClienteEntreDosFechas(codCliente, 
-							this.IoInterface.getOperacionesFacturas().buscarFacturasClientePorFechaEmision()));
-			this.salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
+						this.gestorFacturas.devolverFacturasClienteEntreDosFechas(codCliente, 
+								this.IoInterface.getOperacionesFacturas().buscarFacturasClientePorFechaEmision()));
+				this.salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionClienteNoEncontrado e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			} catch (ExcepcionFacturaNoEncontrada e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		case FACTURAS_CLIENTE:
-			mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
-					this.gestorFacturas.devolverFacturasCliente(
-							this.IoInterface.getOperacionesFacturas().buscarFacturasCliente()));
-			salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesFacturas().mostrarDatosFacturas(
+						this.gestorFacturas.devolverFacturasCliente(
+								this.IoInterface.getOperacionesFacturas().buscarFacturasCliente()));
+				salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionClienteNoEncontrado e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		case ATRAS:
 			break;
@@ -185,16 +226,28 @@ public class Controlador
 			this.salidaInfo.salidaInfo(mensaje);
 			break;
 		case LLAMADAS_CLIENTE:
-			mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
-					this.gestorLlamadas.verLlamadasCliente(this.IoInterface.getOperacionesLlamadas().llamadasCliente()));
-			this.salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
+						this.gestorLlamadas.verLlamadasCliente(this.IoInterface.getOperacionesLlamadas().llamadasCliente()));
+				this.salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionClienteNoEncontrado e) {
+				// TODO Auto-generated catch block
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
+			
 			break;
 		case LLAMADAS_CLIENTE_FECHA:
 			String codCliente = this.IoInterface.getOperacionesLlamadas().llamadasCliente();
-			mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
-					this.gestorLlamadas.devolverLlamadasClienteEntreDosFechas(codCliente, 
-							this.IoInterface.getOperacionesLlamadas().buscarLlamadasClientePorFecha()));
-			this.salidaInfo.salidaInfo(mensaje);
+			try {
+				mensaje = this.IoInterface.getOperacionesLlamadas().mostrarLlamadas(
+						this.gestorLlamadas.devolverLlamadasClienteEntreDosFechas(codCliente, 
+								this.IoInterface.getOperacionesLlamadas().buscarLlamadasClientePorFecha()));
+				this.salidaInfo.salidaInfo(mensaje);
+			} catch (ExcepcionClienteNoEncontrado
+					| ExcepcionLlamadaNoEncontrada e) {
+				// TODO Auto-generated catch block
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		case ATRAS:
 			break;

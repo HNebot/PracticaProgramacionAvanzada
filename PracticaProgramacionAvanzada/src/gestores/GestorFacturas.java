@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-import comparadores.ComparadorFecha;
 
+import comparadores.ComparadorFecha;
+import excepciones.ExcepcionFacturaNoEncontrada;
+import excepciones.ExcepcionClienteNoEncontrado;
 import objetos.Cliente;
 import objetos.Factura;
 import objetos.Llamada;
@@ -97,8 +99,9 @@ public class GestorFacturas
 	 * Se crea una nueva factura si la que se emite es la ultima.
 	 * @param El  codigo del cliente al que se le emite la factura.
 	 * @return Un objeto factura si se emite. Si hay algun fallo retorna null.
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public Factura emitirFactura(String codCliente){
+	public Factura emitirFactura(String codCliente) throws ExcepcionClienteNoEncontrado{
 		ArrayList<Factura> listaFacturas = this.devolverFacturasCliente(codCliente);
 		Factura factura;
 		try{
@@ -142,8 +145,9 @@ public class GestorFacturas
 	 * Busca la factura con el codigo que se le pasa por parametro
 	 * @param codFactura, codigod e la factura que se desea buscar
 	 * @return una factura
+	 * @throws ExcepcionFacturaNoEncontrada 
 	 */
-	public Factura buscarFactura(String codFactura){
+	public Factura buscarFactura(String codFactura) throws ExcepcionFacturaNoEncontrada{
 		return this.dbFacturas.buscarFactura(codFactura);
 	}
 	
@@ -151,8 +155,9 @@ public class GestorFacturas
 	 * Busca y devuelve todas las facturas de un cliente que se le pasa por parametro
 	 * @param codCliente
 	 * @return listado con las facturas del cliente
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public ArrayList<Factura> devolverFacturasCliente(String codCliente)
+	public ArrayList<Factura> devolverFacturasCliente(String codCliente) throws ExcepcionClienteNoEncontrado
 	{
 		return this.dbFacturas.buscarFacturasCliente(codCliente);
 	}
@@ -164,8 +169,10 @@ public class GestorFacturas
 	 * @param codCliente
 	 * @param filtradoFechas
 	 * @return listado con los objetos encontrados y filtrados
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public ArrayList<Factura> devolverFacturasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
+	public ArrayList<Factura> devolverFacturasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas) 
+			throws ExcepcionClienteNoEncontrado, ExcepcionFacturaNoEncontrada
 	{
 		return ComparadorFecha.buscarEntreDosFechas(this.dbFacturas.buscarFacturasCliente(codCliente), 
 				filtradoFechas.get(0), filtradoFechas.get(1));

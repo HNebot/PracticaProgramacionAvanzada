@@ -26,7 +26,7 @@ public class OperacionesLlamadasConsola implements IntMenuLlamadas
 		ArrayList<String> datos = new ArrayList<String>();
 		System.out.println("Introduzca el condigo del cliente que realiza la llamada:");
 		datos.add(lectura.lecturaDatos());
-		System.out.println("Introduzca el numero de telefono alq ue se llama:");
+		System.out.println("Introduzca el numero de telefono al que se llama:");
 		datos.add(lectura.lecturaDatos());
 		System.out.println("Introduzca la duracion la llamada:");
 		datos.add(lectura.lecturaDatos());

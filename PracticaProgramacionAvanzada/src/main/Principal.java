@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import excepciones.ExcepcionClienteNoEncontrado;
 import lectura.LecturaDatosConsola;
 import objetos.Particular;
 import salida.SalidaInfoConsola;
@@ -48,15 +49,19 @@ public class Principal
 		 * Le pasamos un interfaz que sera la que gestione las vistas
 		 */
 		
-		/*Calendar cal = Calendar.getInstance();
+		/**Calendar cal = Calendar.getInstance();
+		//creem el format de eixida
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		//imprimim utilitzan el getTime()
 		System.out.println(sdf.format(cal.getTime()));
 		Calendar cal2 = generar(cal);
 		System.out.println(sdf.format(cal.getTime()));
-		//cal.add(Calendar.MONTH, 1);
-		//System.out.println(sdf.format(cal.getTime()));
-		//cal.add(Calendar.MONTH, 8);
-		//System.out.println(sdf.format(cal.getTime()));
+		//Sumem un mes a la data anterior
+		cal.add(Calendar.MONTH, 1);
+		//sumem 8 mesos
+		System.out.println(sdf.format(cal.getTime()));
+		cal.add(Calendar.MONTH, 8);
+		System.out.println(sdf.format(cal.getTime()));
 		System.out.println(sdf.format(cal2.getTime()));
 		Calendar cal3 = Calendar.getInstance();
 		System.out.println(cal3.before(cal));
@@ -69,7 +74,12 @@ public class Principal
 		controlador.setLectura(lecturaDatos);
 		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
 		controlador.setSalida(salidaInfo);
-		controlador.start();
+		try {
+			controlador.start();
+		} catch (ExcepcionClienteNoEncontrado e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

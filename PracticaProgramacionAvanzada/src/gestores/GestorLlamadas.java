@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import comparadores.ComparadorFecha;
-
+import excepciones.ExcepcionClienteNoEncontrado;
+import excepciones.ExcepcionLlamadaNoEncontrada;
 import objetos.Factura;
 import objetos.Llamada;
 import baseDatos.BDLlamadas;
@@ -52,6 +53,7 @@ public class GestorLlamadas
 	 * Crea la llamada y llama la gestor de facturas para asignarla a una factura determinada.
 	 * @param datos
 	 * @return
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
 	public String altaLlamada(ArrayList<String> datos)
 	{
@@ -76,6 +78,8 @@ public class GestorLlamadas
 		catch(NumberFormatException e)
 		{
 			return "El numero de telefono o la duracion no son correctos";
+		} catch (ExcepcionClienteNoEncontrado e) {
+			return e.getMessage();
 		}
 	}
 	
@@ -83,8 +87,9 @@ public class GestorLlamadas
 	 * Devuelve todas las llamadas de un cliente.
 	 * @param nif
 	 * @return listado de llamadas.
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public ArrayList<Llamada> verLlamadasCliente(String nif)
+	public ArrayList<Llamada> verLlamadasCliente(String nif) throws ExcepcionClienteNoEncontrado
 	{
 		return this.dbLlamadas.llamadasCliente(nif);
 	}
@@ -96,8 +101,9 @@ public class GestorLlamadas
 	 * @param codCliente
 	 * @param filtradoFechas
 	 * @return listado con las llamadas filtradas del cliente.
+	 * @throws ExcepcionClienteNoEncontrado, ExcepcionLlamadaNoEncontrada 
 	 */
-	public ArrayList<Llamada> devolverLlamadasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas)
+	public ArrayList<Llamada> devolverLlamadasClienteEntreDosFechas(String codCliente, ArrayList<Calendar> filtradoFechas) throws ExcepcionClienteNoEncontrado, ExcepcionLlamadaNoEncontrada
 	{
 		return ComparadorFecha.buscarEntreDosFechas(this.verLlamadasCliente(codCliente), 
 				filtradoFechas.get(0), filtradoFechas.get(1));

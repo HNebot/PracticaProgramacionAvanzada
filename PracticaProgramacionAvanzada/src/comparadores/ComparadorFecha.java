@@ -1,6 +1,5 @@
 package comparadores;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -28,6 +27,7 @@ public class ComparadorFecha
 				}
 				
 			}
+			if(listaFiltrada.size() == 0) throw new Exception();
 			return listaFiltrada;
 		}
 		catch(Exception e)

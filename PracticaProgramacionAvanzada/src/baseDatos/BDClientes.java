@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import excepciones.ExcepcionClienteNoEncontrado;
 import objetos.Cliente;
 
 public class BDClientes implements Serializable
@@ -33,26 +34,26 @@ public class BDClientes implements Serializable
 		}
 	}
 	
-	public Cliente buscarCliente(String nif)
+	public Cliente buscarCliente(String nif) throws ExcepcionClienteNoEncontrado
 	{
 		if(clientes.containsKey(nif))
 		{
 			return this.clientes.get(nif);
 		}
 		else
-		{
-			return null;
+		{	
+			throw new ExcepcionClienteNoEncontrado();
 		}	
 	}
 	
-	public ArrayList<Cliente> buscarClientes()
+	public ArrayList<Cliente> buscarClientes() throws ExcepcionClienteNoEncontrado
 	{
 		ArrayList<Cliente> clientesList = new ArrayList<Cliente>();
 		
 		for (Map.Entry<String, Cliente> entry : clientes.entrySet()) { 
 			clientesList.add(entry.getValue());
 		}
-		
+		if(clientesList.size()==0) throw new ExcepcionClienteNoEncontrado("No existen clientes");
 		return clientesList;
 	}
 	

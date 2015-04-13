@@ -12,8 +12,9 @@ import java.util.Calendar;
 
 
 
-import comparadores.ComparadorFecha;
 
+import comparadores.ComparadorFecha;
+import excepciones.ExcepcionClienteNoEncontrado;
 import baseDatos.BDClientes;
 import objetos.Cliente;
 import objetos.Direccion;
@@ -65,7 +66,7 @@ public class GestorClientes
 			Calendar fechaAlta = Calendar.getInstance();
 			Tarifa tarifa = new Tarifa(Float.parseFloat(datos.get(11)));
 			
-			if(datos.get(0) == "E")
+			if(datos.get(0).equals("E"))
 			{
 				this.cliente = new Empresa(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa);
 			}
@@ -88,14 +89,18 @@ public class GestorClientes
 		{
 			return "Error de formato.Introduzca los datos correctamente";
 		}
+		catch (Exception e) {
+			return "El cliente no se pudo crear";
+		}
 	}
 	
 	/**
 	 * Devuelve un cliente que coresponda al condigo que se le pasa por parametro
 	 * @param nuff del cliente a guscar
 	 * @return un objeto cliente
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public Cliente datosCliente(String nif)
+	public Cliente datosCliente(String nif) throws ExcepcionClienteNoEncontrado
 	{
 		return this.dbCliente.buscarCliente(nif);
 	}
@@ -104,7 +109,7 @@ public class GestorClientes
 	 * LLama al metodo buscarCliente del bojeto dBclientes para obtener todos los clientes
 	 * @return Un listado con todos los clientes de la base de datos
 	 */
-	public ArrayList<Cliente> getClientes()
+	public ArrayList<Cliente> getClientes() throws ExcepcionClienteNoEncontrado
 	{
 		try{
 			return this.dbCliente.buscarClientes();
@@ -152,8 +157,9 @@ public class GestorClientes
 	 * Llama al metodo estatico de la calse CoparadorFechas para realizar la operacion de filtrado
 	 * @param fechasDeFiltrado, listado con las dos fechas para filtrar los datos
 	 * @return Un listado con los objetos que cumplen la condicion. Retorna null si hay algun error o no existen clientes
+	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	public ArrayList<Cliente> buscarClientePorFechaAlta(ArrayList<Calendar> fechasDeFiltrado)
+	public ArrayList<Cliente> buscarClientePorFechaAlta(ArrayList<Calendar> fechasDeFiltrado) throws ExcepcionClienteNoEncontrado
 	{
 		try{
 			return ComparadorFecha.buscarEntreDosFechas(getClientes(), fechasDeFiltrado.get(0), fechasDeFiltrado.get(1));
