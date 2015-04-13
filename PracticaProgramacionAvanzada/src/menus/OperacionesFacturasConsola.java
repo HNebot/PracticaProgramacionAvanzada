@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 import lectura.LecturaDatosConsola;
 import objetos.Factura;
@@ -16,12 +15,7 @@ import objetos.Llamada;
 
 public class OperacionesFacturasConsola implements IntMenuFacturas 
 {
-	private Scanner scanner;
 	private LecturaDatosConsola lectura;
-	
-	public OperacionesFacturasConsola(Scanner scanner) {
-		this.scanner = scanner;
-	}
 	
 	public OperacionesFacturasConsola() {
 		this.lectura = new LecturaDatosConsola();
@@ -75,6 +69,7 @@ public class OperacionesFacturasConsola implements IntMenuFacturas
 		return this.lectura.lecturaDatos();
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public String mostrarDatosFacturas(ArrayList<Factura> facturas) {
 		String info = "=========================\n";

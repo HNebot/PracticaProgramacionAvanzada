@@ -3,14 +3,9 @@ package main;
 import interfaces.IntIOInterface;
 import interfaces.IntLectura;
 import interfaces.IntSalidaInfo;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-
 import excepciones.ExcepcionClienteNoEncontrado;
 import lectura.LecturaDatosConsola;
-import objetos.Particular;
 import salida.SalidaInfoConsola;
 
 public class Principal 
@@ -24,49 +19,7 @@ public class Principal
 		return cal;
 	}
 	public static void main(String[] args)
-	{
-		/*ArrayList<String> datos = new ArrayList();
-		datos.add("P");
-		datos.add("123S");
-		datos.add("Hector");
-		//datos.add("Nebot");
-		datos.add("n@gmail.com");
-		datos.add("Avd Pio XII");
-		datos.add("17");
-		datos.add("2D");
-		datos.add("Vila-real");
-		datos.add("Castellon");
-		datos.add("12540");
-		datos.add("0.03");
-		datos.add("Nebot");
-		
-		System.out.println(gestor.altaCliente(datos));
-		Particular particular = (Particular) gestor.datosCliente(datos.get(1));
-		System.out.println(particular);
-		System.out.println(gestor.datosCliente(datos.get(1)).getClass().getSimpleName());*/
-		/**
-		 * Usamos un cotrolador para gestionar la interaccion entre el modelo y las vistas
-		 * Le pasamos un interfaz que sera la que gestione las vistas
-		 */
-		
-		/**Calendar cal = Calendar.getInstance();
-		//creem el format de eixida
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-		//imprimim utilitzan el getTime()
-		System.out.println(sdf.format(cal.getTime()));
-		Calendar cal2 = generar(cal);
-		System.out.println(sdf.format(cal.getTime()));
-		//Sumem un mes a la data anterior
-		cal.add(Calendar.MONTH, 1);
-		//sumem 8 mesos
-		System.out.println(sdf.format(cal.getTime()));
-		cal.add(Calendar.MONTH, 8);
-		System.out.println(sdf.format(cal.getTime()));
-		System.out.println(sdf.format(cal2.getTime()));
-		Calendar cal3 = Calendar.getInstance();
-		System.out.println(cal3.before(cal));
-		System.out.println(cal3.before(cal2));*/
-		
+	{		
 		Controlador controlador = new Controlador();
 		IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		controlador.SetInterface(IoInterface);
@@ -77,7 +30,6 @@ public class Principal
 		try {
 			controlador.start();
 		} catch (ExcepcionClienteNoEncontrado e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

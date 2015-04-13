@@ -7,7 +7,6 @@ import java.util.Map;
 
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionClienteNoEncontrado;
-import objetos.Cliente;
 import objetos.Factura;
 
 public class BDFacturas implements Serializable{

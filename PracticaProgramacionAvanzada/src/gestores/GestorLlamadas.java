@@ -12,7 +12,6 @@ import java.util.Calendar;
 import comparadores.ComparadorFecha;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionLlamadaNoEncontrada;
-import objetos.Factura;
 import objetos.Llamada;
 import baseDatos.BDLlamadas;
 

@@ -15,6 +15,7 @@ public class ComparadorFecha
 	 * @param Un objeto calendar con la fecha final para crear el filtro.
 	 * @return devuelve un lista de ojetos que cumplen con las condiciones del filtro, Devuelve null is hay algun error
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> ArrayList<T> buscarEntreDosFechas(ArrayList<? extends Fecha> lista, Calendar fechaInicio, Calendar fechaFin)
 	{
 		ArrayList<T> listaFiltrada = new ArrayList<T>();

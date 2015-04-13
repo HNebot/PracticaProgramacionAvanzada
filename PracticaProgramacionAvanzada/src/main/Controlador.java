@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionClienteNoEncontrado;
@@ -132,7 +131,6 @@ public class Controlador
 						this.gestorClientes.buscarClientePorFechaAlta(
 								this.IoInterface.getOperacionesClientes().buscarClientesPorFechaAlta()));
 			} catch (ExcepcionClienteNoEncontrado e) {
-				// TODO Auto-generated catch block
 				this.salidaInfo.salidaInfo(e.getMessage());
 			}
 			break;
@@ -141,7 +139,6 @@ public class Controlador
 			try {
 				this.IoInterface.getOperacionesClientes().mostrarClientes(this.gestorClientes.getClientes());
 			} catch (ExcepcionClienteNoEncontrado e) {
-				// TODO Auto-generated catch block
 				this.salidaInfo.salidaInfo(e.getMessage());
 			}
         	break;
@@ -231,7 +228,6 @@ public class Controlador
 						this.gestorLlamadas.verLlamadasCliente(this.IoInterface.getOperacionesLlamadas().llamadasCliente()));
 				this.salidaInfo.salidaInfo(mensaje);
 			} catch (ExcepcionClienteNoEncontrado e) {
-				// TODO Auto-generated catch block
 				this.salidaInfo.salidaInfo(e.getMessage());
 			}
 			
@@ -245,7 +241,6 @@ public class Controlador
 				this.salidaInfo.salidaInfo(mensaje);
 			} catch (ExcepcionClienteNoEncontrado
 					| ExcepcionLlamadaNoEncontrada e) {
-				// TODO Auto-generated catch block
 				this.salidaInfo.salidaInfo(e.getMessage());
 			}
 			break;

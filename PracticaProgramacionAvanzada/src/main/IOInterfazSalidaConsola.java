@@ -4,11 +4,6 @@ import interfaces.IntIOInterface;
 import interfaces.IntMenuClientes;
 import interfaces.IntMenuFacturas;
 import interfaces.IntMenuLlamadas;
-
-import java.util.Scanner;
-
-import com.sun.org.glassfish.gmbal.Description;
-
 import menus.*;
 
 /**

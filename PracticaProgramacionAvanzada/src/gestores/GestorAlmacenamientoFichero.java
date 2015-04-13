@@ -38,6 +38,7 @@ public class GestorAlmacenamientoFichero<T>
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void recuperarDatos() {
 		ObjectInputStream ois = null;
 		try{
