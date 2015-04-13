@@ -22,7 +22,7 @@ public class GestorClientes
 {
 	private Cliente cliente;
 	private BDClientes dbCliente = new BDClientes();
-	private final String FICHERO_CLIENTES ="BDClientes.bin";
+	private final String FICHERO_CLIENTES ="ficherosAlmacenamiento/BDClientes.bin";
 	private GestorFacturas gestorFacturas;
 	//private GestorAlmacenamientoFichero<BDClientes> datosClientes = 
 	//		new GestorAlmacenamientoFichero<BDClientes>(dbCliente, FICHERO_CLIENTES);

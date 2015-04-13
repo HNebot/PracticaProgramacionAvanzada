@@ -21,7 +21,7 @@ import baseDatos.BDFacturas;
 public class GestorFacturas 
 {
 	private BDFacturas dbFacturas = new BDFacturas();
-	private final String FICHERO_FACTURAS ="BDFacturas.bin";
+	private final String FICHERO_FACTURAS ="ficherosAlmacenamiento/BDFacturas.bin";
 	private GestorClientes gestorClientes;
 	
 	public GestorFacturas() {

@@ -16,7 +16,7 @@ public class GestorLlamadas
 {
 	
 	private BDLlamadas dbLlamadas = new BDLlamadas();
-	private final String FICHERO_LLAMADAS ="BDLlamadas.bin";
+	private final String FICHERO_LLAMADAS ="ficherosAlmacenamiento/BDLlamadas.bin";
 	
 	private Llamada llamada;
 	private GestorClientes gestorCliente;
