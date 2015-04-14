@@ -13,8 +13,12 @@ import java.util.Calendar;
 
 
 
+
+
 import comparadores.ComparadorFecha;
+import enumeraciones.TipoCliente;
 import excepciones.ExcepcionClienteNoEncontrado;
+import factorias.FabricaParametrizada;
 import baseDatos.BDClientes;
 import objetos.Cliente;
 import objetos.Direccion;
@@ -28,6 +32,7 @@ public class GestorClientes
 	private BDClientes dbCliente = new BDClientes();
 	private final String FICHERO_CLIENTES ="ficherosAlmacenamiento/BDClientes.bin";
 	private GestorFacturas gestorFacturas;
+	private FabricaParametrizada fabricaCliente;
 	//private GestorAlmacenamientoFichero<BDClientes> datosClientes = 
 	//		new GestorAlmacenamientoFichero<BDClientes>(dbCliente, FICHERO_CLIENTES);
 	
@@ -36,6 +41,7 @@ public class GestorClientes
 	 */
 	public GestorClientes(){
 		super();
+		this.fabricaCliente = new FabricaParametrizada();
 		recuperarDatos();
 	}
 	
@@ -56,24 +62,12 @@ public class GestorClientes
 	 * @param datos, una lista con todos los datos del cliente que se va a crear
 	 * @return Un mensaje indicando si la operacion ha tenido exito
 	 */
-	public String altaCliente (ArrayList<String> datos)
+	public String altaCliente (TipoCliente tipoCliente, ArrayList<String> datos)
 	{
 		try{
 			String mensage = "Cliente registrado";
 			
-			Direccion direccion = new Direccion(datos.get(5), datos.get(6), datos.get(7), 
-					datos.get(8), datos.get(9), Integer.parseInt(datos.get(10)));
-			Calendar fechaAlta = Calendar.getInstance();
-			Tarifa tarifa = new Tarifa(Float.parseFloat(datos.get(11)));
-			
-			if(datos.get(0).equals("E"))
-			{
-				this.cliente = new Empresa(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa);
-			}
-			else
-			{
-				this.cliente = new Particular(datos.get(1), datos.get(2), datos.get(3), Integer.parseInt(datos.get(4)), direccion, fechaAlta, tarifa, datos.get(12));
-			}
+			this.cliente = this.fabricaCliente.getCliente(tipoCliente,datos);
 			
 			if(!dbCliente.addNuevoCliente(cliente))
 			{

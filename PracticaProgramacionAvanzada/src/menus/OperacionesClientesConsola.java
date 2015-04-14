@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javafx.util.Pair;
+import enumeraciones.TipoCliente;
 import lectura.LecturaDatosConsola;
 import objetos.Cliente;
 
@@ -20,6 +22,7 @@ import objetos.Cliente;
  */
 public class OperacionesClientesConsola implements IntMenuClientes
 {
+	private TipoCliente tipocliente;
 	private LecturaDatosConsola lectura;
 	
 	/**
@@ -33,58 +36,63 @@ public class OperacionesClientesConsola implements IntMenuClientes
 	/**
 	 * Muestra y recoje los datos necesarios para introducir un nuevo cliente
 	 * 
-	 * Retorna un ArrayList de String
+	 * Retorna una tupla con El tipo de cliente y los datos en un arrayList de string
 	 */
 	@Override
-	public ArrayList<String> menuNuevoCliente()
+	public Pair<TipoCliente, ArrayList<String>> menuNuevoCliente()
 	{
 		ArrayList<String> datosEntrada = new ArrayList<String>(14);
 		String tipo;
 		do{
-			System.out.println("Cliente particulas(P) o empresa(E)?");
-			tipo = this.lectura.lecturaDatos();
-			tipo = tipo.toUpperCase();
+			try{
+				System.out.println("Cliente particulas o empresa?");
+				System.out.println(TipoCliente.getMenu());
+				tipo = this.lectura.lecturaDatos();
+				tipocliente = TipoCliente.getOpcion(Integer.parseInt(tipo));
+			}catch(Exception e)
+			{
+				System.out.println("Opcion Incorrecta");
+			}
 		}
-		while(tipo.equals("E") == false && tipo.equals("P") == false);
-		datosEntrada.add(0, tipo);
+		while(tipocliente == null);
 		
 		System.out.print("Nombre: ");
-		datosEntrada.add(1,this.lectura.lecturaDatos());
+		datosEntrada.add(0,this.lectura.lecturaDatos());
 		String apellido ="";
 		
-		if(tipo.equals("P"))
+		if(tipocliente.equals(TipoCliente.PARTICULR))
 		{
 			System.out.print("Apellido: ");
 			apellido = this.lectura.lecturaDatos();
 		}
 		
 		System.out.print("NIF: ");
-		datosEntrada.add(2,this.lectura.lecturaDatos());
+		datosEntrada.add(1,this.lectura.lecturaDatos());
 		System.out.print("email: ");
-		datosEntrada.add(3,this.lectura.lecturaDatos());
+		datosEntrada.add(2,this.lectura.lecturaDatos());
 		System.out.print("telefono: ");
-		datosEntrada.add(4,this.lectura.lecturaDatos());
+		datosEntrada.add(3,this.lectura.lecturaDatos());
 		System.out.print("Calle: ");
-		datosEntrada.add(5,this.lectura.lecturaDatos());
+		datosEntrada.add(4,this.lectura.lecturaDatos());
 		System.out.print("Portal: ");
-		datosEntrada.add(6,this.lectura.lecturaDatos());
+		datosEntrada.add(5,this.lectura.lecturaDatos());
 		System.out.print("Piso y portal: ");
-		datosEntrada.add(7,this.lectura.lecturaDatos());
+		datosEntrada.add(6,this.lectura.lecturaDatos());
 		System.out.print("Poblacion: ");
-		datosEntrada.add(8,this.lectura.lecturaDatos());
+		datosEntrada.add(7,this.lectura.lecturaDatos());
 		System.out.print("Porvincia: ");
-		datosEntrada.add(9,this.lectura.lecturaDatos());
+		datosEntrada.add(8,this.lectura.lecturaDatos());
 		System.out.print("C�digo postal: ");
-		datosEntrada.add(10,this.lectura.lecturaDatos());
+		datosEntrada.add(9,this.lectura.lecturaDatos());
 		System.out.print("Tarifa: ");
-		datosEntrada.add(11,this.lectura.lecturaDatos());
-		if(tipo.equals("P"))
+		datosEntrada.add(10,this.lectura.lecturaDatos());
+		if(tipocliente.equals(TipoCliente.PARTICULR))
 		{
-			datosEntrada.add(12,apellido);			
+			datosEntrada.add(11,apellido);			
 		}
 		System.out.println("");
 		
-		return datosEntrada;
+		return new Pair<TipoCliente, ArrayList<String>>(tipocliente, datosEntrada);
 	}
 	
 	/**

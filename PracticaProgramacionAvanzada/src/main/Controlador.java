@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import javafx.util.Pair;
+import enumeraciones.TipoCliente;
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionLlamadaNoEncontrada;
@@ -116,8 +118,8 @@ public class Controlador
 		String mensaje;
 		switch (opcion) {
 		case NUEVO_CLIENTE:
-			ArrayList<String> datos = this.IoInterface.getOperacionesClientes().menuNuevoCliente();
-        	mensaje = this.gestorClientes.altaCliente(datos);
+			Pair<TipoCliente, ArrayList<String>> datos = this.IoInterface.getOperacionesClientes().menuNuevoCliente();
+        	mensaje = this.gestorClientes.altaCliente(datos.getKey(), datos.getValue());
         	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
 			break;
 			
