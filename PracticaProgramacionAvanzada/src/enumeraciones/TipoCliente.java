@@ -1,7 +1,5 @@
 package enumeraciones;
 
-import menus.MenuFacturasConsola;
-
 public enum TipoCliente{
 	PARTICULR("Particular"),
 	EMPRESA("Empresa");
