@@ -12,7 +12,6 @@ public class Factura extends Fecha implements Serializable
 	 */
 	private static final long serialVersionUID = 7081662237352674230L;
 	
-	private static int contFacturaID;
 	private String codFactura;
 	private Tarifa tarifa;
 	private Calendar fechaEmision;
@@ -21,14 +20,14 @@ public class Factura extends Fecha implements Serializable
 	private ArrayList<Llamada> llamadasFactura;
 	
 	/**
-	 * Genera el codigo de la factura mendiante un contador que cuenta las facturas creadas 
+	 * Genera el codigo de la factura mendiante un numero aleatorio 
 	 * y el codigo individual de cada cliente
 	 * @param codCliente
 	 * @return codFactura
 	 */
 	private static String generarCodFactura(String codCliente)
 	{
-		contFacturaID++;
+		int contFacturaID  = (int)(Math.random()*500);
 		return codCliente + contFacturaID;
 	}
 	
@@ -51,14 +50,6 @@ public class Factura extends Fecha implements Serializable
 		this.fechaFin = generarFechaFin(fechaInicio);
 		this.tarifa = tarifa;
 		this.llamadasFactura = new ArrayList<Llamada>();
-	}
-
-	public static int getContFacturaID() {
-		return contFacturaID;
-	}
-
-	public static void setContFacturaID(int contFacturaID) {
-		Factura.contFacturaID = contFacturaID;
 	}
 
 	public String getCodFactura() {
