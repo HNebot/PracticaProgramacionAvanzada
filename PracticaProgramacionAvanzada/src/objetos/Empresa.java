@@ -3,6 +3,8 @@ package objetos;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import tarifas.Tarifa;
+
 public class Empresa extends Cliente implements Serializable
 {
 	

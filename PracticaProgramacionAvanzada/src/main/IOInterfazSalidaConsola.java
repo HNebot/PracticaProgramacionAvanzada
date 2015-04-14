@@ -1,10 +1,12 @@
 package main;
 
+import operaciones.OperacionesClientesConsola;
+import operaciones.OperacionesFacturasConsola;
+import operaciones.OperacionesLlamadasConsola;
 import interfaces.IntIOInterface;
-import interfaces.IntMenuClientes;
-import interfaces.IntMenuFacturas;
-import interfaces.IntMenuLlamadas;
-import menus.*;
+import interfaces.IntOperacionesClientes;
+import interfaces.IntOperacionesFacturas;
+import interfaces.IntOperacionesLlamadas;
 
 /**
  * Clase para gestionar la salida de los datos por pantalla, en esta clase se gestiona la salida por consola.
@@ -28,19 +30,19 @@ public class IOInterfazSalidaConsola implements IntIOInterface
 	}
 
 	@Override
-	public IntMenuClientes getOperacionesClientes() {
+	public IntOperacionesClientes getOperacionesClientes() {
 		// TODO Auto-generated method stub
 		return this.opClintes;
 	}
 
 	@Override
-	public IntMenuFacturas getOperacionesFacturas() {
+	public IntOperacionesFacturas getOperacionesFacturas() {
 		// TODO Auto-generated method stub
 		return this.opFacturas;
 	}
 
 	@Override
-	public IntMenuLlamadas getOperacionesLlamadas() {
+	public IntOperacionesLlamadas getOperacionesLlamadas() {
 		// TODO Auto-generated method stub
 		return this.opLlamadas;
 	}

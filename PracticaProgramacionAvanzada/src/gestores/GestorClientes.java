@@ -9,22 +9,15 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
-
-
-
-
-
 import comparadores.ComparadorFecha;
 import enumeraciones.TipoCliente;
+import enumeraciones.TipoTarifaFinDeSemana;
+import enumeraciones.TipoTarifaHoraria;
 import excepciones.ExcepcionClienteNoEncontrado;
-import factorias.FabricaParametrizada;
+import factorias.FabricaParametrizadaClientes;
+import factorias.FabricaTarifas;
 import baseDatos.BDClientes;
 import objetos.Cliente;
-import objetos.Direccion;
-import objetos.Empresa;
-import objetos.Particular;
-import objetos.Tarifa;
 
 public class GestorClientes
 {
@@ -32,7 +25,8 @@ public class GestorClientes
 	private BDClientes dbCliente = new BDClientes();
 	private final String FICHERO_CLIENTES ="ficherosAlmacenamiento/BDClientes.bin";
 	private GestorFacturas gestorFacturas;
-	private FabricaParametrizada fabricaCliente;
+	private FabricaParametrizadaClientes fabricaCliente;
+	private FabricaTarifas fabricaTarifas;
 	//private GestorAlmacenamientoFichero<BDClientes> datosClientes = 
 	//		new GestorAlmacenamientoFichero<BDClientes>(dbCliente, FICHERO_CLIENTES);
 	
@@ -41,7 +35,8 @@ public class GestorClientes
 	 */
 	public GestorClientes(){
 		super();
-		this.fabricaCliente = new FabricaParametrizada();
+		this.fabricaTarifas = new FabricaTarifas();
+		this.fabricaCliente = new FabricaParametrizadaClientes(this.fabricaTarifas);
 		recuperarDatos();
 	}
 	
@@ -62,12 +57,13 @@ public class GestorClientes
 	 * @param datos, una lista con todos los datos del cliente que se va a crear
 	 * @return Un mensaje indicando si la operacion ha tenido exito
 	 */
-	public String altaCliente (TipoCliente tipoCliente, ArrayList<String> datos)
+	public String altaCliente (TipoCliente tipoCliente, ArrayList<String> datos,
+			TipoTarifaHoraria tarifaHoraria, TipoTarifaFinDeSemana tarifaFinSemana)
 	{
 		try{
 			String mensage = "Cliente registrado";
 			
-			this.cliente = this.fabricaCliente.getCliente(tipoCliente,datos);
+			this.cliente = this.fabricaCliente.getCliente(tipoCliente, datos, tarifaHoraria,tarifaFinSemana);
 			
 			if(!dbCliente.addNuevoCliente(cliente))
 			{
@@ -126,7 +122,7 @@ public class GestorClientes
 		try
 		{
 			this.cliente = this.datosCliente(nif);
-			cliente.getTarifa().setTarifa(Float.parseFloat(nuevaTarifa));
+			//cliente.getTarifa().setTarifa(Float.parseFloat(nuevaTarifa));
 			mensaje = "Tarifa actualizada";
 		}
 		catch(NumberFormatException e)

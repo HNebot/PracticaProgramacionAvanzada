@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import objetos.Factura;
 
-public interface IntMenuFacturas{
+public interface IntOperacionesFacturas{
 	public String emitirFactura();
 	public String mostrarDatosFactura(Factura factura);
 	public String mostrarDatosFacturas(ArrayList<Factura> facturas);

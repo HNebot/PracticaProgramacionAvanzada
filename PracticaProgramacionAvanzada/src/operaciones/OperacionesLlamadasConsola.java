@@ -1,6 +1,6 @@
-package menus;
+package operaciones;
 
-import interfaces.IntMenuLlamadas;
+import interfaces.IntOperacionesLlamadas;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 import objetos.Llamada;
 import lectura.LecturaDatosConsola;
 
-public class OperacionesLlamadasConsola implements IntMenuLlamadas
+public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 {
 	private LecturaDatosConsola lectura;
 	

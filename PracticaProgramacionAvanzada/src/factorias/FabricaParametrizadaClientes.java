@@ -7,18 +7,27 @@ import objetos.Cliente;
 import objetos.Direccion;
 import objetos.Empresa;
 import objetos.Particular;
-import objetos.Tarifa;
+import tarifas.Tarifa;
 import enumeraciones.TipoCliente;
+import enumeraciones.TipoTarifaFinDeSemana;
+import enumeraciones.TipoTarifaHoraria;
 import interfaces.IntFabricaClientes;
 
-public class FabricaParametrizada implements IntFabricaClientes{
+public class FabricaParametrizadaClientes implements IntFabricaClientes{
 
+	private FabricaTarifas fabricaTarifas;
+	
+	public FabricaParametrizadaClientes(FabricaTarifas fabricaTarifas) {
+		this.fabricaTarifas = fabricaTarifas;
+	}
+	
 	@Override
-	public Cliente getCliente(TipoCliente tipoCliente, ArrayList<String> datos) {
+	public Cliente getCliente(TipoCliente tipoCliente, ArrayList<String> datos,
+			TipoTarifaHoraria tarifaHoraria, TipoTarifaFinDeSemana tarifaFinSemana) {
 		Direccion direccion = new Direccion(datos.get(4), datos.get(5), datos.get(6), 
 				datos.get(7), datos.get(8), Integer.parseInt(datos.get(9)));
 		Calendar fechaAlta = Calendar.getInstance();
-		Tarifa tarifa = new Tarifa(Float.parseFloat(datos.get(10)));
+		Tarifa tarifa = this.fabricaTarifas.getTarifa(tarifaHoraria, tarifaFinSemana);
 		
 		switch (tipoCliente) {
 		case EMPRESA:

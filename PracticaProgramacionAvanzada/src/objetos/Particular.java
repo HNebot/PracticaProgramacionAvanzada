@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import tarifas.Tarifa;
+
 public class Particular extends Cliente implements Serializable
 {
 	

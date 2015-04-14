@@ -1,6 +1,6 @@
-package menus;
+package operaciones;
 
-import interfaces.IntMenuFacturas;
+import interfaces.IntOperacionesFacturas;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import lectura.LecturaDatosConsola;
 import objetos.Factura;
 import objetos.Llamada;
 
-public class OperacionesFacturasConsola implements IntMenuFacturas 
+public class OperacionesFacturasConsola implements IntOperacionesFacturas 
 {
 	private LecturaDatosConsola lectura;
 	

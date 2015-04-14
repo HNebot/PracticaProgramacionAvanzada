@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import objetos.Llamada;
 
-public interface IntMenuLlamadas
+public interface IntOperacionesLlamadas
 {
 	public ArrayList<String> realizarLLamada();
 	public String llamadasCliente();

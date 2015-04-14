@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import tarifas.Tarifa;
+
 public class Factura extends Fecha implements Serializable
 {
 	/**

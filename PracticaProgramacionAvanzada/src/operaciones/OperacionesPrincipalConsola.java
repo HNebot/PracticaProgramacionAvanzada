@@ -1,4 +1,4 @@
-package menus;
+package operaciones;
 
 import interfaces.IntMenu;
 

@@ -8,13 +8,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import comparadores.ComparadorFecha;
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionClienteNoEncontrado;
 import objetos.Cliente;
 import objetos.Factura;
 import objetos.Llamada;
-import objetos.Tarifa;
+import tarifas.Tarifa;
 import baseDatos.BDFacturas;
 
 public class GestorFacturas 

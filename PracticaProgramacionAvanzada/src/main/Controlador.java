@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javafx.util.Pair;
 import enumeraciones.TipoCliente;
+import enumeraciones.TipoTarifaFinDeSemana;
+import enumeraciones.TipoTarifaHoraria;
 import excepciones.ExcepcionFacturaNoEncontrada;
 import excepciones.ExcepcionClienteNoEncontrado;
 import excepciones.ExcepcionLlamadaNoEncontrada;
@@ -119,7 +121,9 @@ public class Controlador
 		switch (opcion) {
 		case NUEVO_CLIENTE:
 			Pair<TipoCliente, ArrayList<String>> datos = this.IoInterface.getOperacionesClientes().menuNuevoCliente();
-        	mensaje = this.gestorClientes.altaCliente(datos.getKey(), datos.getValue());
+			TipoTarifaHoraria tarifaHoraria = this.IoInterface.getOperacionesClientes().menuTarifaHoraria();
+			TipoTarifaFinDeSemana tarifaFinSemana = this.IoInterface.getOperacionesClientes().menuTarifaFInDeSemana();
+        	mensaje = this.gestorClientes.altaCliente(datos.getKey(), datos.getValue(), tarifaHoraria, tarifaFinSemana);
         	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
 			break;
 			

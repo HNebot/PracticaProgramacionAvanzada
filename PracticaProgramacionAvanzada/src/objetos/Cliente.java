@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import tarifas.Tarifa;
+
 public class Cliente extends Fecha implements Serializable 
 {
 	
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 3883647530742079062L;
 	
 	private String NIF;

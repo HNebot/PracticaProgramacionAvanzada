@@ -1,6 +1,6 @@
-package menus;
+package operaciones;
 
-import interfaces.IntMenuClientes;
+import interfaces.IntOperacionesClientes;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -11,6 +11,8 @@ import java.util.GregorianCalendar;
 
 import javafx.util.Pair;
 import enumeraciones.TipoCliente;
+import enumeraciones.TipoTarifaFinDeSemana;
+import enumeraciones.TipoTarifaHoraria;
 import lectura.LecturaDatosConsola;
 import objetos.Cliente;
 
@@ -20,7 +22,7 @@ import objetos.Cliente;
  * 
  * Implementa una interfaz IntMenuClientes que a su vez extiende una de tipo Menu
  */
-public class OperacionesClientesConsola implements IntMenuClientes
+public class OperacionesClientesConsola implements IntOperacionesClientes
 {
 	private TipoCliente tipocliente;
 	private LecturaDatosConsola lectura;
@@ -198,6 +200,46 @@ public class OperacionesClientesConsola implements IntMenuClientes
 			System.out.println("Error en el formato de la fecha");
 			return null;
 		}
+	}
+
+
+	@Override
+	public TipoTarifaHoraria menuTarifaHoraria() {
+		int pos;
+		TipoTarifaHoraria tipoTarifa = null;
+		do{
+			try{
+				System.out.println("Elija un tipo de tarifa horaria:");
+				System.out.println(TipoCliente.getMenu());
+				pos = this.lectura.lecturaEnteros();
+				tipoTarifa= TipoTarifaHoraria.getOpcion(pos);
+			}catch(Exception e)
+			{
+				System.out.println("Opcion Incorrecta");
+			}
+		}
+		while(tipocliente == null);
+		return tipoTarifa;
+	}
+
+
+	@Override
+	public TipoTarifaFinDeSemana menuTarifaFInDeSemana() {
+		int pos;
+		TipoTarifaFinDeSemana tipoTarifa = null;
+		do{
+			try{
+				System.out.println("Elija un tipo de tarifa para el fin de semana:");
+				System.out.println(TipoCliente.getMenu());
+				pos = this.lectura.lecturaEnteros();
+				tipoTarifa= TipoTarifaFinDeSemana.getOpcion(pos);
+			}catch(Exception e)
+			{
+				System.out.println("Opcion Incorrecta");
+			}
+		}
+		while(tipocliente == null);
+		return tipoTarifa;
 	}
 
 }
