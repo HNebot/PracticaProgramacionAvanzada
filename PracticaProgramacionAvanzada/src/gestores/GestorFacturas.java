@@ -22,6 +22,7 @@ public class GestorFacturas
 	private BDFacturas dbFacturas = new BDFacturas();
 	private final String FICHERO_FACTURAS ="ficherosAlmacenamiento/BDFacturas.bin";
 	private GestorClientes gestorClientes;
+	private Factura factura;
 	
 	public GestorFacturas() {
 		super();
@@ -43,7 +44,7 @@ public class GestorFacturas
 	public boolean crearFactura(String cliente, Tarifa tarifa)
 	{
 		try{
-			Factura factura = new Factura(cliente, tarifa);
+			this.factura = new Factura(cliente, tarifa);
 			this.dbFacturas.addNuevaFactura(factura, cliente);
 			almacenarDatos();
 			return true;
@@ -63,7 +64,7 @@ public class GestorFacturas
 	{
 		try {
 			ArrayList<Factura> facturas = this.dbFacturas.buscarFacturasCliente(codCliente);
-			Factura factura = facturas .get(facturas.size() - 1);
+			this.factura = facturas .get(facturas.size() - 1);
 			
 			if(llamada.getFecha().before(factura.getFechaFin()))
 			{

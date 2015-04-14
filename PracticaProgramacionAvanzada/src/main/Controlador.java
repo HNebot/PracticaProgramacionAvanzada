@@ -51,11 +51,16 @@ public class Controlador
 	public void start() throws ExcepcionClienteNoEncontrado
 	{
 		inicializaGestores();
-		MenuPrincipalConsola op;
+		MenuPrincipalConsola op = null;
 		do {
-			this.salidaInfo.salidaInfo(MenuPrincipalConsola.getMenu());
-			op = MenuPrincipalConsola.getOpcion(this.lecturaDatos.lecturaEnteros());
-			ejecutaOpcionMenuPrincipal(op);
+			try{
+				this.salidaInfo.salidaInfo(MenuPrincipalConsola.getMenu());
+				op = MenuPrincipalConsola.getOpcion(this.lecturaDatos.lecturaEnteros());
+				ejecutaOpcionMenuPrincipal(op);
+			}catch(Exception e)
+			{
+				this.salidaInfo.salidaInfo("Opcion Incorrecta");
+			}		
 		} while (op != MenuPrincipalConsola.SALIR);
 	}
 
@@ -95,6 +100,8 @@ public class Controlador
 			ejecutaOpcionMenuLlamadas(MenuLlamadasConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
 			break;
 		case SALIR:
+			break;
+		default:
 			break;
 		}
 		

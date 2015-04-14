@@ -30,13 +30,7 @@ public enum MenuClientesConsola{
 	}
 	
 	public static MenuClientesConsola getOpcion(int posicion) {
-		try
-		{
-			return values()[posicion];
-		}catch(ArrayIndexOutOfBoundsException e)
-		{
-			return values()[0];
-		}
+		return values()[posicion];
 	}
 
 }

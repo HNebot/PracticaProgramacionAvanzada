@@ -29,13 +29,7 @@ public enum MenuFacturasConsola {
 	}
 	
 	public static MenuFacturasConsola getOpcion(int posicion) {
-		try
-		{
-			return values()[posicion];
-		}catch(ArrayIndexOutOfBoundsException e)
-		{
-			return values()[0];
-		}
+		return values()[posicion];
 	}
 
 }

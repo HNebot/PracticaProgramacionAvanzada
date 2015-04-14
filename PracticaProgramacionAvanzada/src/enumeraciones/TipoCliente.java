@@ -1,14 +1,14 @@
-package menus;
+package enumeraciones;
 
-public enum MenuPrincipalConsola {
-	SALIR("Salir del programa"),
-	CLIENTES("Menu clientes"),
-	FACTURAS("Menu facturas"),
-	LLAMADAS("Menu llamadas");
+import menus.MenuFacturasConsola;
 
+public enum TipoCliente{
+	PARTICULR("Particular"),
+	EMPRESA("Empresa");
+	
 	private String descripcion;
-
-	private MenuPrincipalConsola(String descripcion) {
+	
+	private TipoCliente(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	
@@ -18,7 +18,7 @@ public enum MenuPrincipalConsola {
 	
 	public static String getMenu() {
 		StringBuilder sb = new StringBuilder();
-		for (MenuPrincipalConsola opcion : MenuPrincipalConsola.values()) {
+		for (TipoCliente opcion : TipoCliente.values()) {
 			sb.append(opcion.ordinal());
 			sb.append(".- ");
 			sb.append(opcion.getDescripcion());
@@ -27,9 +27,8 @@ public enum MenuPrincipalConsola {
 		return sb.toString();
 	}
 	
-	public static MenuPrincipalConsola getOpcion(int posicion) {
+	public static TipoCliente getOpcion(int posicion) {
 		return values()[posicion];
 	}
-		
-}
 
+}

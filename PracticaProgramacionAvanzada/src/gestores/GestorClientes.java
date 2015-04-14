@@ -131,7 +131,7 @@ public class GestorClientes
 		String mensaje = "";
 		try
 		{
-			Cliente cliente = this.datosCliente(nif);
+			this.cliente = this.datosCliente(nif);
 			cliente.getTarifa().setTarifa(Float.parseFloat(nuevaTarifa));
 			mensaje = "Tarifa actualizada";
 		}
