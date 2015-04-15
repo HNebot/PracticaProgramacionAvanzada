@@ -51,7 +51,7 @@ public class Llamada extends Fecha implements Serializable
 	
 	@Override
 	public String toString() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HH:mm");
 		return "telefonoReceptor: " + telefonoReceptor + ", fecha:"
 				+ sdf.format(fecha.getTime()) + ", duracion: " + duracion + "min";
 	}
@@ -65,7 +65,7 @@ public class Llamada extends Fecha implements Serializable
 	public ArrayList<String> toArray()
 	{
 		ArrayList<String> datosLlamada = new ArrayList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HH:mm");
 		datosLlamada.add(""+ this.getTelefonoReceptor());
 		datosLlamada.add(sdf.format(this.getFecha().getTime()));
 		datosLlamada.add(""+ this.getDuracion());

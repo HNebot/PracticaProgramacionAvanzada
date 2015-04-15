@@ -35,7 +35,7 @@ public class FabricaParametrizadaClientes implements IntFabricaClientes{
 					Integer.parseInt(datos.get(3)), direccion, fechaAlta, tarifa);
 		case PARTICULR:
 			return new Particular(datos.get(0), datos.get(1), datos.get(2), 
-					Integer.parseInt(datos.get(3)), direccion, fechaAlta, tarifa, datos.get(11));
+					Integer.parseInt(datos.get(3)), direccion, fechaAlta, tarifa, datos.get(10));
 		}
 		return null;
 

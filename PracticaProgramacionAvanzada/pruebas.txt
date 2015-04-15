@@ -39,3 +39,36 @@
 		Calendar cal3 = Calendar.getInstance();
 		System.out.println(cal3.before(cal));
 		System.out.println(cal3.before(cal2));*/
+		
+		
+		
+		/*Tarifa tarifa = new TarifaBase();
+		
+		System.out.println(tarifa.getTarifa());
+		
+		tarifa = new TarifaManyana(tarifa);
+		
+		System.out.println(tarifa.getTarifa());
+		
+		Llamada llamada = new Llamada(123654789, Calendar.getInstance(), 5);
+		System.out.println(tarifa.costeLlamada(llamada));
+		SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+		System.out.println( "" + sdf.format(llamada.getFecha().getTime()));
+		
+		tarifa = new TarifaSabado(tarifa);
+		System.out.println(tarifa.getTarifa());
+		System.out.println(tarifa.costeLlamada(llamada));
+		
+		System.out.println(tarifa.getNombreTarifa());*/
+		
+		/*SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		Date horaInicio = sdf.parse( "7:00", new ParsePosition(0));
+		Date horaFin = sdf.parse( "22:00", new ParsePosition(0));
+		Calendar cal = Calendar.getInstance();
+		System.out.println(sdf.format(cal.getTime()));
+		Date horaCatual = sdf.parse(sdf.format(llamada.getFecha().getTime()), new ParsePosition(0));
+		System.out.println(horaCatual.toString());
+		System.out.println(horaInicio.toString());
+		System.out.println(horaFin.toString());
+		System.out.println(horaCatual.compareTo(horaInicio));
+		System.out.println(horaCatual.compareTo(horaFin));*/

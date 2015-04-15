@@ -138,7 +138,7 @@ public class Cliente extends Fecha implements Serializable
 		datos.add(getEmail());
 		datos.add(getNumeroTelefono() +"");
 		datos.add(getDireccion().newToString());
-		datos.add(getTarifa().toString());
+		datos.add(getTarifa().getNombreTarifa());
 		return datos;
 		
 	}

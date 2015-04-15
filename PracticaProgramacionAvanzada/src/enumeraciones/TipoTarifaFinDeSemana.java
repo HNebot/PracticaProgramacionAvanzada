@@ -1,16 +1,16 @@
 package enumeraciones;
 
 public enum TipoTarifaFinDeSemana {
-	TARIFA_SABADO("Tarifa Buenos Dias: "
-			+ "Despierte a todos, llamadas economicas de 7 a 12 de la mañana"),
-	TARIFA_DOMINGO("Tarifa Buen Provecho: "
-			+ "Hable con sus amigos a medio dia con llamadas a 0.5 de 12 a 20 de la tarde"),
-	TARIFA_VIERNES_SABADO("Tarifa buenas noches: "
-			+ "Las llamdas a 0.6 de 20 a 1 de la noche para que le cuente su dia a todos"),
-	TARIFA_SABADO_DOMINGO("Tarifa buenas noches: "
-					+ "Las llamdas a 0.6 de 20 a 1 de la noche para que le cuente su dia a todos"),
-	TARIFA_FIN_DE_SEMANA("Tarifa buenas noches: "
-							+ "Las llamdas a 0.6 de 20 a 1 de la noche para que le cuente su dia a todos"),
+	TARIFA_SABADO("Tarifa Sabados Gratis: "
+			+ "LLame todos los Sábados gratis durante todo el dia"),
+	TARIFA_DOMINGO("Tarifa Domingos Gratis: "
+			+ "LLame todos los Domingos gratis durante todo el dia"),
+	TARIFA_VIERNES_SABADO("Tarifa Viernes y Sabados: "
+			+ "Las llamdas a 0.09 todos los Viernes y Sabados durante todo el dia"),
+	TARIFA_SABADO_DOMINGO("Tarifa Sabados y Domingos: "
+					+ "Las llamdas a 0.09 todos los Sabados u Domingos durante todo el dia"),
+	TARIFA_FIN_DE_SEMANA("Tarifa Fin De Semana: "
+							+ "Las llamdas a 0.05 de Viernes a Domingo durante todo el dia"),
 	NADA("Ninguna: No se aplique ninguna tarifa especial y que viva el capitalismo");
 	
 	private String descripcion;

@@ -123,7 +123,7 @@ public class Factura extends Fecha implements Serializable
 		try{
 			for(Llamada llamada: this.llamadasFactura)
 			{
-				facturacion = facturacion + llamada.getDuracion() * this.tarifa.getTarifa();
+				facturacion = facturacion + this.tarifa.costeLlamada(llamada);
 			}
 			return facturacion;
 		}catch(Exception e){
@@ -163,7 +163,7 @@ public class Factura extends Fecha implements Serializable
 		datos.add(getCodFactura());
 		datos.add(formatoFecha(fechaInicio));
 		datos.add(formatoFecha(fechaFin));
-		datos.add("" + getTarifa().getTarifa());
+		datos.add("" + getTarifa().getNombreTarifa());
 		return datos;
 	}
 

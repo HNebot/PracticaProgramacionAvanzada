@@ -86,11 +86,9 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		datosEntrada.add(8,this.lectura.lecturaDatos());
 		System.out.print("C�digo postal: ");
 		datosEntrada.add(9,this.lectura.lecturaDatos());
-		System.out.print("Tarifa: ");
-		datosEntrada.add(10,this.lectura.lecturaDatos());
 		if(tipocliente.equals(TipoCliente.PARTICULR))
 		{
-			datosEntrada.add(11,apellido);			
+			datosEntrada.add(10,apellido);			
 		}
 		System.out.println("");
 		
@@ -210,7 +208,7 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		do{
 			try{
 				System.out.println("Elija un tipo de tarifa horaria:");
-				System.out.println(TipoCliente.getMenu());
+				System.out.println(TipoTarifaHoraria.getMenu());
 				pos = this.lectura.lecturaEnteros();
 				tipoTarifa= TipoTarifaHoraria.getOpcion(pos);
 			}catch(Exception e)
@@ -230,7 +228,7 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		do{
 			try{
 				System.out.println("Elija un tipo de tarifa para el fin de semana:");
-				System.out.println(TipoCliente.getMenu());
+				System.out.println(TipoTarifaFinDeSemana.getMenu());
 				pos = this.lectura.lecturaEnteros();
 				tipoTarifa= TipoTarifaFinDeSemana.getOpcion(pos);
 			}catch(Exception e)

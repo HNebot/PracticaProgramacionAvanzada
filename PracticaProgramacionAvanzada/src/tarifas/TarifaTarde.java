@@ -6,20 +6,20 @@ import java.util.Date;
 
 import objetos.Llamada;
 
-public class TarifaManyana extends TarifaPersonalizada
+public class TarifaTarde extends TarifaPersonalizada
 {
-	private static final long serialVersionUID = 7630075695645985331L;
+	private static final long serialVersionUID = 1630078895745980031L;
 	
 	private final float COSTE_TARIFA = 0.12f;
-	private final String HORA_INICIO_TARIFA = "7:00";
-	private final String HORA_FIN_TARIFA = "12:00";
-	private final String NOMBRE_TARIFA = "Buenos Dias";
+	private final String HORA_INICIO_TARIFA = "12:00";
+	private final String HORA_FIN_TARIFA = "20:00";
+	private final String NOMBRE_TARIFA = "Buen Provecho";
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 	private Date horaInicioTarifa = sdf.parse( this.HORA_INICIO_TARIFA, new ParsePosition(0));
 	private Date horaFinTarifa = sdf.parse( this.HORA_FIN_TARIFA, new ParsePosition(0));
 	
-	public TarifaManyana(Tarifa tarifa) {
+	public TarifaTarde(Tarifa tarifa) {
 		super(tarifa);
 	}
 	
@@ -50,6 +50,5 @@ public class TarifaManyana extends TarifaPersonalizada
 		
 		return costeLlamada;
 	}
-	 
 
 }
