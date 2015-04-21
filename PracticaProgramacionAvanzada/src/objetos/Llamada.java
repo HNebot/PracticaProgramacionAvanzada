@@ -16,6 +16,7 @@ public class Llamada extends Fecha implements Serializable
 	private int telefonoReceptor;
 	private Calendar fecha;
 	private int duracion;
+	private float costeLlamada = -1;
 	
 	public Llamada(int telefonoReceptor, Calendar fecha, int duracion) {
 		super();
@@ -48,12 +49,25 @@ public class Llamada extends Fecha implements Serializable
 		this.duracion = duracion;
 	}
 
-	
+		
+	public float getCosteLlamada() {
+		return costeLlamada;
+	}
+
+	public void setCosteLlamada(float costeLlamada) {
+		this.costeLlamada = costeLlamada;
+	}
+
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HH:mm");
-		return "telefonoReceptor: " + telefonoReceptor + ", fecha:"
+		String info;
+		info =  "telefonoReceptor: " + telefonoReceptor + ", fecha:"
 				+ sdf.format(fecha.getTime()) + ", duracion: " + duracion + "min";
+		
+		if(costeLlamada != -1) info = info + " " + costeLlamada + "€";
+		
+		return info;
 	}
 	
 	/**

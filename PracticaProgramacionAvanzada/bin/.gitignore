@@ -1,9 +1,3 @@
-/baseDatos/
-/comparadores/
-/enumeraciones/
-/excepciones/
-/factorias/
-/gestores/
 /interfaces/
 /lectura/
 /main/
@@ -13,3 +7,9 @@
 /salida/
 /tarifas/
 /test/
+/baseDatos/
+/comparadores/
+/enumeraciones/
+/excepciones/
+/factorias/
+/gestores/

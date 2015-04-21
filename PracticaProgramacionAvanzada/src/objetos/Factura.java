@@ -120,10 +120,13 @@ public class Factura extends Fecha implements Serializable
 	public float facturacionTotal()
 	{
 		float facturacion = 0;
+		float costeLLamada = 0;
 		try{
 			for(Llamada llamada: this.llamadasFactura)
 			{
-				facturacion = facturacion + this.tarifa.costeLlamada(llamada);
+				costeLLamada = this.tarifa.costeLlamada(llamada);
+				llamada.setCosteLlamada(costeLLamada);
+				facturacion = facturacion + costeLLamada;
 			}
 			return facturacion;
 		}catch(Exception e){
