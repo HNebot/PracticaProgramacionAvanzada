@@ -92,6 +92,30 @@ public class GestorFacturas
 	}
 	
 	/**
+	 * Crea una factrura con la nueva tarifa que ha elegido el cliente y 
+	 * modifica la ultima factura del cliente con la fecha de finalizacion actual.
+	 * @param codCliente El codigo del cliente que modifica la tarifa
+	 * @param tarifa la nueva tarifa 
+	 * @throws ExcepcionClienteNoEncontrado
+	 */
+	public void facturarNuevaTarifa(String codCliente, Tarifa tarifa) throws ExcepcionClienteNoEncontrado
+	{
+		try {
+			ArrayList<Factura> facturasCliente = this.devolverFacturasCliente(codCliente);
+			Factura ultimaFactura = facturasCliente.get(facturasCliente.size() - 1);
+			ultimaFactura.setFechaFin(Calendar.getInstance());
+			
+			this.crearFactura(codCliente, tarifa);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	/**
 	 * Busca la ultima factura sin emitir y la devuelve asignando la fecha actual como fecha de emision.
 	 * Si la fecha de emision es anterior a la de fin de factura esta ultima se actualiza a la de emision.
 	 * Se crea una nueva factura si la que se emite es la ultima.

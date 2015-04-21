@@ -18,6 +18,7 @@ import factorias.FabricaParametrizadaClientes;
 import factorias.FabricaTarifas;
 import baseDatos.BDClientes;
 import objetos.Cliente;
+import tarifas.Tarifa;
 
 public class GestorClientes
 {
@@ -36,7 +37,7 @@ public class GestorClientes
 	public GestorClientes(){
 		super();
 		this.fabricaTarifas = new FabricaTarifas();
-		this.fabricaCliente = new FabricaParametrizadaClientes(this.fabricaTarifas);
+		this.fabricaCliente = new FabricaParametrizadaClientes();
 		recuperarDatos();
 	}
 	
@@ -62,8 +63,8 @@ public class GestorClientes
 	{
 		try{
 			String mensage = "Cliente registrado";
-			
-			this.cliente = this.fabricaCliente.getCliente(tipoCliente, datos, tarifaHoraria,tarifaFinSemana);
+			Tarifa tarifa = this.fabricaTarifas.getTarifa(tarifaHoraria, tarifaFinSemana);
+			this.cliente = this.fabricaCliente.getCliente(tipoCliente, datos, tarifa);
 			
 			if(!dbCliente.addNuevoCliente(cliente))
 			{
@@ -116,13 +117,15 @@ public class GestorClientes
 	 * @return Un mensaje indicando si la operacio ha tenido exito.
 	 */
 	@SuppressWarnings("finally")
-	public String actualizarTarifa(String nif, String nuevaTarifa)
+	public String actualizarTarifa(String nif, TipoTarifaHoraria tarifaHoraria, TipoTarifaFinDeSemana tarifaFinSemana)
 	{	
 		String mensaje = "";
 		try
 		{
 			this.cliente = this.datosCliente(nif);
-			//cliente.getTarifa().setTarifa(Float.parseFloat(nuevaTarifa));
+			Tarifa nuevaTarifa = this.fabricaTarifas.getTarifa(tarifaHoraria, tarifaFinSemana);
+			cliente.setTarifa(nuevaTarifa);
+			this.gestorFacturas.facturarNuevaTarifa(nif, nuevaTarifa);
 			mensaje = "Tarifa actualizada";
 		}
 		catch(NumberFormatException e)

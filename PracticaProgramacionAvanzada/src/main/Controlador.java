@@ -118,11 +118,13 @@ public class Controlador
 	 */
 	private void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
 		String mensaje;
+		TipoTarifaHoraria tarifaHoraria;
+		TipoTarifaFinDeSemana tarifaFinSemana;
 		switch (opcion) {
 		case NUEVO_CLIENTE:
 			Pair<TipoCliente, ArrayList<String>> datos = this.IoInterface.getOperacionesClientes().menuNuevoCliente();
-			TipoTarifaHoraria tarifaHoraria = this.IoInterface.getOperacionesClientes().menuTarifaHoraria();
-			TipoTarifaFinDeSemana tarifaFinSemana = this.IoInterface.getOperacionesClientes().menuTarifaFInDeSemana();
+			tarifaHoraria = this.IoInterface.getOperacionesClientes().menuTarifaHoraria();
+			tarifaFinSemana = this.IoInterface.getOperacionesClientes().menuTarifaFInDeSemana();
         	mensaje = this.gestorClientes.altaCliente(datos.getKey(), datos.getValue(), tarifaHoraria, tarifaFinSemana);
         	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
 			break;
@@ -158,8 +160,9 @@ public class Controlador
         	
 		case MODIFICAR_TARIFA:
 			String nif = this.IoInterface.getOperacionesClientes().menuVerCliente();
-        	String tarifa = this.IoInterface.getOperacionesClientes().actualizarTarifa();
-        	mensaje = this.gestorClientes.actualizarTarifa(nif, tarifa);
+        	tarifaHoraria = this.IoInterface.getOperacionesClientes().menuTarifaHoraria();
+			tarifaFinSemana = this.IoInterface.getOperacionesClientes().menuTarifaFInDeSemana();
+        	mensaje = this.gestorClientes.actualizarTarifa(nif, tarifaHoraria, tarifaFinSemana);
         	this.IoInterface.getOperacionesClientes().mostrarMensaje(mensaje);
         	break;
 			
