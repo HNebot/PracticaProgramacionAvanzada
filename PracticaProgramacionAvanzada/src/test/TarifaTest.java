@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import tarifas.Tarifa;
+import tarifas.TarifaBase;
+
 public class TarifaTest {
 
 	@Test
 	public void testGetTarifa() {
-		fail("Not yet implemented");
+		Tarifa tarifa = new TarifaBase();
+		assertEquals(0.15f, tarifa.getTarifa(), 0.0);
 	}
 
 	@Test
