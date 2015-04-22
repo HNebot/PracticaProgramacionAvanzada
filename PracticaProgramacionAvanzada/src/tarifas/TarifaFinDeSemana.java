@@ -12,7 +12,7 @@ public class TarifaFinDeSemana extends TarifaPersonalizada
 	private final String DIA_TARIFA_1 = "viernes";
 	private final String DIA_TARIFA_2 = "sábado";
 	private final String DIA_TARIFA_3 = "domingo";
-	private final String NOMBRE_TARIFA = "Sabados Fin De Semana";
+	private final String NOMBRE_TARIFA = "Fin De Semana";
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
 	

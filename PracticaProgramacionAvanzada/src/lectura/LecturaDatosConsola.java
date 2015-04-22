@@ -26,7 +26,14 @@ public class LecturaDatosConsola implements IntLectura {
 	 */
 	@Override
 	public String lecturaDatos() {
-		return this.scanner.nextLine();
+		try{
+			return this.scanner.nextLine();
+		}catch(Exception e)
+		{
+			this.scanner.close();
+			this.scanner = new Scanner(System.in);
+			return null;
+		}
 	}
 	
 	/**
@@ -35,7 +42,14 @@ public class LecturaDatosConsola implements IntLectura {
 	 */
 	@Override
 	public int lecturaEnteros() {
-		return this.scanner.nextInt();
+		try{
+			return this.scanner.nextInt();
+		}catch(Exception e)
+		{
+			this.scanner.close();
+			this.scanner = new Scanner(System.in);
+			return -1;
+		}
 	}
 	
 	

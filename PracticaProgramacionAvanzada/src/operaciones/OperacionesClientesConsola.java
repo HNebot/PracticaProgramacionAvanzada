@@ -204,19 +204,23 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 	@Override
 	public TipoTarifaHoraria menuTarifaHoraria() {
 		int pos;
+		String opcion;
 		TipoTarifaHoraria tipoTarifa = null;
 		do{
 			try{
+				pos = -1;
 				System.out.println("Elija un tipo de tarifa horaria:");
 				System.out.println(TipoTarifaHoraria.getMenu());
-				pos = this.lectura.lecturaEnteros();
+				opcion = this.lectura.lecturaDatos();
+				pos = Integer.parseInt(opcion);
 				tipoTarifa= TipoTarifaHoraria.getOpcion(pos);
 			}catch(Exception e)
 			{
+				//e.printStackTrace();
 				System.out.println("Opcion Incorrecta");
 			}
 		}
-		while(tipocliente == null);
+		while(tipoTarifa == null);
 		return tipoTarifa;
 	}
 
@@ -224,19 +228,22 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 	@Override
 	public TipoTarifaFinDeSemana menuTarifaFInDeSemana() {
 		int pos;
+		String opcion;
 		TipoTarifaFinDeSemana tipoTarifa = null;
 		do{
 			try{
+				pos = -1;
 				System.out.println("Elija un tipo de tarifa para el fin de semana:");
 				System.out.println(TipoTarifaFinDeSemana.getMenu());
-				pos = this.lectura.lecturaEnteros();
+				opcion = this.lectura.lecturaDatos();
+				pos = Integer.parseInt(opcion);
 				tipoTarifa= TipoTarifaFinDeSemana.getOpcion(pos);
 			}catch(Exception e)
 			{
 				System.out.println("Opcion Incorrecta");
 			}
 		}
-		while(tipocliente == null);
+		while(tipoTarifa == null);
 		return tipoTarifa;
 	}
 
