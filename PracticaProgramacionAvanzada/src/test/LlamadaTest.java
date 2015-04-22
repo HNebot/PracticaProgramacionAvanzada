@@ -2,7 +2,10 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import objetos.Llamada;
 
@@ -12,7 +15,7 @@ import org.junit.Test;
 public class LlamadaTest {
 	
 	private Llamada llamada;
-	private Calendar fecha, fecha2;
+	private Calendar fecha, fecha2, fecha3;
 	@Before
 	public void init() {
 		fecha = Calendar.getInstance();
@@ -27,7 +30,12 @@ public class LlamadaTest {
 
 	@Test
 	public void testSetFecha() {
-		fail("Not yet implemented");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/M/yyyy");
+		Date horaInicio = sdf.parse( "9:00 19/4/2015", new ParsePosition(0));
+		fecha2.setTime(horaInicio);
+		fecha3 = (Calendar) fecha2.clone();
+		llamada.setFecha(fecha3);
+		assertEquals(fecha2, llamada.getFecha());
 	}
 
 	@Test
@@ -57,7 +65,12 @@ public class LlamadaTest {
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HH:mm");
+		String info = "telefonoReceptor: 789456123, fecha:"
+				+ sdf.format(fecha2.getTime()) + ", duracion: 8min";
+		
+		assertEquals(info, llamada.toString());
+		
 	}
 
 }
