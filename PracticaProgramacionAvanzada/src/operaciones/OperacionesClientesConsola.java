@@ -9,11 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import controlador.Controlador;
 import javafx.util.Pair;
 import enumeraciones.TipoCliente;
 import enumeraciones.TipoTarifaFinDeSemana;
 import enumeraciones.TipoTarifaHoraria;
 import lectura.LecturaDatosConsola;
+import menus.MenuClientesConsola;
 import objetos.Cliente;
 
 /**
@@ -26,6 +28,7 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 {
 	private TipoCliente tipocliente;
 	private LecturaDatosConsola lectura;
+	private Controlador controlador;
 	
 	/**
 	 * Contructor principal de la clase
@@ -34,6 +37,13 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		this.lectura = new LecturaDatosConsola();
 	}
 	
+	 
+	 @Override
+		public void menuPincipalClientes() {
+		 System.out.println(MenuClientesConsola.getMenu());
+		 this.controlador.ejecutaOpcionMenuCliente(MenuClientesConsola.getOpcion(this.lectura.lecturaEnteros()));
+			
+		}
 	
 	/**
 	 * Muestra y recoje los datos necesarios para introducir un nuevo cliente
@@ -245,6 +255,13 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		}
 		while(tipoTarifa == null);
 		return tipoTarifa;
+	}
+
+
+	@Override
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+		
 	}
 
 }

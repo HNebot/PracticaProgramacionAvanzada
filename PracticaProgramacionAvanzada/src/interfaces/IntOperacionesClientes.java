@@ -3,6 +3,7 @@ package interfaces;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import controlador.Controlador;
 import enumeraciones.TipoCliente;
 import enumeraciones.TipoTarifaFinDeSemana;
 import enumeraciones.TipoTarifaHoraria;
@@ -11,7 +12,8 @@ import objetos.Cliente;
 
 public interface IntOperacionesClientes
 {
-	
+	public void menuPincipalClientes();
+	public void setControlador(Controlador controlador);
 	public Pair<TipoCliente, ArrayList<String>> menuNuevoCliente();
 	public String menuVerCliente();
 	public TipoTarifaHoraria menuTarifaHoraria();

@@ -8,15 +8,34 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import controlador.Controlador;
 import objetos.Llamada;
 import lectura.LecturaDatosConsola;
+import menus.MenuLlamadasConsola;
 
 public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 {
+	
+	private Controlador controlador;
 	private LecturaDatosConsola lectura;
 	
 	public OperacionesLlamadasConsola() {
 		this.lectura = new LecturaDatosConsola();
+	}
+	
+
+	@Override
+	public void menuPincipalLLamadas() {
+		System.out.println(MenuLlamadasConsola.getMenu());
+		this.controlador.ejecutaOpcionMenuLlamadas(MenuLlamadasConsola.getOpcion(this.lectura.lecturaEnteros()));
+		
+	}
+
+	@Override
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+		
 	}
 
 	@Override
@@ -34,7 +53,9 @@ public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 	@Override
 	public String llamadasCliente() {
 		System.out.println("Introduzca el nif del cliente: ");
-		return this.lectura.lecturaDatos();
+		String str = this.lectura.lecturaDatos();
+		System.out.println(str);
+		return str;
 	}
 
 	@Override
@@ -86,5 +107,6 @@ public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 			return null;
 		}
 	}
+
 
 }

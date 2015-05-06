@@ -43,7 +43,9 @@ public class LecturaDatosConsola implements IntLectura {
 	@Override
 	public int lecturaEnteros() {
 		try{
-			return this.scanner.nextInt();
+			int num = this.scanner.nextInt();
+			this.scanner.nextLine();
+			return num;
 		}catch(Exception e)
 		{
 			this.scanner.close();

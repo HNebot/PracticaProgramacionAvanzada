@@ -9,16 +9,33 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import controlador.Controlador;
 import lectura.LecturaDatosConsola;
+import menus.MenuFacturasConsola;
 import objetos.Factura;
 import objetos.Llamada;
 
 public class OperacionesFacturasConsola implements IntOperacionesFacturas 
 {
+	
+	private Controlador controlador;
 	private LecturaDatosConsola lectura;
 	
 	public OperacionesFacturasConsola() {
 		this.lectura = new LecturaDatosConsola();
+	}
+	
+	@Override
+	public void menuPincipalFacturas() {
+		System.out.println(MenuFacturasConsola.getMenu());
+		this.controlador.ejecutaOpcionMenuFacturas(MenuFacturasConsola.getOpcion(this.lectura.lecturaEnteros()));
+		
+	}
+
+	@Override
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+		
 	}
 
 	@Override
@@ -114,8 +131,6 @@ public class OperacionesFacturasConsola implements IntOperacionesFacturas
 			System.out.println("Error en el formato de la fecha");
 			return null;
 		}
-	}
-	
-	
+	}	
 
 }

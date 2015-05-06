@@ -1,4 +1,4 @@
-package main;
+package controlador;
 
 import java.util.ArrayList;
 
@@ -33,6 +33,7 @@ public class Controlador
 	
 	public Controlador() {
 		super();
+		inicializaGestores();
 	}
 	
 	public void SetInterface (IntIOInterface IoInterface)
@@ -54,18 +55,15 @@ public class Controlador
 	 */
 	public void start() throws ExcepcionClienteNoEncontrado
 	{
-		inicializaGestores();
-		MenuPrincipalConsola op = null;
-		do {
+		//inicializaGestores();
+		/*do {
 			try{
-				this.salidaInfo.salidaInfo(MenuPrincipalConsola.getMenu());
-				op = MenuPrincipalConsola.getOpcion(this.lecturaDatos.lecturaEnteros());
-				ejecutaOpcionMenuPrincipal(op);
+				this.IoInterface.getOperacionesPrincipal().menuPincipal();
 			}catch(Exception e)
 			{
 				this.salidaInfo.salidaInfo("Opcion Incorrecta");
 			}		
-		} while (op != MenuPrincipalConsola.SALIR);
+		/} while(true);*/
 	}
 
 	/**
@@ -89,21 +87,19 @@ public class Controlador
 	 * @param opcion elegida por el usuario
 	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	private void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) throws ExcepcionClienteNoEncontrado {
+	public void ejecutaOpcionMenuPrincipal(MenuPrincipalConsola opcion) throws ExcepcionClienteNoEncontrado {
 		switch (opcion) {
 		case CLIENTES:
-			this.salidaInfo.salidaInfo(MenuClientesConsola.getMenu());
-			ejecutaOpcionMenuCliente(MenuClientesConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
+			this.IoInterface.getOperacionesClientes().menuPincipalClientes();
 			break;
 		case FACTURAS:
-			this.salidaInfo.salidaInfo(MenuFacturasConsola.getMenu());
-			ejecutaOpcionMenuFacturas(MenuFacturasConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
+			this.IoInterface.getOperacionesFacturas().menuPincipalFacturas();
 			break;
 		case LLAMADAS:
-			this.salidaInfo.salidaInfo(MenuLlamadasConsola.getMenu());
-			ejecutaOpcionMenuLlamadas(MenuLlamadasConsola.getOpcion(this.lecturaDatos.lecturaEnteros()));
+			this.IoInterface.getOperacionesLlamadas().menuPincipalLLamadas();
 			break;
 		case SALIR:
+			System.exit(0);
 			break;
 		default:
 			break;
@@ -116,7 +112,7 @@ public class Controlador
 	 * @param opcion elegida por el usuario
 	 * @throws ExcepcionClienteNoEncontrado 
 	 */
-	private void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
+	public void ejecutaOpcionMenuCliente(MenuClientesConsola opcion) {
 		String mensaje;
 		TipoTarifaHoraria tarifaHoraria;
 		TipoTarifaFinDeSemana tarifaFinSemana;
@@ -175,7 +171,7 @@ public class Controlador
 	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
 	 * @param opcion elegida por el usuario
 	 */
-	private void ejecutaOpcionMenuFacturas(MenuFacturasConsola opcion) {
+	public void ejecutaOpcionMenuFacturas(MenuFacturasConsola opcion) {
 		String mensaje;
 		switch (opcion) {
 		case EMITIR_FACTURA:
@@ -231,7 +227,7 @@ public class Controlador
 	 * Ejecuta las opciones del menu de Facturas elegidas por le usuario y ejecuta sus operaciones
 	 * @param opcion elegida por el usuario
 	 */
-	private void ejecutaOpcionMenuLlamadas(MenuLlamadasConsola opcion) {
+	public void ejecutaOpcionMenuLlamadas(MenuLlamadasConsola opcion) {
 		String mensaje;
 		switch (opcion) {
 		case ALTA_LLAMADA:
