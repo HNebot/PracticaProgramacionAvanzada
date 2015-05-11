@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Menu;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import controlador.Controlador;
 import operaciones.OperacionesClientesGrafica;
@@ -41,7 +44,13 @@ public class IOInterfazGrafica implements IntIOInterface{
 	    
 	public IOInterfazGrafica() {
 		
-		crearPanelPrincipal();
+		try {
+			crearPanelPrincipal();
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.opClintes = new OperacionesClientesGrafica();
 		this.opFacturas = new OperacionesFacturasGrafica();
@@ -76,13 +85,15 @@ public class IOInterfazGrafica implements IntIOInterface{
 		return this.opPrincipal;
 	}
 	
-	private void crearPanelPrincipal()
+	private void crearPanelPrincipal() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
 	{
+		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		this.ventana = new JFrame("Empresa Telefonia");
 		this.contenedor = ventana.getContentPane();
 		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.panelInicial = new JPanel();
-		ventana.add(panelInicial);
+		this.panelInicial.setLayout(null);
+		contenedor.add(panelInicial);
 		JMenu menu = new JMenu("Cliente");
 		Action accionVerClientes = new AccionMenu("Ver clientes");
 		menu.add(accionVerClientes);
@@ -92,7 +103,8 @@ public class IOInterfazGrafica implements IntIOInterface{
 	}
 	private void visualizarPanelPincipal()
 	{
-		ventana.setSize(800, 400);
+		ventana.setBounds(200, 200, 1000, 600);
+		ventana.setResizable(false);
 		ventana.setVisible(true);
 		
 	}
