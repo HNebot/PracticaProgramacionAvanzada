@@ -103,7 +103,7 @@ public class IOInterfazGrafica implements IntIOInterface{
 	}
 	private void visualizarPanelPincipal()
 	{
-		ventana.setBounds(200, 200, 1000, 600);
+		ventana.setBounds(200, 110, 1000, 600);
 		ventana.setResizable(false);
 		ventana.setVisible(true);
 		

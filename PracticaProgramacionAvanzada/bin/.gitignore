@@ -1,9 +1,5 @@
-/operaciones/
-/iconoClientes.jpg
-/vista/
 /controlador/
-/modelo/
-/principal/
+/iconoClientes.jpg
 /iconoClientes45x45.png
 /iconoClientes50x50.png
 /iconoFacturas.jpg
@@ -12,3 +8,16 @@
 /iconoLlamadas45x45.png
 /iconoSalir.jpg
 /iconoSalir45x45.png
+/vista/
+/baseDatos/
+/comparadores/
+/enumeraciones/
+/excepciones/
+/factorias/
+/gestores/
+/interfaces/
+/lectura/
+/main/
+/menus/
+/objetos/
+/operaciones/
