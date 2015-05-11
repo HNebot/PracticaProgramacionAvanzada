@@ -88,7 +88,7 @@ public class OperacionesPrincipalGrafica implements IntOperacionesPrincipal, Int
 		panel2.add(salirLabel2);
 	    
 	    this.panelPrincipal.add(panel2, BorderLayout.CENTER);
-	    this.panelPrincipal.repaint();;
+	    this.panelPrincipal.repaint();
 		
 		
 	}

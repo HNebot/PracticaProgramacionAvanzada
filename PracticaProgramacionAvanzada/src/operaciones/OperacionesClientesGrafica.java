@@ -43,6 +43,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JButton botonModificarTarifa;
 	private JButton  botonAtras;
 	
+	
+	
 	public OperacionesClientesGrafica() {
 		super();
 	}
