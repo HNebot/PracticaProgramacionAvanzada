@@ -58,6 +58,9 @@ public class IOInterfazGrafica implements IntIOInterface{
 		this.opPrincipal = new OperacionesPrincipalGrafica();
 		
 		this.opPrincipal.setPanelPincipal(this.panelInicial);
+		this.opClintes.setPanelPincipal(this.panelInicial);
+		this.opFacturas.setPanelPincipal(this.panelInicial);
+		this.opLlamadas.setPanelPincipal(this.panelInicial);
 	}
 
 	@Override
@@ -78,6 +81,10 @@ public class IOInterfazGrafica implements IntIOInterface{
 	@Override
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
+		this.opPrincipal.setControlador(controlador);
+		this.opClintes.setControlador(controlador);
+		this.opFacturas.setControlador(controlador);
+		this.opLlamadas.setControlador(controlador);
 	}
 
 	@Override
@@ -125,6 +132,7 @@ public class IOInterfazGrafica implements IntIOInterface{
 
 		
 	}
+	
 	
 	private class AccionMenu extends AbstractAction{
 

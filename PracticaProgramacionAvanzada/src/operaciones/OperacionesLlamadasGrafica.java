@@ -16,9 +16,12 @@ public class OperacionesLlamadasGrafica implements IntOperacionesLlamadas, IntGr
 
 	private Controlador controlador;
 	
+	private JFrame ventanaPrincipal;
+	private JPanel panelPrincipal;
+	
 	@Override
 	public void setPanelPincipal(JPanel panel) {
-		
+		this.panelPrincipal = panel;
 		
 	}
 
@@ -30,7 +33,7 @@ public class OperacionesLlamadasGrafica implements IntOperacionesLlamadas, IntGr
 
 	@Override
 	public void setControlador(Controlador controlador) {
-		// TODO Auto-generated method stub
+		this.controlador = controlador;
 		
 	}
 

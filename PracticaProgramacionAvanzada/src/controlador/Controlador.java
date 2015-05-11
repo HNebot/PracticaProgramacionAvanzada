@@ -163,6 +163,11 @@ public class Controlador
         	break;
 			
 		case ATRAS:
+			try {
+				this.IoInterface.getOperacionesPrincipal().menuPincipal();
+			} catch (Exception e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		}
 	}
@@ -219,6 +224,11 @@ public class Controlador
 			}
 			break;
 		case ATRAS:
+			try {
+				this.IoInterface.getOperacionesPrincipal().menuPincipal();
+			} catch (Exception e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		}
 	}
@@ -257,6 +267,11 @@ public class Controlador
 			}
 			break;
 		case ATRAS:
+			try {
+				this.IoInterface.getOperacionesPrincipal().menuPincipal();
+			} catch (Exception e) {
+				this.salidaInfo.salidaInfo(e.getMessage());
+			}
 			break;
 		}
 	}
