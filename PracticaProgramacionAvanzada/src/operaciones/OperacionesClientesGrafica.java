@@ -2,8 +2,15 @@ package operaciones;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,8 +20,10 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
@@ -71,6 +80,10 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JTextField puertaText;
 	private JTextField telefonoText;
 	
+	private JRadioButton empresaRadioButton;
+	private JRadioButton particularRadioButton;
+	private ButtonGroup tipoClienteGroup;
+	
 	private JRadioButton tarifaManyanaRadioButton;
 	private JRadioButton tarifaTardeRadioButton;
 	private JRadioButton tarifaNocheRadioButton;
@@ -83,8 +96,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JRadioButton tarifaFinDeSemanaRadioButton;
 	private JRadioButton tarifaNingunaFindeRadioButton;
 	
-	private ButtonGroup tarifasHoras;
-	private ButtonGroup tarifasDias;
+	private ButtonGroup tarifasHorasGroup;
+	private ButtonGroup tarifasDiasGroup;
 	
 	
 	
@@ -177,10 +190,10 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		int posx = (this.panelPrincipal.getWidth() - 800)/2;
 		int posy = (this.panelPrincipal.getHeight() - 350)/2;
 		panel2.setBounds(posx, posy, 800, 350);
-		panel2.setBackground(Color.GRAY);
-		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		//panel2.setBackground(Color.GRAY);
+		Border raisedbevel = BorderFactory.createLineBorder(Color.GRAY);
 		panel2.setBorder(raisedbevel);
-		panel2.setLayout(null);
+		panel2.setLayout(new BorderLayout());
 		
 		iniciarPanelNuevoCliente();
 		iniciarPanelTarifas();
@@ -189,24 +202,78 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		pestanyas.addTab("Datos personales", this.panelNuevoCliente);
 		pestanyas.addTab("Tarifas", this.panelTarifas);
 		
-		panel2.add(pestanyas);
+		panel2.add(pestanyas, BorderLayout.CENTER);
 		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
+		this.panelPrincipal.revalidate();
 		this.panelPrincipal.repaint();
 	}
 	
 	private void iniciarPanelNuevoCliente()
 	{
 		this.panelNuevoCliente = new JPanel();
-		JLabel label = new JLabel("Panel nuevo cliente");
-		this.panelNuevoCliente.add(label);
+		GridBagLayout gridLayout = new GridBagLayout();
+		this.panelNuevoCliente.setLayout(new GridBagLayout());
+		GridBagConstraints contraints = new GridBagConstraints();
+		this.panelNuevoCliente.setBackground(Color.GRAY);		
+		
+		JLabel label = new JLabel("Intorduce los datos personales del cliente");
+		addItem(panelNuevoCliente, label, 0, 0, 5, 1, GridBagConstraints.NORTH);
+		
+		JLabel label2 = new JLabel("Tipo de cliente: ");
+		addItem(panelNuevoCliente, label2, 0, 1, 1, 1, GridBagConstraints.WEST);
+		
+		
+		this.empresaRadioButton = new JRadioButton(TipoCliente.EMPRESA.getDescripcion(), true);
+		this.empresaRadioButton.setActionCommand("Empresa");
+		this.empresaRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.particularRadioButton = new JRadioButton(TipoCliente.PARTICULR.getDescripcion());
+		this.particularRadioButton.setActionCommand("Particular");
+		this.particularRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tipoClienteGroup = new ButtonGroup();
+		this.tipoClienteGroup.add(this.empresaRadioButton);
+		this.tipoClienteGroup.add(this.particularRadioButton);
+
+		addItem(panelNuevoCliente, this.empresaRadioButton, 1, 1, 1, 1, GridBagConstraints.WEST);
+		addItem(panelNuevoCliente, this.particularRadioButton, 2, 1, 3, 1, GridBagConstraints.WEST);
+		
+		this.nombreLabel = new JLabel("Nombre");
+		addItem(panelNuevoCliente, this.nombreLabel, 0, 2, 1, 1, GridBagConstraints.WEST);
+		this.nombreText = new JTextField(25);
+		this.nombreText.setSize(25, 10);
+		addItem(panelNuevoCliente, this.nombreText, 1, 2, 1, 1, GridBagConstraints.WEST);
+		
+		this.apellidoLabel = new JLabel("Apellido");
+		addItem(panelNuevoCliente, this.apellidoLabel, 2, 2, 1, 1, GridBagConstraints.WEST);
+		this.apellidoText = new JTextField(25);
+		this.apellidoText.setSize(25, 10);
+		this.apellidoText.setEditable(false);
+		addItem(panelNuevoCliente, this.apellidoText, 3, 2, 2, 1, GridBagConstraints.WEST);
+
+		
 	}
 	
 	private void iniciarPanelTarifas()
 	{
 		this.panelTarifas = new JPanel();
+		this.panelTarifas.setBackground(Color.GRAY);
 		JLabel label = new JLabel("Panel tarifa");
-		this.panelNuevoCliente.add(label);
+		this.panelTarifas.add(label);
 	}
+	
+	private void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
+	    GridBagConstraints gc = new GridBagConstraints();
+	    gc.fill = GridBagConstraints.RELATIVE;
+	    gc.gridx = x;
+	    gc.gridy = y;
+	    gc.gridwidth = width;
+	    gc.gridheight = height;
+	    gc.weightx = 100.0;
+	    gc.weighty = 100.0;
+	    gc.insets = new Insets(5, 5, 5, 5);
+	    gc.anchor = align;
+	    gc.fill = GridBagConstraints.NONE;
+	    p.add(c, gc);
+	  }
 
 	@Override
 	public Pair<TipoCliente, ArrayList<String>> menuNuevoCliente() {
@@ -312,7 +379,45 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.botonAtras.setActionCommand("Atras");
 		this.botonAtras.addActionListener(new EscuchadoraBoton());
 		
-		
+	}
+	public void cambiarClienteEmpresa(){
+		this.apellidoText.setText("");
+		this.apellidoText.setEditable(false);
+		this.apellidoText.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+								
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JOptionPane.showMessageDialog(new JFrame(), "Eggs are not supposed to be green.");				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+								
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		this.tipocliente = TipoCliente.EMPRESA;
+	}
+	public void cambiarClienteParticular(){
+		this.apellidoText.removeAll();
+		this.apellidoText.setEditable(true);
+		this.tipocliente = TipoCliente.EMPRESA;
 	}
 	
 	public class EscuchadoraBoton implements ActionListener {
@@ -346,6 +451,33 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 			}
 		}
 
+	}
+	
+	public class escuchadorRadioButtons implements ItemListener{
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JRadioButton boton = (JRadioButton)e.getItemSelectable();
+			String comando = boton.getActionCommand();
+			if(e.getStateChange() == ItemEvent.SELECTED)
+			{
+				switch (comando) {
+				case "Empresa":
+					cambiarClienteEmpresa();
+					
+					break;
+				case "Particular":
+					cambiarClienteParticular();
+					break;
+
+				default:
+					break;
+				}
+			}
+			
+			
+		}
+		
 	}
 	
 	public Controlador getControlador()
