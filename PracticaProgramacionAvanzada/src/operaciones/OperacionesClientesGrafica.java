@@ -10,11 +10,15 @@ import java.util.Calendar;
 import javafx.util.Pair;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import menus.MenuClientesConsola;
@@ -29,19 +33,59 @@ import excepciones.ExcepcionClienteNoEncontrado;
 import interfaces.IntGrafico;
 import interfaces.IntOperacionesClientes;
 
-public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesClientes{
-
+public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesClientes {
+	
 	private Controlador controlador;
+	private TipoCliente tipocliente;
+	private TipoTarifaHoraria tipoTarifaHoraria = TipoTarifaHoraria.NADA;
+	private TipoTarifaFinDeSemana tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.NADA;
 	
 	private JFrame ventanaPrincipal;
 	private JPanel panelPrincipal;
+	private JPanel panelNuevoCliente;
+	private JPanel panelTarifas;
 	
 	private JButton botonAltaCliente;
 	private JButton botonBuscarClienteDNI;
 	private JButton botonBuscarClienteFecha;
 	private JButton botonVerClientes;
 	private JButton botonModificarTarifa;
-	private JButton  botonAtras;
+	private JButton botonAtras;
+	
+	private JLabel dniLabel;
+	private JLabel nombreLabel;
+	private JLabel apellidoLabel;
+	private JLabel emailLabel;
+	private JLabel direccionLabel;
+	private JLabel tarifaLabel;
+	private JLabel telefonoLabel;
+	private JLabel fechaAltaLabel;
+	
+	private JTextField dniText;
+	private JTextField nombreText;
+	private JTextField apellidoText;
+	private JTextField emailText;
+	private JTextField direccionText;
+	private JTextField portalText;
+	private JTextField pisoText;
+	private JTextField puertaText;
+	private JTextField telefonoText;
+	
+	private JRadioButton tarifaManyanaRadioButton;
+	private JRadioButton tarifaTardeRadioButton;
+	private JRadioButton tarifaNocheRadioButton;
+	private JRadioButton tarifaNingunaHorariaRadioButton;
+	
+	private JRadioButton tarifaSabadoRadioButton;
+	private JRadioButton tarifaDomingoRadioButton;
+	private JRadioButton tarifaViernesSabadoRadioButton;
+	private JRadioButton tarifaSabadoDomingoRadioButton;
+	private JRadioButton tarifaFinDeSemanaRadioButton;
+	private JRadioButton tarifaNingunaFindeRadioButton;
+	
+	private ButtonGroup tarifasHoras;
+	private ButtonGroup tarifasDias;
+	
 	
 	
 	
@@ -124,6 +168,44 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 		
+	}
+	
+	public void vistaNuevoCliente()
+	{
+		this.panelPrincipal.removeAll();
+		JPanel panel2 = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 350)/2;
+		panel2.setBounds(posx, posy, 800, 350);
+		panel2.setBackground(Color.GRAY);
+		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		panel2.setBorder(raisedbevel);
+		panel2.setLayout(null);
+		
+		iniciarPanelNuevoCliente();
+		iniciarPanelTarifas();
+		
+		JTabbedPane pestanyas = new JTabbedPane();
+		pestanyas.addTab("Datos personales", this.panelNuevoCliente);
+		pestanyas.addTab("Tarifas", this.panelTarifas);
+		
+		panel2.add(pestanyas);
+		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
+		this.panelPrincipal.repaint();
+	}
+	
+	private void iniciarPanelNuevoCliente()
+	{
+		this.panelNuevoCliente = new JPanel();
+		JLabel label = new JLabel("Panel nuevo cliente");
+		this.panelNuevoCliente.add(label);
+	}
+	
+	private void iniciarPanelTarifas()
+	{
+		this.panelTarifas = new JPanel();
+		JLabel label = new JLabel("Panel tarifa");
+		this.panelNuevoCliente.add(label);
 	}
 
 	@Override
@@ -240,6 +322,7 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 			
 			switch (comando) {
 			case "AltaCliente":
+				vistaNuevoCliente();
 				break;
 				
 			case "BuscarDNI":

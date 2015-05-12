@@ -136,6 +136,7 @@ public class IOInterfazGrafica implements IntIOInterface{
 	
 	private class AccionMenu extends AbstractAction{
 
+		private static final long serialVersionUID = 355044677127560958L;
 		public AccionMenu(String nombre){
 			putValue(Action.NAME, nombre);
 		}
