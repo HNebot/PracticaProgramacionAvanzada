@@ -2,6 +2,7 @@ package operaciones;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -49,6 +50,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private TipoTarifaHoraria tipoTarifaHoraria = TipoTarifaHoraria.NADA;
 	private TipoTarifaFinDeSemana tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.NADA;
 	
+	private escuchadorRaton escuchadorRaton = new escuchadorRaton();
+	
 	private JFrame ventanaPrincipal;
 	private JPanel panelPrincipal;
 	private JPanel panelNuevoCliente;
@@ -66,6 +69,11 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JLabel apellidoLabel;
 	private JLabel emailLabel;
 	private JLabel direccionLabel;
+	private JLabel portalLabel;
+	private JLabel pisoPuertaLabel;
+	private JLabel poblacionLabel;
+	private JLabel provinciaLabel;
+	private JLabel codigoPostalLabel;
 	private JLabel tarifaLabel;
 	private JLabel telefonoLabel;
 	private JLabel fechaAltaLabel;
@@ -76,8 +84,10 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JTextField emailText;
 	private JTextField direccionText;
 	private JTextField portalText;
-	private JTextField pisoText;
-	private JTextField puertaText;
+	private JTextField pisoPuertaText;
+	private JTextField poblacionText;
+	private JTextField provinciaText;
+	private JTextField codigoPostalText;
 	private JTextField telefonoText;
 	
 	private JRadioButton empresaRadioButton;
@@ -188,9 +198,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.panelPrincipal.removeAll();
 		JPanel panel2 = new JPanel();
 		int posx = (this.panelPrincipal.getWidth() - 800)/2;
-		int posy = (this.panelPrincipal.getHeight() - 350)/2;
-		panel2.setBounds(posx, posy, 800, 350);
-		//panel2.setBackground(Color.GRAY);
+		int posy = (this.panelPrincipal.getHeight() - 450)/2;
+		panel2.setBounds(posx, posy, 800, 450);
 		Border raisedbevel = BorderFactory.createLineBorder(Color.GRAY);
 		panel2.setBorder(raisedbevel);
 		panel2.setLayout(new BorderLayout());
@@ -211,17 +220,18 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private void iniciarPanelNuevoCliente()
 	{
 		this.panelNuevoCliente = new JPanel();
-		GridBagLayout gridLayout = new GridBagLayout();
-		this.panelNuevoCliente.setLayout(new GridBagLayout());
-		GridBagConstraints contraints = new GridBagConstraints();
+		this.panelNuevoCliente.setLayout(null);
 		this.panelNuevoCliente.setBackground(Color.GRAY);		
 		
-		JLabel label = new JLabel("Intorduce los datos personales del cliente");
-		addItem(panelNuevoCliente, label, 0, 0, 5, 1, GridBagConstraints.NORTH);
+		JLabel titulo = new JLabel("Introduce los datos personales del cliente");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulo.setBounds(250, 20, 300, 20);
+		this.panelNuevoCliente.add(titulo);
 		
-		JLabel label2 = new JLabel("Tipo de cliente: ");
-		addItem(panelNuevoCliente, label2, 0, 1, 1, 1, GridBagConstraints.WEST);
-		
+		JLabel tipocliente = new JLabel("Tipo de cliente: ");
+		tipocliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+		tipocliente.setBounds(30, 60, 150, 20);
+		this.panelNuevoCliente.add(tipocliente);	
 		
 		this.empresaRadioButton = new JRadioButton(TipoCliente.EMPRESA.getDescripcion(), true);
 		this.empresaRadioButton.setActionCommand("Empresa");
@@ -231,49 +241,217 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.particularRadioButton.addItemListener(new escuchadorRadioButtons());
 		this.tipoClienteGroup = new ButtonGroup();
 		this.tipoClienteGroup.add(this.empresaRadioButton);
-		this.tipoClienteGroup.add(this.particularRadioButton);
+		this.tipoClienteGroup.add(this.particularRadioButton);	
+		this.empresaRadioButton.setBounds(200, 60, 100, 20);
+		this.particularRadioButton.setBounds(350, 60, 100, 20);
+		this.panelNuevoCliente.add(this.empresaRadioButton);
+		this.panelNuevoCliente.add(this.particularRadioButton);
 
-		addItem(panelNuevoCliente, this.empresaRadioButton, 1, 1, 1, 1, GridBagConstraints.WEST);
-		addItem(panelNuevoCliente, this.particularRadioButton, 2, 1, 3, 1, GridBagConstraints.WEST);
 		
-		this.nombreLabel = new JLabel("Nombre");
-		addItem(panelNuevoCliente, this.nombreLabel, 0, 2, 1, 1, GridBagConstraints.WEST);
-		this.nombreText = new JTextField(25);
-		this.nombreText.setSize(25, 10);
-		addItem(panelNuevoCliente, this.nombreText, 1, 2, 1, 1, GridBagConstraints.WEST);
+		this.dniLabel = new JLabel("DNI/NIF:");
+		this.dniLabel.setBounds(50, 110, 80, 20);
+		this.dniLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.dniText = new JTextField(50);
+		this.dniText.setBounds(130, 100, 250, 30);
+		this.panelNuevoCliente.add(this.dniLabel);
+		this.panelNuevoCliente.add(this.dniText);
 		
-		this.apellidoLabel = new JLabel("Apellido");
-		addItem(panelNuevoCliente, this.apellidoLabel, 2, 2, 1, 1, GridBagConstraints.WEST);
-		this.apellidoText = new JTextField(25);
-		this.apellidoText.setSize(25, 10);
-		this.apellidoText.setEditable(false);
-		addItem(panelNuevoCliente, this.apellidoText, 3, 2, 2, 1, GridBagConstraints.WEST);
+		
+		this.nombreLabel = new JLabel("Nombre:");
+		this.nombreLabel.setBounds(50, 160, 80, 20);
+		this.nombreLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.nombreText = new JTextField(50);
+		this.nombreText.setBounds(130, 150, 250, 30);
+		this.panelNuevoCliente.add(this.nombreLabel);
+		this.panelNuevoCliente.add(this.nombreText);
+		
+		
+		this.apellidoLabel = new JLabel("Apellido:");
+		this.apellidoLabel.setBounds(400, 160, 80, 20);
+		this.apellidoLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.apellidoText = new JTextField(50);
+		this.apellidoText.setBounds(480, 150, 250, 30);
+		this.cambiarClienteEmpresa();
+		this.panelNuevoCliente.add(this.apellidoLabel);
+		this.panelNuevoCliente.add(this.apellidoText);
 
+		
+		this.direccionLabel = new JLabel("Dirección:");
+		this.direccionLabel.setBounds(50, 210, 80, 20);
+		this.direccionLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.direccionText = new JTextField(50);
+		this.direccionText.setBounds(130, 200, 200, 30);
+		
+		this.portalLabel = new JLabel("Portal:");
+		this.portalLabel.setBounds(360, 210, 80, 20);
+		this.portalLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.portalText = new JTextField(20);
+		this.portalText.setBounds(420, 200, 80, 30);
+		
+		this.pisoPuertaLabel = new JLabel("Piso y puerta:");
+		this.pisoPuertaLabel.setBounds(520, 210, 100, 20);
+		this.pisoPuertaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.pisoPuertaText = new JTextField(20);
+		this.pisoPuertaText.setBounds(630, 200, 60, 30);
+		
+		this.panelNuevoCliente.add(this.direccionLabel);
+		this.panelNuevoCliente.add(this.direccionText);
+		this.panelNuevoCliente.add(this.portalLabel);
+		this.panelNuevoCliente.add(this.portalText);
+		this.panelNuevoCliente.add(this.pisoPuertaLabel);
+		this.panelNuevoCliente.add(this.pisoPuertaText);
+		
+		this.poblacionLabel = new JLabel("Población:");
+		this.poblacionLabel.setBounds(50, 260, 100, 20);
+		this.poblacionLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.poblacionText = new JTextField(50);
+		this.poblacionText.setBounds(130, 250, 150, 30);
+		this.panelNuevoCliente.add(this.poblacionLabel);
+		this.panelNuevoCliente.add(this.poblacionText);
+		
+		this.provinciaLabel = new JLabel("Porvincia:");
+		this.provinciaLabel.setBounds(290, 260, 100, 20);
+		this.provinciaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.provinciaText = new JTextField(50);
+		this.provinciaText.setBounds(370, 250, 150, 30);
+		this.panelNuevoCliente.add(this.provinciaLabel);
+		this.panelNuevoCliente.add(this.provinciaText);
+		
+		this.codigoPostalLabel = new JLabel("Codigo postal:");
+		this.codigoPostalLabel.setBounds(530, 260, 100, 20);
+		this.codigoPostalLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.codigoPostalText = new JTextField(50);
+		this.codigoPostalText.setBounds(630, 250, 100, 30);
+		this.panelNuevoCliente.add(this.codigoPostalLabel);
+		this.panelNuevoCliente.add(this.codigoPostalText);
+		
+		
+		this.emailLabel = new JLabel("Correo electronico:");
+		this.emailLabel.setBounds(50, 310, 150, 20);
+		this.emailLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.emailText = new JTextField(70);
+		this.emailText.setBounds(200, 300, 280, 30);
+		this.panelNuevoCliente.add(this.emailLabel);
+		this.panelNuevoCliente.add(this.emailText);
+		
+		this.telefonoLabel = new JLabel("Telefono cliente:");
+		this.telefonoLabel.setBounds(50, 360, 150, 20);
+		this.telefonoLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.telefonoText = new JTextField(70);
+		this.telefonoText.setBounds(200, 350, 200, 30);
+		this.panelNuevoCliente.add(this.telefonoLabel);
+		this.panelNuevoCliente.add(this.telefonoText);
 		
 	}
 	
 	private void iniciarPanelTarifas()
 	{
 		this.panelTarifas = new JPanel();
-		this.panelTarifas.setBackground(Color.GRAY);
-		JLabel label = new JLabel("Panel tarifa");
-		this.panelTarifas.add(label);
+		this.panelTarifas.setLayout(null);
+		this.panelTarifas.setBackground(Color.GRAY);		
+		
+		JLabel titulo = new JLabel("Seleccione las tarifas extras que desea aplicar al cliente");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulo.setBounds(200, 20, 400, 20);
+		this.panelTarifas.add(titulo);
+		
+		JLabel tarifasHoras = new JLabel("Tipo de facturas por hora: ");
+		tarifasHoras.setFont(new Font("Tahoma", Font.BOLD, 13));
+		tarifasHoras.setBounds(30, 60, 200, 20);
+		this.panelTarifas.add(tarifasHoras);
+		
+		this.tarifaManyanaRadioButton = new JRadioButton(TipoTarifaHoraria.TARIFA_MANYANA.getDescripcion());
+		this.tarifaTardeRadioButton = new JRadioButton(TipoTarifaHoraria.TARIFA_TARDE.getDescripcion());
+		this.tarifaNocheRadioButton = new JRadioButton(TipoTarifaHoraria.TARIFA_NOCHE.getDescripcion());
+		this.tarifaNingunaHorariaRadioButton = new JRadioButton(TipoTarifaHoraria.NADA.getDescripcion(), true);
+		
+		this.tarifaManyanaRadioButton.setActionCommand("TarifaManyana");
+		this.tarifaManyanaRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaTardeRadioButton.setActionCommand("TarifaTarde");
+		this.tarifaTardeRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaNocheRadioButton.setActionCommand("TarifaNoche");
+		this.tarifaNocheRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaNingunaHorariaRadioButton.setActionCommand("TarifaHorariaNada");
+		this.tarifaNingunaHorariaRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.cambiarTarifaHoras("TarifaHorariaNada");
+		
+		this.tarifasHorasGroup = new ButtonGroup();
+		this.tarifasHorasGroup.add(this.tarifaManyanaRadioButton);
+		this.tarifasHorasGroup.add(this.tarifaTardeRadioButton);
+		this.tarifasHorasGroup.add(this.tarifaNocheRadioButton);
+		this.tarifasHorasGroup.add(this.tarifaNingunaHorariaRadioButton);
+		
+		this.tarifaManyanaRadioButton.setBounds(50, 80, 750, 20);
+		this.tarifaTardeRadioButton.setBounds(50, 100, 750, 20);
+		this.tarifaNocheRadioButton.setBounds(50, 120, 750, 20);
+		this.tarifaNingunaHorariaRadioButton.setBounds(50, 140, 750, 20);
+		
+		
+		this.panelTarifas.add(this.tarifaManyanaRadioButton);
+		this.panelTarifas.add(this.tarifaTardeRadioButton);
+		this.panelTarifas.add(this.tarifaNocheRadioButton);
+		this.panelTarifas.add(this.tarifaNingunaHorariaRadioButton);
+		
+		
+		
+		JLabel tarifasFinde = new JLabel("Tipo de facturas para fin de semana: ");
+		tarifasFinde.setFont(new Font("Tahoma", Font.BOLD, 13));
+		tarifasFinde.setBounds(30, 170, 250, 20);
+		this.panelTarifas.add(tarifasFinde);
+		
+		this.tarifaSabadoRadioButton = new JRadioButton(TipoTarifaFinDeSemana.TARIFA_SABADO.getDescripcion());
+		this.tarifaDomingoRadioButton = new JRadioButton(TipoTarifaFinDeSemana.TARIFA_DOMINGO.getDescripcion());
+		this.tarifaViernesSabadoRadioButton = new JRadioButton(TipoTarifaFinDeSemana.TARIFA_VIERNES_SABADO.getDescripcion());
+		this.tarifaSabadoDomingoRadioButton = new JRadioButton(TipoTarifaFinDeSemana.TARIFA_SABADO_DOMINGO.getDescripcion());
+		this.tarifaFinDeSemanaRadioButton = new JRadioButton(TipoTarifaFinDeSemana.TARIFA_FIN_DE_SEMANA.getDescripcion());
+		this.tarifaNingunaFindeRadioButton = new JRadioButton(TipoTarifaFinDeSemana.NADA.getDescripcion(), true);
+		
+		this.tarifaSabadoRadioButton.setActionCommand("TarifaSabado");
+		this.tarifaSabadoRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaDomingoRadioButton.setActionCommand("TarifaDomingo");
+		this.tarifaDomingoRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaViernesSabadoRadioButton.setActionCommand("TarifaViernesSabado");
+		this.tarifaViernesSabadoRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaSabadoDomingoRadioButton.setActionCommand("TarifaSabadoDomingo");
+		this.tarifaSabadoDomingoRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaFinDeSemanaRadioButton.setActionCommand("TarifaFinDeSemanda");
+		this.tarifaFinDeSemanaRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.tarifaNingunaFindeRadioButton.setActionCommand("TarifaFindeNada");
+		this.tarifaNingunaFindeRadioButton.addItemListener(new escuchadorRadioButtons());
+		this.cambiarTarifaFinDeSemana("TarifaFindeNada");
+		
+		this.tarifasDiasGroup = new ButtonGroup();
+		this.tarifasDiasGroup.add(this.tarifaSabadoRadioButton);
+		this.tarifasDiasGroup.add(this.tarifaDomingoRadioButton);
+		this.tarifasDiasGroup.add(this.tarifaViernesSabadoRadioButton);
+		this.tarifasDiasGroup.add(this.tarifaSabadoDomingoRadioButton);
+		this.tarifasDiasGroup.add(this.tarifaFinDeSemanaRadioButton);
+		this.tarifasDiasGroup.add(this.tarifaNingunaFindeRadioButton);
+		
+		this.tarifaSabadoRadioButton.setBounds(50, 190, 750, 20);
+		this.tarifaDomingoRadioButton.setBounds(50, 210, 750, 20);
+		this.tarifaViernesSabadoRadioButton.setBounds(50, 230, 750, 20);
+		this.tarifaSabadoDomingoRadioButton.setBounds(50, 250, 750, 20);
+		this.tarifaFinDeSemanaRadioButton.setBounds(50, 270, 750, 20);
+		this.tarifaNingunaFindeRadioButton.setBounds(50, 290, 750, 20);
+		
+		
+		this.panelTarifas.add(this.tarifaSabadoRadioButton);
+		this.panelTarifas.add(this.tarifaDomingoRadioButton);
+		this.panelTarifas.add(this.tarifaViernesSabadoRadioButton);
+		this.panelTarifas.add(this.tarifaSabadoDomingoRadioButton);
+		this.panelTarifas.add(this.tarifaFinDeSemanaRadioButton);
+		this.panelTarifas.add(this.tarifaNingunaFindeRadioButton);
+		
+		
+		JLabel tarifaBase = new JLabel("**La tarifa base aplicada a todos los cliente tiene un coste de 0,15€/min por llamada");
+		tarifaBase.setFont(new Font("Tahoma", Font.BOLD, 13));
+		tarifaBase.setBounds(30, 330, 600, 20);
+		this.panelTarifas.add(tarifaBase);
+		
+		
+		
 	}
-	
-	private void addItem(JPanel p, JComponent c, int x, int y, int width, int height, int align) {
-	    GridBagConstraints gc = new GridBagConstraints();
-	    gc.fill = GridBagConstraints.RELATIVE;
-	    gc.gridx = x;
-	    gc.gridy = y;
-	    gc.gridwidth = width;
-	    gc.gridheight = height;
-	    gc.weightx = 100.0;
-	    gc.weighty = 100.0;
-	    gc.insets = new Insets(5, 5, 5, 5);
-	    gc.anchor = align;
-	    gc.fill = GridBagConstraints.NONE;
-	    p.add(c, gc);
-	  }
 
 	@Override
 	public Pair<TipoCliente, ArrayList<String>> menuNuevoCliente() {
@@ -383,41 +561,63 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	public void cambiarClienteEmpresa(){
 		this.apellidoText.setText("");
 		this.apellidoText.setEditable(false);
-		this.apellidoText.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-								
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(new JFrame(), "Eggs are not supposed to be green.");				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-								
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		this.apellidoText.addMouseListener(escuchadorRaton);
 		this.tipocliente = TipoCliente.EMPRESA;
 	}
 	public void cambiarClienteParticular(){
-		this.apellidoText.removeAll();
+		this.apellidoText.removeMouseListener(escuchadorRaton);
 		this.apellidoText.setEditable(true);
 		this.tipocliente = TipoCliente.EMPRESA;
+	}
+	
+	public void cambiarTarifaHoras(String tarifa)
+	{
+		switch (tarifa) {
+			case "TarifaHorariaNada":
+				this.tipoTarifaHoraria = TipoTarifaHoraria.NADA;
+				break;
+				
+			case "TarifaNoche":
+				this.tipoTarifaHoraria = TipoTarifaHoraria.TARIFA_NOCHE;		
+				break;
+							
+			case "TarifaManyana":
+				this.tipoTarifaHoraria = TipoTarifaHoraria.TARIFA_MANYANA;
+				break;
+				
+			case "TarifaTarde":
+				this.tipoTarifaHoraria = TipoTarifaHoraria.TARIFA_TARDE;
+				break;
+		}
+	}
+	
+	public void cambiarTarifaFinDeSemana(String tarifa) {
+		switch (tarifa) {
+		case "TarifaFindeNada":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.NADA;
+			break;
+			
+		case "TarifaSabado":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.TARIFA_SABADO;	
+			break;
+						
+		case "TarifaDomingo":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.TARIFA_DOMINGO;
+			break;
+			
+		case "TarifaViernesSabado":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.TARIFA_VIERNES_SABADO;
+			break;
+			
+		case "TarifaSabadoDomingo":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.TARIFA_SABADO_DOMINGO;
+			break;
+			
+		case "TarifaFinDeSemanda":
+			this.tipoTarifaFinDeSemana = TipoTarifaFinDeSemana.TARIFA_FIN_DE_SEMANA;
+			break;
+		
+		}
 	}
 	
 	public class EscuchadoraBoton implements ActionListener {
@@ -469,15 +669,80 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				case "Particular":
 					cambiarClienteParticular();
 					break;
-
-				default:
+					
+				case "TarifaTarde":
+					cambiarTarifaHoras(comando);
+					break;
+					
+				case "TarifaNoche":
+					cambiarTarifaHoras(comando);
+					break;
+					
+				case "TarifaManyana":
+					cambiarTarifaHoras(comando);
+					break;
+					
+				case "TarifaHorariaNada":
+					cambiarTarifaHoras(comando);
+					break;
+					
+				case "TarifaFindeNada":
+					cambiarTarifaFinDeSemana(comando);
+					break;
+					
+				case "TarifaSabado":
+					cambiarTarifaFinDeSemana(comando);
+					break;
+								
+				case "TarifaDomingo":
+					cambiarTarifaFinDeSemana(comando);
+					break;
+					
+				case "TarifaViernesSabado":
+					cambiarTarifaFinDeSemana(comando);
+					break;
+					
+				case "TarifaSabadoDomingo":
+					cambiarTarifaFinDeSemana(comando);
+					break;
+					
+				case "TarifaFinDeSemanda":
+					cambiarTarifaFinDeSemana(comando);
 					break;
 				}
 			}
-			
+		}
+		
+	}
+	
+	public class escuchadorRaton implements MouseListener{
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+							
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			JOptionPane.showMessageDialog(new JFrame(), "El campo 'Apellido' solo se puede rellenarse si el cliente es un particular.");				
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+							
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
 			
 		}
 		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	public Controlador getControlador()

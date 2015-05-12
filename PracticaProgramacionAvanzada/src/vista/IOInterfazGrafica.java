@@ -5,6 +5,9 @@ import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Menu;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;

@@ -8,7 +8,7 @@ public enum TipoTarifaFinDeSemana {
 	TARIFA_VIERNES_SABADO("Tarifa Viernes y Sabados: "
 			+ "Las llamdas a 0.09 todos los Viernes y Sabados durante todo el dia"),
 	TARIFA_SABADO_DOMINGO("Tarifa Sabados y Domingos: "
-					+ "Las llamdas a 0.09 todos los Sabados u Domingos durante todo el dia"),
+					+ "Las llamdas a 0.09 todos los Sabados y Domingos durante todo el dia"),
 	TARIFA_FIN_DE_SEMANA("Tarifa Fin De Semana: "
 							+ "Las llamdas a 0.05 de Viernes a Domingo durante todo el dia"),
 	NADA("Ninguna: No se aplique ninguna tarifa especial y que viva el capitalismo");
