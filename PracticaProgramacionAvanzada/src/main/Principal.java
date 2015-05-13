@@ -23,7 +23,6 @@ public class Principal
 		controlador.SetInterface(IoInterface);
 		IoInterface.setControlador(controlador);
 		IntLectura lecturaDatos = new LecturaDatosConsola();
-		controlador.setLectura(lecturaDatos);
 		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
 		controlador.setSalida(salidaInfo);
 		try {

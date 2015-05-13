@@ -2,6 +2,8 @@ package operaciones;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,8 +29,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SpringLayout;
 import javax.swing.border.Border;
 
 import menus.MenuClientesConsola;
@@ -56,6 +62,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JPanel panelPrincipal;
 	private JPanel panelNuevoCliente;
 	private JPanel panelTarifas;
+	private JPanel panelRegistrar;
+	private JPanel panelVerClientes;
 	
 	private JButton botonAltaCliente;
 	private JButton botonBuscarClienteDNI;
@@ -63,6 +71,8 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private JButton botonVerClientes;
 	private JButton botonModificarTarifa;
 	private JButton botonAtras;
+	private JButton botonRegistrar;
+	private JButton botonBuscar;
 	
 	private JLabel dniLabel;
 	private JLabel nombreLabel;
@@ -108,6 +118,7 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	
 	private ButtonGroup tarifasHorasGroup;
 	private ButtonGroup tarifasDiasGroup;
+	
 	
 	
 	
@@ -204,12 +215,14 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		panel2.setBorder(raisedbevel);
 		panel2.setLayout(new BorderLayout());
 		
-		iniciarPanelNuevoCliente();
-		iniciarPanelTarifas();
+		this.iniciarPanelNuevoCliente();
+		this.iniciarPanelTarifas();
+		this.iniciarPanelRegistrar();
 		
 		JTabbedPane pestanyas = new JTabbedPane();
 		pestanyas.addTab("Datos personales", this.panelNuevoCliente);
 		pestanyas.addTab("Tarifas", this.panelTarifas);
+		pestanyas.addTab("Finalizar registro", this.panelRegistrar);
 		
 		panel2.add(pestanyas, BorderLayout.CENTER);
 		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
@@ -448,50 +461,213 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		tarifaBase.setFont(new Font("Tahoma", Font.BOLD, 13));
 		tarifaBase.setBounds(30, 330, 600, 20);
 		this.panelTarifas.add(tarifaBase);
+	}
+	
+	private void iniciarPanelRegistrar()
+	{
+		this.panelRegistrar = new JPanel();
+		this.panelRegistrar.setLayout(null);
+		this.panelRegistrar.setBackground(Color.GRAY);		
 		
+		JLabel titulo = new JLabel("Finalizar registro del nuevo cliente");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulo.setBounds(200, 20, 400, 20);
+		this.panelRegistrar.add(titulo);
+		
+		JLabel titulocondiciones = new JLabel("Condiciones de registro.");
+		titulocondiciones.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulocondiciones.setBounds(60, 50, 400, 20);
+		this.panelRegistrar.add(titulocondiciones);
+		
+		JTextPane condiciones = new JTextPane();
+		condiciones.setForeground(Color.BLACK);
+		condiciones.setBackground(Color.GRAY);
+		condiciones.setFont(new Font("Tahoma", Font.BOLD, 12));
+		condiciones.setEditable(false);
+		condiciones.setText("-Todo cliente registrado sera añadido a nuestra base de datos.\r\n"
+				+ "\r\n-Los datos personales del nuevo cliente constaran indefinidamente en la abse de datos de la empresa.\r\n"
+				+ "\r\n-Los datos del cliente seran unicamente para uso de la empresa y esta no dara a conocer dichos"
+				+ "\r\ndatos a terceros sin el consentimiento del cliente afectado.\r\n"
+				+ "\r\n-El cliente tiene derecho a modificar sus tarifas especiales siempre que lo desee.\r\n");
+		condiciones.setBounds(60, 70, 670, 200);
+		panelRegistrar.add(condiciones);
+		
+		this.botonRegistrar = new JButton("Registrar");
+		this.botonAtras = new JButton("Atras");
+		this.botonRegistrar.setActionCommand("Registrar");
+		this.botonAtras.setActionCommand("MenuClientes");
+		this.botonRegistrar.addActionListener(new EscuchadoraBoton());
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
+		this.botonRegistrar.setBounds(550, 350, 100, 30);
+		this.botonAtras.setBounds(665, 350, 100, 30);
+		
+		panelRegistrar.add(this.botonRegistrar);
+		panelRegistrar.add(this.botonAtras);
 		
 		
 	}
 
+	public void vistaPedirDni(String command)
+	{
+		this.panelPrincipal.removeAll();
+		JPanel panel2 = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 350)/2;
+		panel2.setBounds(posx, posy, 800, 350);
+		panel2.setBackground(Color.GRAY);
+		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		panel2.setBorder(raisedbevel);
+		panel2.setLayout(null);
+		
+		JLabel titulo = new JLabel("Introduce el Dni del cliente que desea buscar");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulo.setBounds(230, 20, 350, 20);
+		panel2.add(titulo);
+		
+		this.dniLabel = new JLabel("DNI/NIF:");
+		this.dniLabel.setBounds(50, 110, 80, 20);
+		this.dniLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		this.dniText = new JTextField(50);
+		this.dniText.setBounds(130, 100, 250, 30);
+		panel2.add(this.dniLabel);
+		panel2.add(this.dniText);
+		
+		this.botonBuscar = new JButton("Buscar");
+		this.botonBuscar.setActionCommand(command);
+		this.botonBuscar.addActionListener(new EscuchadoraBoton());	
+		this.botonBuscar.setBounds(500, 100, 100, 30);
+		
+		panel2.add(this.botonBuscar);
+		
+		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
+		this.panelPrincipal.repaint();
+		
+		
+		
+		
+	}
 	@Override
 	public Pair<TipoCliente, ArrayList<String>> menuNuevoCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> datosEntrada = new ArrayList<String>(14);
+		
+		datosEntrada.add(0,this.nombreText.getText());
+		datosEntrada.add(1,this.dniText.getText());
+		datosEntrada.add(2,this.emailText.getText());
+		datosEntrada.add(3,this.telefonoText.getText());
+		datosEntrada.add(4,this.direccionText.getText());
+		datosEntrada.add(5,this.portalText.getText());
+		datosEntrada.add(6,this.pisoPuertaText.getText());
+		datosEntrada.add(7,this.poblacionText.getText());
+		datosEntrada.add(8,this.provinciaText.getText());
+		datosEntrada.add(9,this.codigoPostalText.getText());
+		
+		if(this.tipocliente.equals(TipoCliente.PARTICULR))
+		{
+			datosEntrada.add(10,this.apellidoText.getText());			
+		}
+		return new Pair<TipoCliente, ArrayList<String>>(tipocliente, datosEntrada);
 	}
 
 	@Override
 	public String menuVerCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.dniText.getText();
 	}
 
 	@Override
 	public TipoTarifaHoraria menuTarifaHoraria() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tipoTarifaHoraria;
 	}
 
 	@Override
 	public TipoTarifaFinDeSemana menuTarifaFInDeSemana() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.tipoTarifaFinDeSemana;
 	}
 
 	@Override
 	public void mostrarMensaje(String mensaje) {
-		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(new JFrame(), mensaje);
+		menuPincipalClientes();
 	}
 
 	@Override
 	public void formatoInfoCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
+		
+		this.panelPrincipal.removeAll();
+		this.panelVerClientes = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 350)/2;
+		panelVerClientes.setBounds(posx, posy, 800, 350);
+		panelVerClientes.setBackground(Color.GRAY);
+		
+		GridBagLayout gbl_panelVerClientes = new GridBagLayout();
+		gbl_panelVerClientes.columnWidths = new int[]{0, 0};
+		gbl_panelVerClientes.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panelVerClientes.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelVerClientes.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		panelVerClientes.setLayout(gbl_panelVerClientes);
+		
+		
+		JPanel panel_1 = new JPanel();
+		
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		
+		panelVerClientes.add(panel_1, gbc_panel_1);
+		this.panelPrincipal.add(this.panelVerClientes);
+		this.panelPrincipal.repaint();
+		
+		
+		
+		
+	}
+	
+	public void formatoInfoCliente(Cliente cliente, JPanel panel, SpringLayout sl_panel_1) {
+		
+		ArrayList<String> informacion = cliente.toArray();
+		
+		String nombre = "";
+		nombre = nombre + "Nombre: " + informacion.get(0);
+		if(cliente.getClass().getSimpleName().toString().equals("Particular"))
+		{
+			nombre = nombre + " " + informacion.get(6);
+		}
+		this.nombreLabel = new JLabel(nombre);
+		
+		panel.add(nombreLabel);
+		
+		
+		/*info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
+		info = info + "Email: " + informacion.get(2) + "\n";
+		info = info + "Telefono: " + informacion.get(3) + "\n";
+		info = info + "Direcciï¿½n: " + informacion.get(4) + "\n";
+		info = info + "Tarifa: " + informacion.get(5) +  "\n";
+		
+		System.out.println("=====================");
+		System.out.print(info);
+		System.out.println("=====================");*/
 		
 	}
 
 	@Override
 	public void mostrarClientes(ArrayList<Cliente> clientes) {
-		// TODO Auto-generated method stub
+		
+		this.panelVerClientes = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 350)/2;
+		panelVerClientes.setBounds(posx, posy, 800, 350);
+		panelVerClientes.setBackground(Color.GRAY);
+		
+		JScrollPane scroll = new JScrollPane();
+		scroll .setBounds(posx, posy, 800, 350);
+		scroll .setViewportView(panelVerClientes);
+		scroll .getViewport().setView(panelVerClientes);
+		SpringLayout sl_panel_1 = new SpringLayout();
+		panelVerClientes.setLayout(sl_panel_1);
+		panelVerClientes.setPreferredSize(new Dimension(800, 350));
+		this.panelPrincipal.add(scroll);
 		
 	}
 
@@ -558,16 +734,18 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.botonAtras.addActionListener(new EscuchadoraBoton());
 		
 	}
+	
 	public void cambiarClienteEmpresa(){
 		this.apellidoText.setText("");
 		this.apellidoText.setEditable(false);
 		this.apellidoText.addMouseListener(escuchadorRaton);
 		this.tipocliente = TipoCliente.EMPRESA;
 	}
+	
 	public void cambiarClienteParticular(){
 		this.apellidoText.removeMouseListener(escuchadorRaton);
 		this.apellidoText.setEditable(true);
-		this.tipocliente = TipoCliente.EMPRESA;
+		this.tipocliente = TipoCliente.PARTICULR;
 	}
 	
 	public void cambiarTarifaHoras(String tarifa)
@@ -631,6 +809,7 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				break;
 				
 			case "BuscarDNI":
+				vistaPedirDni("BuscarCliente");
 				break;
 				
 			case "BuscarFecha":
@@ -640,10 +819,27 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				break;
 				
 			case "ModificarTarifa":
+				vistaPedirDni("NuevaTarifa");
 				break;
 				
 			case "Atras":
 				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.ATRAS);
+				break;
+				
+			case "Registrar":
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.NUEVO_CLIENTE);
+				break;
+				
+			case "MenuClientes":
+				menuPincipalClientes();
+				break;
+			
+			case "BuscarCliente":
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.BUSCAR_CLIENTE_DNI);
+				break;
+				
+			case "NuevaTarifa":
+				menuPincipalClientes();
 				break;
 				
 			default:

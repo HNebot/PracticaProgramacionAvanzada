@@ -28,7 +28,6 @@ public class Controlador
 	private GestorLlamadas gestorLlamadas;
 	
 	private IntIOInterface IoInterface;
-	private IntLectura lecturaDatos;
 	private IntSalidaInfo salidaInfo;
 	
 	public Controlador() {
@@ -39,10 +38,6 @@ public class Controlador
 	public void SetInterface (IntIOInterface IoInterface)
 	{
 		this.IoInterface = IoInterface;
-	}
-	public void setLectura(IntLectura lecturaDatos)
-	{
-		this.lecturaDatos = lecturaDatos;
 	}
 	public void setSalida (IntSalidaInfo salidaInfo)
 	{
