@@ -815,15 +815,15 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		}
 		
 		JLabel lbaelDia1 = new JLabel("dia ");
-		lbaelDia1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelDia1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbaelDia1.setBounds(210, 110, 50, 20);
 		
 		JLabel lbaelMes1 = new JLabel("mes ");
-		lbaelMes1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelMes1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbaelMes1.setBounds(300, 104, 50, 30);
 		
 		JLabel lbaelAnyo1 = new JLabel("año ");
-		lbaelAnyo1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelAnyo1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lbaelAnyo1.setBounds(390, 104, 50, 30);
 		
 		this.listaDias1 = new JComboBox<Integer>(dias);
@@ -850,11 +850,12 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		
 		
 		this.botonAtras = new JButton("Atras");
-		this.botonBuscar.setActionCommand("Atras");
+		this.botonAtras.setActionCommand("MenuClientes");
 		this.botonAtras.addActionListener(new EscuchadoraBoton());	
 		this.botonAtras.setBounds(500, 200, 100, 30);
 		
 		panel2.add(this.botonBuscar);
+		panel2.add(this.botonAtras);
 		
 		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
 		this.panelPrincipal.repaint();
