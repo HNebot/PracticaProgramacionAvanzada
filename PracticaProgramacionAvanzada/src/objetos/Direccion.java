@@ -86,7 +86,7 @@ public class Direccion implements Serializable
 	
 	public String newToString()
 	{
-		return getCalle() + " Nº" + getPortal() + " " + getPuerta() + "\n" + 
+		return getCalle() + " Nº" + getPortal() + " " + getPuerta() + "\n  " + 
 				getPoblacion() + " ("+ getProvincia() +") " + getCodigoPostal();
 	}
 	

@@ -14,6 +14,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -23,9 +24,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -58,7 +61,6 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	
 	private escuchadorRaton escuchadorRaton = new escuchadorRaton();
 	
-	private JFrame ventanaPrincipal;
 	private JPanel panelPrincipal;
 	private JPanel panelNuevoCliente;
 	private JPanel panelTarifas;
@@ -118,6 +120,13 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	
 	private ButtonGroup tarifasHorasGroup;
 	private ButtonGroup tarifasDiasGroup;
+	
+	private JComboBox listaDias1;
+	private JComboBox listaDias2;
+	private JComboBox listaMeses1;
+	private JComboBox listaMeses2;
+	private JComboBox listaAnyos1;
+	private JComboBox listaAnyos2;
 	
 	
 	
@@ -603,20 +612,41 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		gbl_panelVerClientes.columnWidths = new int[]{0, 0};
 		gbl_panelVerClientes.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_panelVerClientes.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelVerClientes.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		//gbl_panelVerClientes.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		panelVerClientes.setLayout(gbl_panelVerClientes);
 		
 		
-		JPanel panel_1 = new JPanel();
+		JLabel label = new JLabel("Cliente encontrado");
+		label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.insets = new Insets(0, 0, 5, 0);
+		gbc_label_1.fill = GridBagConstraints.NORTH;
+		gbc_label_1.gridx = 0;
+		gbc_label_1.gridy = 0;
+		panelVerClientes.add(label, gbc_label_1);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.GRAY);
+		panel_1.setLayout(null);
+		panel_1.setSize(800, 300);
+		panel_1.setPreferredSize(new Dimension(800, 200));
+		Border border = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		panel_1.setBorder(border);
+		formatoInfoCliente(cliente, panel_1);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 0;
-		
+		gbc_panel_1.gridy = 1;
 		panelVerClientes.add(panel_1, gbc_panel_1);
+		
+		
+		
+		
+		this.panelPrincipal.removeAll();
+		this.panelVerClientes = new JPanel();
 		this.panelPrincipal.add(this.panelVerClientes);
+		this.panelPrincipal.revalidate();
 		this.panelPrincipal.repaint();
 		
 		
@@ -624,7 +654,7 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		
 	}
 	
-	public void formatoInfoCliente(Cliente cliente, JPanel panel, SpringLayout sl_panel_1) {
+	public void formatoInfoCliente(Cliente cliente, JPanel panel) {
 		
 		ArrayList<String> informacion = cliente.toArray();
 		
@@ -634,40 +664,200 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		{
 			nombre = nombre + " " + informacion.get(6);
 		}
-		this.nombreLabel = new JLabel(nombre);
 		
+		this.nombreLabel = new JLabel(nombre);
+		this.nombreLabel.setBounds(50, 30, 210, 20);
+		this.nombreLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		panel.add(nombreLabel);
 		
+		this.dniLabel = new JLabel("DNI/NIF: " + informacion.get(1));
+		this.dniLabel.setBounds(310, 30, 150, 20);
+		this.dniLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(dniLabel);
 		
-		/*info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
-		info = info + "Email: " + informacion.get(2) + "\n";
-		info = info + "Telefono: " + informacion.get(3) + "\n";
-		info = info + "Direcciï¿½n: " + informacion.get(4) + "\n";
-		info = info + "Tarifa: " + informacion.get(5) +  "\n";
+		this.direccionLabel = new JLabel("Dirección: " + informacion.get(4));
+		this.direccionLabel.setBounds(50, 60, 500, 20);
+		this.direccionLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(direccionLabel);
 		
-		System.out.println("=====================");
-		System.out.print(info);
-		System.out.println("=====================");*/
+		this.telefonoLabel = new JLabel("Teléfono: " + informacion.get(3));
+		this.telefonoLabel.setBounds(50, 90, 150, 20);
+		this.telefonoLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(telefonoLabel);
+		
+		this.emailLabel = new JLabel("Correo electrónico: " + informacion.get(2));
+		this.emailLabel.setBounds(50, 120, 500, 20);
+		this.emailLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(emailLabel);
+		
+		this.tarifaLabel = new JLabel("Tarifa aplicada: " + informacion.get(5));
+		this.tarifaLabel.setBounds(50, 150, 600, 20);
+		this.tarifaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(tarifaLabel);
+		
+		panel.repaint();
 		
 	}
 
 	@Override
 	public void mostrarClientes(ArrayList<Cliente> clientes) {
 		
+		int tam = clientes.size();
+		int tamrowWeights = clientes.size() + 3;
+		
+		this.panelPrincipal.removeAll();
 		this.panelVerClientes = new JPanel();
 		int posx = (this.panelPrincipal.getWidth() - 800)/2;
 		int posy = (this.panelPrincipal.getHeight() - 350)/2;
-		panelVerClientes.setBounds(posx, posy, 800, 350);
+		panelVerClientes.setBounds(posx, posy, 770, 350);
 		panelVerClientes.setBackground(Color.GRAY);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll .setBounds(posx, posy, 800, 350);
 		scroll .setViewportView(panelVerClientes);
 		scroll .getViewport().setView(panelVerClientes);
-		SpringLayout sl_panel_1 = new SpringLayout();
-		panelVerClientes.setLayout(sl_panel_1);
-		panelVerClientes.setPreferredSize(new Dimension(800, 350));
+		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		scroll.setBorder(raisedbevel);
+		panelVerClientes.setPreferredSize(new Dimension(770, (250 * tam)));
+		GridBagLayout gbl_panelVerClientes = new GridBagLayout();
+		gbl_panelVerClientes.columnWidths = new int[]{0, 0};
+		gbl_panelVerClientes.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panelVerClientes.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelVerClientes.rowWeights = new double[tamrowWeights];
+		for(int i = 0; i < tamrowWeights-1; i++)
+		{
+			gbl_panelVerClientes.rowWeights[i] = Double.MIN_VALUE;
+		}
+		gbl_panelVerClientes.rowWeights[tamrowWeights-1] = 1.0;
+		
+		panelVerClientes.setLayout(gbl_panelVerClientes);
+		
+		JLabel label = new JLabel("Clientes encontrados");
+		label.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.insets = new Insets(0, 0, 5, 0);
+		gbc_label_1.fill = GridBagConstraints.NORTH;
+		gbc_label_1.gridx = 0;
+		gbc_label_1.gridy = 0;
+		panelVerClientes.add(label, gbc_label_1);
+		
+		
+		int contadorPosicion = 1;
+		for(Cliente cliente : clientes){
+			JPanel panel_1 = new JPanel();
+			panel_1.setBackground(Color.GRAY);
+			panel_1.setLayout(null);
+			panel_1.setSize(770, 300);
+			panel_1.setPreferredSize(new Dimension(770, 200));
+			Border border = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+			panel_1.setBorder(border);
+			formatoInfoCliente(cliente, panel_1);
+			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_1.fill = GridBagConstraints.BOTH;
+			gbc_panel_1.gridx = 0;
+			gbc_panel_1.gridy = contadorPosicion;
+			panelVerClientes.add(panel_1, gbc_panel_1);
+			contadorPosicion++;
+		}
+		
+		
+		this.botonAtras = new JButton("Atras");
+		this.botonAtras.setActionCommand("MenuClientes");
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
+		
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 5, 0);
+		gbc_button_1.fill = GridBagConstraints.LINE_END;
+		gbc_button_1.gridx = 0;
+		gbc_button_1.gridy = tamrowWeights - 2;
+		panelVerClientes.add(this.botonAtras, gbc_button_1);
+		
 		this.panelPrincipal.add(scroll);
+		this.panelPrincipal.revalidate();
+		this.panelPrincipal.repaint();
+		
+	}
+	
+	public void vistaPedirFechas() {
+		this.panelPrincipal.removeAll();
+		JPanel panel2 = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 350)/2;
+		panel2.setBounds(posx, posy, 800, 350);
+		panel2.setBackground(Color.GRAY);
+		Border raisedbevel = BorderFactory.createRaisedBevelBorder();
+		panel2.setBorder(raisedbevel);
+		panel2.setLayout(null);
+		
+		JLabel titulo = new JLabel("Introduce el rango de fechas que desea filtrar");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titulo.setBounds(230, 20, 350, 20);
+		panel2.add(titulo);
+		
+		this.fechaAltaLabel = new JLabel("Fecha de alta inicio:");
+		this.fechaAltaLabel.setBounds(50, 110, 150, 20);
+		this.fechaAltaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
+		Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 
+				20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+		
+		Integer[] meses = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		int anyoInicio = 1960;
+		Integer numeroAnyos = (Integer.parseInt(sdf.format(Calendar.getInstance().getTime())) - anyoInicio + 1);
+		
+		Integer[] anyos = new Integer[numeroAnyos];
+		for(int i = 0; i < numeroAnyos; i++)
+		{
+			anyos[i] = anyoInicio + i;
+		}
+		
+		JLabel lbaelDia1 = new JLabel("dia ");
+		lbaelDia1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelDia1.setBounds(210, 110, 50, 20);
+		
+		JLabel lbaelMes1 = new JLabel("mes ");
+		lbaelMes1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelMes1.setBounds(300, 104, 50, 30);
+		
+		JLabel lbaelAnyo1 = new JLabel("año ");
+		lbaelAnyo1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbaelAnyo1.setBounds(390, 104, 50, 30);
+		
+		this.listaDias1 = new JComboBox<Integer>(dias);
+		this.listaDias1.setBounds(240, 104, 50, 30);
+		this.listaMeses1 = new JComboBox<Integer>(meses);
+		this.listaMeses1.setBounds(330, 104, 50, 30);
+		this.listaAnyos1 =new JComboBox<Integer>(anyos);
+		this.listaAnyos1.setBounds(420, 104, 85, 30);
+		
+		panel2.add(this.fechaAltaLabel);
+		panel2.add(listaDias1);
+		panel2.add(lbaelDia1);
+		panel2.add(listaMeses1);
+		panel2.add(lbaelMes1);
+		panel2.add(listaAnyos1);
+		panel2.add(lbaelAnyo1);
+		
+		
+		this.botonBuscar = new JButton("Buscar");
+		this.botonBuscar.setActionCommand("BuscarClienteFecha");
+		this.botonBuscar.addActionListener(new EscuchadoraBoton());	
+		this.botonBuscar.setBounds(400, 200, 100, 30);
+		
+		
+		
+		this.botonAtras = new JButton("Atras");
+		this.botonBuscar.setActionCommand("Atras");
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
+		this.botonAtras.setBounds(500, 200, 100, 30);
+		
+		panel2.add(this.botonBuscar);
+		
+		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
+		this.panelPrincipal.repaint();
 		
 	}
 
@@ -813,9 +1003,11 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				break;
 				
 			case "BuscarFecha":
+				vistaPedirFechas();
 				break;
 				
 			case "VerClientes":
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.VER_CLIENTES);
 				break;
 				
 			case "ModificarTarifa":
@@ -838,8 +1030,12 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.BUSCAR_CLIENTE_DNI);
 				break;
 				
+			case "BuscarClienteFecha":
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.BUSCAR_CLIENTE_DNI);
+				break;
+				
 			case "NuevaTarifa":
-				menuPincipalClientes();
+				vistaPedirDni("BuscarCliente");
 				break;
 				
 			default:
