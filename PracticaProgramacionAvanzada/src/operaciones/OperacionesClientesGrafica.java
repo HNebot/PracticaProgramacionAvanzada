@@ -3,7 +3,6 @@ package operaciones;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,41 +13,34 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javafx.util.Pair;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
 import javax.swing.border.Border;
-
 import menus.MenuClientesConsola;
-import menus.MenuPrincipalConsola;
-import operaciones.OperacionesPrincipalGrafica.EscuchadoraBoton;
 import objetos.Cliente;
 import controlador.Controlador;
 import enumeraciones.TipoCliente;
 import enumeraciones.TipoTarifaFinDeSemana;
 import enumeraciones.TipoTarifaHoraria;
-import excepciones.ExcepcionClienteNoEncontrado;
 import interfaces.IntGrafico;
 import interfaces.IntOperacionesClientes;
 
@@ -121,12 +113,12 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	private ButtonGroup tarifasHorasGroup;
 	private ButtonGroup tarifasDiasGroup;
 	
-	private JComboBox listaDias1;
-	private JComboBox listaDias2;
-	private JComboBox listaMeses1;
-	private JComboBox listaMeses2;
-	private JComboBox listaAnyos1;
-	private JComboBox listaAnyos2;
+	private JComboBox<Integer> listaDias1;
+	private JComboBox<Integer> listaDias2;
+	private JComboBox<Integer> listaMeses1;
+	private JComboBox<Integer> listaMeses2;
+	private JComboBox<Integer> listaAnyos1;
+	private JComboBox<Integer> listaAnyos2;
 	
 	
 	
@@ -544,9 +536,15 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.botonBuscar = new JButton("Buscar");
 		this.botonBuscar.setActionCommand(command);
 		this.botonBuscar.addActionListener(new EscuchadoraBoton());	
-		this.botonBuscar.setBounds(500, 100, 100, 30);
+		this.botonBuscar.setBounds(400, 100, 100, 30);
+		
+		this.botonAtras = new JButton("Atras");
+		this.botonAtras.setActionCommand("MenuClientes");
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
+		this.botonAtras.setBounds(500, 100, 100, 30);
 		
 		panel2.add(this.botonBuscar);
+		panel2.add(this.botonAtras);
 		
 		this.panelPrincipal.add(panel2, BorderLayout.CENTER);
 		this.panelPrincipal.repaint();
@@ -640,11 +638,17 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		gbc_panel_1.gridy = 1;
 		panelVerClientes.add(panel_1, gbc_panel_1);
 		
+		this.botonAtras = new JButton("Atras");
+		this.botonAtras.setActionCommand("MenuClientes");
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
 		
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 5, 0);
+		gbc_button_1.fill = GridBagConstraints.LINE_END;
+		gbc_button_1.gridx = 0;
+		gbc_button_1.gridy = 3;
+		panelVerClientes.add(this.botonAtras, gbc_button_1);
 		
-		
-		this.panelPrincipal.removeAll();
-		this.panelVerClientes = new JPanel();
 		this.panelPrincipal.add(this.panelVerClientes);
 		this.panelPrincipal.revalidate();
 		this.panelPrincipal.repaint();
@@ -662,7 +666,7 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		nombre = nombre + "Nombre: " + informacion.get(0);
 		if(cliente.getClass().getSimpleName().toString().equals("Particular"))
 		{
-			nombre = nombre + " " + informacion.get(6);
+			nombre = nombre + " " + informacion.get(7);
 		}
 		
 		this.nombreLabel = new JLabel(nombre);
@@ -690,8 +694,13 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		this.emailLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		panel.add(emailLabel);
 		
+		this.fechaAltaLabel = new JLabel("Fecha Alta: " + informacion.get(6));
+		this.fechaAltaLabel.setBounds(50, 150, 600, 20);
+		this.fechaAltaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		panel.add(fechaAltaLabel);
+		
 		this.tarifaLabel = new JLabel("Tarifa aplicada: " + informacion.get(5));
-		this.tarifaLabel.setBounds(50, 150, 600, 20);
+		this.tarifaLabel.setBounds(50, 180, 600, 20);
 		this.tarifaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		panel.add(tarifaLabel);
 		
@@ -841,6 +850,37 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		panel2.add(listaAnyos1);
 		panel2.add(lbaelAnyo1);
 		
+		this.fechaAltaLabel = new JLabel("Fecha de alta final:");
+		this.fechaAltaLabel.setBounds(50, 150, 150, 20);
+		this.fechaAltaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
+		JLabel lbaelDia2 = new JLabel("dia ");
+		lbaelDia2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbaelDia2.setBounds(210, 150, 50, 20);
+		
+		JLabel lbaelMes2 = new JLabel("mes ");
+		lbaelMes2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbaelMes2.setBounds(300, 144, 50, 30);
+		
+		JLabel lbaelAnyo2 = new JLabel("año ");
+		lbaelAnyo2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbaelAnyo2.setBounds(390, 144, 50, 30);
+		
+		this.listaDias2 = new JComboBox<Integer>(dias);
+		this.listaDias2.setBounds(240, 144, 50, 30);
+		this.listaMeses2 = new JComboBox<Integer>(meses);
+		this.listaMeses2.setBounds(330, 144, 50, 30);
+		this.listaAnyos2 =new JComboBox<Integer>(anyos);
+		this.listaAnyos2.setBounds(420, 144, 85, 30);
+		
+		panel2.add(this.fechaAltaLabel);
+		panel2.add(listaDias2);
+		panel2.add(lbaelDia2);
+		panel2.add(listaMeses2);
+		panel2.add(lbaelMes2);
+		panel2.add(listaAnyos2);
+		panel2.add(lbaelAnyo2);
+		
 		
 		this.botonBuscar = new JButton("Buscar");
 		this.botonBuscar.setActionCommand("BuscarClienteFecha");
@@ -867,11 +907,68 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void vistaModificarTarifa() {
+		this.panelPrincipal.removeAll();
+		JPanel panel2 = new JPanel();
+		int posx = (this.panelPrincipal.getWidth() - 800)/2;
+		int posy = (this.panelPrincipal.getHeight() - 450)/2;
+		panel2.setBounds(posx, posy, 800, 450);
+		Border raisedbevel = BorderFactory.createLineBorder(Color.GRAY);
+		panel2.setBorder(raisedbevel);
+		panel2.setLayout(new BorderLayout());
+		iniciarPanelTarifas();
+		panel2.add(this.panelTarifas);
+		
+		this.botonBuscar = new JButton("Modificar");
+		this.botonBuscar.setActionCommand("CambiarTarifa");
+		this.botonBuscar.addActionListener(new EscuchadoraBoton());	
+		this.botonBuscar.setBounds(500, 400, 100, 30);
+		
+		this.botonAtras = new JButton("Atras");
+		this.botonAtras.setActionCommand("MenuClientes");
+		this.botonAtras.addActionListener(new EscuchadoraBoton());	
+		this.botonAtras.setBounds(600, 400, 100, 30);
+		
+		panelTarifas.add(this.botonBuscar);
+		panelTarifas.add(this.botonAtras);
+		
+		this.panelPrincipal.add(panel2);
+		this.panelPrincipal.revalidate();
+		this.panelPrincipal.repaint();
+		
+	}
 
 	@Override
 	public ArrayList<Calendar> buscarClientesPorFechaAlta() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			ArrayList<Calendar> filtro = new ArrayList<Calendar>();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+			
+			String fechaInicio = "" + this.listaDias1.getSelectedItem() + 
+					"/" + this.listaMeses1.getSelectedItem() + 
+					"/" + this.listaAnyos1.getSelectedItem();
+			
+			Date fecha1 = sdf.parse(fechaInicio , new ParsePosition(0));
+			Calendar cal1 = new GregorianCalendar();
+			cal1.setTime(fecha1);
+			filtro.add(cal1);
+			
+			String fechaFin = "" + this.listaDias2.getSelectedItem() + 
+					"/" + this.listaMeses2.getSelectedItem() + 
+					"/" + this.listaAnyos2.getSelectedItem();
+			Date fecha2 = sdf.parse(fechaFin, new ParsePosition(0));
+			Calendar cal2 = new GregorianCalendar();
+			cal2.setTime(fecha2);
+			filtro.add(cal2);
+			
+			return filtro;
+		}catch(NullPointerException e)
+		{
+			System.out.println("java.lang.NullPointerException");
+			System.out.println("Error en el formato de la fecha");
+			return null;
+		}
 	}
 
 	@Override
@@ -882,10 +979,10 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 	
 	private void generarBotones()
 	{
-		ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
+		/*ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
 		ImageIcon imagenFacturas = new ImageIcon("iconos/iconoFacturas45x45.png");
 		ImageIcon imagenLlamadas = new ImageIcon("iconos/iconoLLamadas45x45.png");
-		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");
+		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");*/
 		
 		this.botonAltaCliente = new JButton();
 		this.botonAltaCliente.setBounds(50, 50, 50, 50);
@@ -1032,11 +1129,15 @@ public class OperacionesClientesGrafica implements IntGrafico, IntOperacionesCli
 				break;
 				
 			case "BuscarClienteFecha":
-				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.BUSCAR_CLIENTE_DNI);
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.BUSCAR_CLIENTE_ALTA);
 				break;
 				
 			case "NuevaTarifa":
-				vistaPedirDni("BuscarCliente");
+				vistaModificarTarifa();
+				break;
+				
+			case "CambiarTarifa":
+				getControlador().ejecutaOpcionMenuCliente(MenuClientesConsola.MODIFICAR_TARIFA);
 				break;
 				
 			default:

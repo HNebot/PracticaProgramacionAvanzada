@@ -45,7 +45,7 @@ public class OperacionesFacturasConsola implements IntOperacionesFacturas
 	}
 
 	@Override
-	public String mostrarDatosFactura(Factura factura) {
+	public void mostrarDatosFactura(Factura factura) {
 			
 		if(factura != null){
 			String infoFactura = "";
@@ -67,10 +67,7 @@ public class OperacionesFacturasConsola implements IntOperacionesFacturas
 				infoFactura = infoFactura + llamada.toString() + "\n";
 			}
 			
-			return infoFactura;
-		}
-		else{
-			return "No existen facturas";
+			System.out.println(infoFactura);
 		}
 	}
 
@@ -88,19 +85,16 @@ public class OperacionesFacturasConsola implements IntOperacionesFacturas
 
 	@SuppressWarnings("null")
 	@Override
-	public String mostrarDatosFacturas(ArrayList<Factura> facturas) {
-		String info = "=========================\n";
+	public void mostrarDatosFacturas(ArrayList<Factura> facturas) {
+		System.out.println("=========================\n");
 		
 		if(facturas !=null || facturas.size() < 0)
 		{
 			for(Factura factura: facturas)
 			{
-				info = info + this.mostrarDatosFactura(factura);
-				info = info +  "=========================\n";
+				this.mostrarDatosFactura(factura);
+				System.out.println("=========================\n");
 			}
-			return info;
-		}else{
-			return "No existen facturas";
 		}
 	}
 
@@ -131,6 +125,12 @@ public class OperacionesFacturasConsola implements IntOperacionesFacturas
 			System.out.println("Error en el formato de la fecha");
 			return null;
 		}
+	}
+
+	@Override
+	public void mostrarMenjase(String mensaje) {
+		System.out.println(mensaje);
+		
 	}	
 
 }

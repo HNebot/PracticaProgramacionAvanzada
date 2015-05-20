@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -63,23 +64,44 @@ public class GestorFacturas
 	 */
 	public boolean anyadirLlamada(String codCliente, Llamada llamada)
 	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		//System.out.println(sdf.format(cal.getTime()));
 		try {
 			ArrayList<Factura> facturas = this.dbFacturas.buscarFacturasCliente(codCliente);
-			this.factura = facturas .get(facturas.size() - 1);
+			this.factura = facturas.get(facturas.size() - 1);
+			
+			System.out.println(sdf.format(llamada.getFecha().getTime()));
+			System.out.println(sdf.format(factura.getFechaFin().getTime()));
 			
 			if(llamada.getFecha().before(factura.getFechaFin()))
 			{
 				factura.getLlamadasFactura().add(llamada);
 			}
 			else{
+				System.out.println(sdf.format(llamada.getFecha().getTime()));
+				System.out.println(sdf.format(factura.getFechaFin().getTime()));
+				
 				Cliente cliente = this.gestorClientes.datosCliente(codCliente);
 				do{
-					Calendar fechaInicio = (Calendar) factura.getFechaFin().clone();				
+					
+					Calendar fechaInicio = (Calendar) factura.getFechaFin().clone();
+					
+					System.out.println(sdf.format(fechaInicio.getTime()));
+					System.out.println(sdf.format(factura.getFechaFin().getTime()));
+					
 					Factura nuevaFactura = new Factura(codCliente, cliente.getTarifa());
 					nuevaFactura.modificarFechaInicioYFIn(fechaInicio);
+					
+					System.out.println(sdf.format(nuevaFactura.getFechaInicio().getTime()));
+					System.out.println(sdf.format(nuevaFactura.getFechaFin().getTime()));
+					
 					this.dbFacturas.addNuevaFactura(nuevaFactura, codCliente);
+					
 					factura = nuevaFactura;
-				}while(llamada.getFecha().before(factura.getFechaFin()));
+					System.out.println(sdf.format(factura.getFechaInicio().getTime()));
+					System.out.println(sdf.format(factura.getFechaFin().getTime()));
+					System.out.println(llamada.getFecha().before(factura.getFechaFin()));
+				}while(!llamada.getFecha().before(factura.getFechaFin()));
 				
 				factura.getLlamadasFactura().add(llamada);
 			}

@@ -137,7 +137,7 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 		info = info + "Nombre: " + informacion.get(0);
 		if(cliente.getClass().getSimpleName().toString().equals("Particular"))
 		{
-			info = info + " " + informacion.get(6);
+			info = info + " " + informacion.get(7);
 		}
 		info = info + "\n" + "NIF: " + informacion.get(1) + "\n";
 		info = info + "Email: " + informacion.get(2) + "\n";
@@ -198,7 +198,7 @@ public class OperacionesClientesConsola implements IntOperacionesClientes
 			System.out.print("--> ");
 			Date fecha2 = sdf.parse(lectura.lecturaDatos() , new ParsePosition(0));
 			Calendar cal2 = new GregorianCalendar();
-			cal1.setTime(fecha2);
+			cal2.setTime(fecha2);
 			filtro.add(cal2);
 			
 			return filtro;

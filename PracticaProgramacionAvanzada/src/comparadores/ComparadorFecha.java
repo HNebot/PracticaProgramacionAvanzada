@@ -1,5 +1,6 @@
 package comparadores;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -36,6 +37,12 @@ public class ComparadorFecha
 			return null;
 		}
 		
+	}
+	
+	public static String formatoFecha(Calendar fecha)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		return sdf.format(fecha.getTime());
 	}
 
 }

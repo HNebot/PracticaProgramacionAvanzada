@@ -4,7 +4,6 @@ import controlador.Controlador;
 import interfaces.IntIOInterface;
 import interfaces.IntLectura;
 import interfaces.IntSalidaInfo;
-import excepciones.ExcepcionClienteNoEncontrado;
 import lectura.LecturaDatosConsola;
 import salida.SalidaInfoConsola;
 import vista.IOInterfazGrafica;

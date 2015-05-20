@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import controlador.Controlador;
+import excepciones.ExcepcionLlamadaNoEncontrada;
 import objetos.Llamada;
 import lectura.LecturaDatosConsola;
 import menus.MenuLlamadasConsola;
@@ -59,16 +60,16 @@ public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 	}
 
 	@Override
-	public String mostrarLlamadas(ArrayList<Llamada> llamadas) {
+	public void mostrarLlamadas(ArrayList<Llamada> llamadas) throws ExcepcionLlamadaNoEncontrada {
 		String informacion = "====================\n";
-		if(llamadas == null) return "El cliente no existe o no tiene llamadas";
+		if(llamadas == null) throw new ExcepcionLlamadaNoEncontrada();
 		
 		for(Llamada llamada: llamadas)
 		{
 			informacion = informacion + this.formatoLlamadaPantalla(llamada);
 			informacion = informacion + "====================\n";
 		}
-		return informacion;
+		System.out.println(informacion);
 	}
 
 	@Override
@@ -106,6 +107,12 @@ public class OperacionesLlamadasConsola implements IntOperacionesLlamadas
 			System.out.println("Error en el formato de la fecha");
 			return null;
 		}
+	}
+
+
+	@Override
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
 	}
 
 

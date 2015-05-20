@@ -2,6 +2,7 @@ package factorias;
 
 import tarifas.Tarifa;
 import tarifas.TarifaManyana;
+import tarifas.TarifaNoche;
 import tarifas.TarifaTarde;
 import enumeraciones.TipoTarifaHoraria;
 import interfaces.IntFabricaTarifaHoraria;
@@ -20,7 +21,7 @@ public class FabricaParametrizadaTarifaHoraria implements IntFabricaTarifaHorari
 			break;
 			
 		case TARIFA_NOCHE:
-			tarifa = new TarifaTarde(tarifa);
+			tarifa = new TarifaNoche(tarifa);
 			break;
 			
 		case NADA:

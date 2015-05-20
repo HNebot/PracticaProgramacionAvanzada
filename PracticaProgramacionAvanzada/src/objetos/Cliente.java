@@ -1,6 +1,7 @@
 package objetos;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -130,6 +131,12 @@ public class Cliente extends Fecha implements Serializable
 				+ fechaAlta.toString() + ", tarifa=" + tarifa + "]";
 	}
 	
+	private String formatoFecha(Calendar fecha)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+		return sdf.format(fecha.getTime());
+	}
+	
 	public ArrayList<String> toArray()
 	{
 		ArrayList<String> datos = new ArrayList<String>();
@@ -139,8 +146,8 @@ public class Cliente extends Fecha implements Serializable
 		datos.add(getNumeroTelefono() +"");
 		datos.add(getDireccion().newToString());
 		datos.add(getTarifa().getNombreTarifa());
+		datos.add(formatoFecha(getFecha()));
 		return datos;
-		
 	}
 	
 	
