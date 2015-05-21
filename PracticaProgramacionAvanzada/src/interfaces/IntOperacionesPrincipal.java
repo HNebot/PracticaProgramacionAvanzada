@@ -1,8 +1,6 @@
 package interfaces;
 
 import controlador.Controlador;
-import excepciones.ExcepcionClienteNoEncontrado;
-import menus.MenuPrincipalConsola;
 
 public interface IntOperacionesPrincipal 
 {

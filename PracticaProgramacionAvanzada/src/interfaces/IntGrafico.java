@@ -1,6 +1,5 @@
 package interfaces;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public interface IntGrafico 

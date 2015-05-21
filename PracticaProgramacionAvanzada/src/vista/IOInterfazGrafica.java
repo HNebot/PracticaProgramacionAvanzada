@@ -1,8 +1,8 @@
 package vista;
 
 import java.awt.Container;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
@@ -13,9 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
 import menus.MenuClientesConsola;
-import menus.MenuFacturasConsola;
 import controlador.Controlador;
 import operaciones.OperacionesClientesGrafica;
 import operaciones.OperacionesFacturasGrafica;
@@ -113,7 +111,10 @@ public class IOInterfazGrafica implements IntIOInterface{
 		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		this.ventana = new JFrame("Empresa Telefonia");
 		this.contenedor = ventana.getContentPane();
-		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+ 
+		this.ventana.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/IconoEmpresa.png"));
+		
 		this.panelInicial = new JPanel();
 		this.panelInicial.setLayout(null);
 		contenedor.add(panelInicial);

@@ -3,7 +3,6 @@ package operaciones;
 import lectura.LecturaDatosConsola;
 import menus.MenuPrincipalConsola;
 import controlador.Controlador;
-import excepciones.ExcepcionClienteNoEncontrado;
 import interfaces.IntOperacionesPrincipal;
 
 

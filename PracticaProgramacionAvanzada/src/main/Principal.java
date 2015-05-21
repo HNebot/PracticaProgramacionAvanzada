@@ -1,10 +1,10 @@
 package main;
 
 import controlador.Controlador;
+import gestores.GestorManager;
 import interfaces.IntIOInterface;
-import interfaces.IntLectura;
+import interfaces.IntModeloGestor;
 import interfaces.IntSalidaInfo;
-import lectura.LecturaDatosConsola;
 import salida.SalidaInfoConsola;
 import vista.IOInterfazGrafica;
 import vista.IOInterfazSalidaConsola;
@@ -19,9 +19,12 @@ public class Principal
 		Controlador controlador = new Controlador();
 		//IntIOInterface IoInterface = new IOInterfazSalidaConsola();
 		IntIOInterface IoInterface = new IOInterfazGrafica();
-		controlador.SetInterface(IoInterface);
+		IntModeloGestor gestorManager = new GestorManager();
+		
+		controlador.setInterface(IoInterface);
+		controlador.setModeloGestor(gestorManager);
 		IoInterface.setControlador(controlador);
-		IntLectura lecturaDatos = new LecturaDatosConsola();
+		
 		IntSalidaInfo salidaInfo = new SalidaInfoConsola();
 		controlador.setSalida(salidaInfo);
 		try {

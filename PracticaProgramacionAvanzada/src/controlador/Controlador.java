@@ -18,30 +18,40 @@ import gestores.GestorClientes;
 import gestores.GestorFacturas;
 import gestores.GestorLlamadas;
 import interfaces.IntIOInterface;
+import interfaces.IntModeloGestor;
 import interfaces.IntSalidaInfo;
 
 public class Controlador 
 {
+	
 	private GestorClientes gestorClientes;
 	private GestorFacturas gestorFacturas;
 	private GestorLlamadas gestorLlamadas;
 	
 	private IntIOInterface IoInterface;
+	private IntModeloGestor gestorManager;
 	private IntSalidaInfo salidaInfo;
 	
 	public Controlador() {
 		super();
-		inicializaGestores();
 	}
 	
-	public void SetInterface (IntIOInterface IoInterface)
+	public void setInterface (IntIOInterface IoInterface)
 	{
 		this.IoInterface = IoInterface;
 	}
+	
+	public void setModeloGestor (IntModeloGestor modeloGestor)
+	{
+		this.gestorManager = modeloGestor;
+		inicializaGestores();
+	}
+	
 	public void setSalida (IntSalidaInfo salidaInfo)
 	{
 		this.salidaInfo = salidaInfo;
 	}
+	
 	
 	/**
 	 * Inicia el controlador y mantiene el programa en ejecucion
@@ -65,14 +75,9 @@ public class Controlador
 	 */
 	private void inicializaGestores()
 	{
-		this.gestorClientes = new GestorClientes();
-		this.gestorFacturas = new GestorFacturas();
-		this.gestorLlamadas = new GestorLlamadas();
-		
-		this.gestorClientes.setGestorFacturas(this.gestorFacturas);
-		this.gestorFacturas.setGestorClientes(this.gestorClientes);
-		this.gestorLlamadas.setGestorClientes(this.gestorClientes);
-		this.gestorLlamadas.setGestorFacturas(this.gestorFacturas);
+		this.gestorClientes = this.gestorManager.getGestorCliente();
+		this.gestorFacturas = this.gestorManager.getGestorFacturas();
+		this.gestorLlamadas = this.gestorManager.getGestorLlamadas();
 	}
 	
 	/**
