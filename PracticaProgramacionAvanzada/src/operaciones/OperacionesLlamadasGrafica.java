@@ -127,10 +127,10 @@ public class OperacionesLlamadasGrafica implements IntOperacionesLlamadas, IntGr
 	}
 
 	private void generarBotones() {
-		ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
+		/*ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
 		ImageIcon imagenFacturas = new ImageIcon("iconos/iconoFacturas45x45.png");
 		ImageIcon imagenLlamadas = new ImageIcon("iconos/iconoLLamadas45x45.png");
-		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");
+		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");*/
 		
 		this.botonAltaLLamada = new JButton();
 		this.botonAltaLLamada.setBounds(50, 50, 50, 50);

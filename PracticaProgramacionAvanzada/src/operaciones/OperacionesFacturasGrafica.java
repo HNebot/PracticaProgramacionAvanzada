@@ -597,10 +597,10 @@ public class OperacionesFacturasGrafica implements IntGrafico, IntOperacionesFac
 	
 	private void generarBotones()
 	{
-		ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
+		/*ImageIcon imagenCliente = new ImageIcon("iconos/iconoClientes45x45.png");
 		ImageIcon imagenFacturas = new ImageIcon("iconos/iconoFacturas45x45.png");
 		ImageIcon imagenLlamadas = new ImageIcon("iconos/iconoLLamadas45x45.png");
-		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");
+		ImageIcon imagenSalir = new ImageIcon("iconos/iconoSalir45x45.png");*/
 		
 		this.botonEmitir = new JButton();
 		this.botonEmitir.setBounds(50, 50, 50, 50);
