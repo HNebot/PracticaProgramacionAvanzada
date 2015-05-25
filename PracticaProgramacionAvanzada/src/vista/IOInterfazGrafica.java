@@ -1,18 +1,31 @@
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
+
 import menus.MenuClientesConsola;
 import controlador.Controlador;
 import operaciones.OperacionesClientesGrafica;
@@ -109,7 +122,7 @@ public class IOInterfazGrafica implements IntIOInterface{
 	private void crearPanelPrincipal() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
 	{
 		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-		this.ventana = new JFrame("Empresa Telefonia");
+		this.ventana = new JFrame("TelefMas");
 		this.contenedor = ventana.getContentPane();
 		this.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
  
@@ -209,8 +222,56 @@ public class IOInterfazGrafica implements IntIOInterface{
 				break;
 				
 			case "Información":
-				JOptionPane.showMessageDialog(new JFrame(), "informacion\n"
-						+ "asdasdasdasd");
+				
+				JFrame ventanaInfo = new JFrame("Información TelefMas");
+				ventanaInfo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				ventanaInfo.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/IconoEmpresa.png"));
+				ventanaInfo.setBounds(100, 100, 450, 275);
+				
+				JPanel panel = new JPanel();
+				ventanaInfo.getContentPane().add(panel, BorderLayout.CENTER);
+				panel.setLayout(null);
+				panel.setBackground(Color.GRAY);
+				
+				PanelImagen panel_1 = new PanelImagen(); 
+				panel_1.setBackgroundImage(panel_1.createImage("iconos/IconoEmpresaInfo.png").getImage());
+				panel_1.setBounds(10, 11, 150, 200);
+				Border borde = BorderFactory.createLineBorder(Color.BLACK);
+				panel_1.setBorder(borde);
+				panel.add(panel_1);
+				
+				JTextArea infoText = new JTextArea();
+				infoText.setBounds(170, 11, 250, 200);
+				infoText.setBackground(Color.LIGHT_GRAY);
+				infoText.setEditable(false);
+			    JScrollPane scroll = new JScrollPane(infoText);
+			    scroll.setBounds(170, 11, 250, 200);
+			    scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+			    String informacion = "TelefMas Manager\n\n"
+			    		+ "Version: TelefMas Manager (2.0.1)\n\n"
+			    		+ "Build id: 70140246-0800\n\n" 
+			    		+ "(c) Copyright TelefMas contributors and others 2014, 2015.\n"
+			    		+ "All rights reserved.\n "
+			    		+ "Eclipse and the TelefMas logo are trademarks of the TelefMas Foundation, Inc.,\n"
+			    		+ "The TelefMas logo cannot be altered without TelefMas's permission.\n"
+			    		+ "TelefMas logos are provided for use under the TelefMas logo and trademark guidelines.\n";
+			    infoText.setText(informacion);
+			    panel.add(scroll);
+				
+			    JButton botonSalirInfo = new JButton("Salir");
+			    botonSalirInfo.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ventanaInfo.setVisible(false);
+						
+					}
+				});
+			    botonSalirInfo.setBounds(300, 215, 100, 30);
+			    panel.add(botonSalirInfo);
+				
+				ventanaInfo.setResizable(false);
+				ventanaInfo.setVisible(true);
 				break;
 				
 			case "Salir":
@@ -222,6 +283,40 @@ public class IOInterfazGrafica implements IntIOInterface{
 			
 		}
 		
+	}
+	
+	public class PanelImagen extends JPanel {
+
+		private static final long serialVersionUID = 6521278324796399116L;
+		private Image bgImage;
+		 
+		 public PanelImagen() {
+		  super();
+		  this.setOpaque(false);
+		 }
+		 
+		 public void setBackgroundImage(Image bgImage) {
+		  this.bgImage = bgImage;
+		 }
+		 
+		 public ImageIcon createImage(String path) {
+		     if (path != null) {
+		         return new ImageIcon(path);
+		     } else {
+		         return null;
+		     }
+		 }
+		 
+		 @Override
+		 public void paint(Graphics g) {
+		 
+		  if(bgImage != null) {
+		   g.drawImage(bgImage, -3, -3, null);
+		  }
+		 
+		  super.paint(g);
+		 
+		 }
 	}
 
 }
