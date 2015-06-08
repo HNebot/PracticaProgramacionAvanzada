@@ -1,11 +1,8 @@
-/operaciones/
-/objetos/
-/controlador/
-/main/
+/baseDatos/
 /comparadores/
-/interfaces/
-/gestores/
+/controlador/
+/enumeraciones/
+/excepciones/
 /factorias/
-/vista/
-/IconoEmpresa.png
-/IconoEmpresaInfo.png
+/gestores/
+/interfaces/
