@@ -12,6 +12,13 @@ import vista.IOInterfazSalidaConsola;
 
 public class Principal 
 {
+	/**
+	 * El programa tiene la peculiaridad de que se puede elegr la opcion de salida de datos "consola" o interfaz grafica
+	 * cambiando entre las dos lineas de codigo:
+	 * IntIOInterface IoInterface = new IOInterfazSalidaConsola();
+	 * IntIOInterface IoInterface = new IOInterfazGrafica();
+	 * @param args
+	 */
 	
 	public static void main(String[] args)
 	{	
